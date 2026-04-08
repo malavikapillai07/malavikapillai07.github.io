@@ -1,0 +1,255 @@
+/* Root Variables */
+:root {
+    --nav-glass-bg: rgba(255, 255, 255, 0.5);
+    --nav-glass-border: rgba(255, 255, 255, 0.4);
+    --accent-color: #f7b731;
+    --text-color: #1a1a1a;
+}
+
+body.dark-mode {
+    background-color: #151515;
+    color: #f2f2f2;
+    --text-color: #f2f2f2;
+    --nav-glass-bg: rgba(30, 30, 30, 0.5);
+    --nav-glass-border: rgba(255, 255, 255, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Mono', monospace;
+    background-color: #e5e5e3;
+    color: var(--text-color);
+    text-transform: uppercase;
+}
+
+::selection {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* Header & Navigation */
+header {
+    position: sticky;
+    top: 1rem;
+    margin: 1rem 4rem;
+    z-index: 100;
+    background-color: var(--nav-glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--nav-glass-border);
+    border-radius: 100px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    font-weight: 700;
+}
+
+.logo {
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+    z-index: 20;
+}
+
+nav {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    z-index: 20;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+}
+
+.theme-toggle {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin-right: 1rem;
+    transition: color 0.2s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--accent-color);
+}
+
+.moon-icon {
+    display: none;
+    fill: #fdf5d3;
+    color: #fdf5d3;
+}
+
+body.dark-mode .sun-icon {
+    display: none;
+}
+
+body.dark-mode .moon-icon {
+    display: block;
+}
+
+@media (max-width: 900px) {
+    header {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        margin: 1rem 4rem 1rem 5rem;
+        /* give room for scroll tracker */
+        border-radius: 24px;
+        text-align: center;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* Subtle SVG Noise Grain Texture applied to body */
+body::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200vw;
+    height: 200vh;
+    opacity: 0.25;
+    pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    z-index: 10;
+    animation: static-noise 0.6s steps(10) infinite;
+}
+
+@keyframes static-noise {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-2%, -4%);
+    }
+
+    20% {
+        transform: translate(-6%, 2%);
+    }
+
+    30% {
+        transform: translate(3%, -8%);
+    }
+
+    40% {
+        transform: translate(-2%, 8%);
+    }
+
+    50% {
+        transform: translate(-6%, 4%);
+    }
+
+    60% {
+        transform: translate(6%, 0%);
+    }
+
+    70% {
+        transform: translate(0%, 6%);
+    }
+
+    80% {
+        transform: translate(2%, 10%);
+    }
+
+    90% {
+        transform: translate(-4%, 4%);
+    }
+}
+
+.scroll-container {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.image-wrapper {
+    width: 100%;
+    margin: 0;
+}
+
+.main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Scroll Tracker UI --- */
+.scroll-tracker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 100vh;
+    pointer-events: none;
+    /* Allows clicking through it */
+    z-index: 9999;
+}
+
+.scroll-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    /* Thicker track */
+    height: 100%;
+    background-color: #f1f5f9;
+    /* Subtle grey background for the scroll track */
+    border-right: 1px solid #e2e8f0;
+}
+
+.scroll-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    /* Thicker progress bar */
+    height: 0%;
+    /* This will be changed by JS */
+    background-color: #ec4899;
+    /* Bright Pink! */
+}
+
+.scroll-percent {
+    position: absolute;
+    left: 18px;
+    /* Placed slightly to the right of the thicker bar */
+    top: 0;
+    /* Updated by JS */
+    transform: translateY(-50%);
+    /* Centers the text vertically with the tip of the line */
+    color: #ec4899;
+    /* Matching Pink text */
+    font-family: sans-serif;
+    font-size: 15px;
+    /* Slightly larger font to match the thicker bar */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}

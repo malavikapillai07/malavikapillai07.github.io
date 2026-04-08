@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Recreate</title>
+    <!-- Google Fonts for the monospace typewriter look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo"></div>
+        <nav>
+            <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme">
+                <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+            <a href="#">[HOME]</a>
+            <a href="#">[WORK]</a>
+            <a href="#">[ABOUT]</a>
+            <a href="#">[CONTACT]</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero-container">
+            <div class="polaroid-wrapper">
+                <div class="polaroid-flipcard">
+                    <!-- FRONT: decorative polaroid (existing look) -->
+                    <div class="polaroid-face polaroid-front">
+                        <div class="polaroid">
+                            <div class="image-crop">
+                                <img src="malu polaroid.jpeg" alt="Profile" class="profile-img">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- BACK: your real photo -->
+                    <div class="polaroid-face polaroid-back">
+                        <div class="polaroid">
+                            <div class="image-crop">
+                                <img src="hi.PNG" alt="Malavika" class="profile-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-block">
+                    <h2>STATUS INFORMATION:</h2>
+                    <p>BASED IN KERALA<br>COMMUNICATION DESIGN STUDENT<br><span class="highlight-orange">AVAILABLE FOR
+                            HIRE</span></p>
+                </div>
+
+                <div class="info-block">
+                    <h2>FEATURES:</h2>
+                    <p>UI/UX DESIGN<br>VISUAL DESIGN<br>DESIGN STRATEGY</p>
+                </div>
+
+                <div class="buttons-row">
+                    <a href="#" class="btn btn-primary">MORE INFO</a>
+                    <a href="#" class="btn btn-icon" aria-label="Email">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#" class="btn btn-icon" aria-label="LinkedIn">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <section id="work" class="work-section">
+            <h2 class="section-title">WORKS //</h2>
+            <div class="projects-grid">
+                <a href="abc%20of%20fashion/index.html" class="project-card">
+                    <img src="abc front pg.jpg" alt="ABC of Fashion" class="project-img">
+                    <div class="project-info">
+                        <h3>ABC OF FASHION</h3>
+                        <p>Editorial Design and Illustration</p>
+                    </div>
+                </a>
+                <a href="branding%20final/graduation-portfolio.html" class="project-card">
+                    <img src="branding final/white (1) (1) (2).png" alt="Brand Identity" class="project-img">
+                    <div class="project-info">
+                        <h3>BRAND IDENTITY</h3>
+                        <p>Graduation Showcase Identity.</p>
+                    </div>
+                </a>
+                <div class="project-card">
+                    <div class="project-img-placeholder">PROJECT_IMG_02</div>
+                    <div class="project-info">
+                        <h3>UI/UX DESIGN</h3>
+                        <p>Streamlined app experience.</p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img-placeholder">PROJECT_IMG_04</div>
+                    <div class="project-info">
+                        <h3>WEB DEVELOPMENT</h3>
+                        <p>Interactive digital experiences.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer-text">
+            CURRENTLY EXPLORING FULL TIME OPPORTUNITIES _
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
