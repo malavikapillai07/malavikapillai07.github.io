@@ -28,6 +28,19 @@ html {
   --fb: 'Lexend', sans-serif;
 }
 
+/* Light Mode Overrides for Graduation Project */
+body:not(.dark-mode) {
+  --black: #f8f9fa;
+  --surface: #ffffff;
+  --surface2: #f1f3f5;
+  --surface3: #e9ecef;
+  --border: rgba(0, 0, 0, 0.08);
+  --border2: rgba(0, 0, 0, 0.15);
+  --text: #1a1a1a;
+  --muted: rgba(0, 0, 0, 0.6);
+  --dimmed: rgba(0, 0, 0, 0.4);
+}
+
 body {
   background: var(--black);
   color: var(--text);
@@ -130,6 +143,7 @@ header {
   background-color: var(--text);
   border-radius: 2px;
   transition: all 0.3s ease;
+  pointer-events: none;
 }
 
 .mobile-menu-btn.active .bar:nth-child(1) {
@@ -182,6 +196,10 @@ body.dark-mode .sun-icon {
 
 body.dark-mode .moon-icon {
   display: block;
+}
+
+.theme-toggle svg {
+  pointer-events: none;
 }
 
 
@@ -1268,6 +1286,15 @@ body.dark-mode .moon-icon {
   letter-spacing: 0.05em;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+}
+
+.floating-back-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .floating-back-btn:hover {

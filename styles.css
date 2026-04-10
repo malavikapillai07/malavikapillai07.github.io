@@ -130,6 +130,7 @@ header {
     background-color: var(--text-color);
     border-radius: 2px;
     transition: all 0.3s ease;
+    pointer-events: none;
 }
 
 /* Hamburger animation when active */
@@ -197,6 +198,10 @@ nav a:hover {
 
 .theme-toggle:hover {
     color: var(--accent-color);
+}
+
+.theme-toggle svg {
+    pointer-events: none;
 }
 
 .moon-icon {
@@ -658,7 +663,11 @@ body.dark-mode .project-img-placeholder {
     }
 
     #flipbook-scroll-area {
-        height: 100vh; /* Reduced further to eliminate space after flip */
+        height: 75vh; /* Reduced further to eliminate space after flip */
+    }
+
+    .about-section {
+        margin-top: 4rem; /* Seriously reduce space between Work and About pg */
     }
 
     #flipbook-sticky-wrapper {
@@ -883,10 +892,9 @@ body.dark-mode .project-img-placeholder {
     font-family: 'Hagrid', sans-serif !important;
     font-size: clamp(2.5rem, 8vw, 6rem);
     font-weight: 400;
-    line-height: 1.1;
     margin: 0 0 4rem 0;
     letter-spacing: -1px;
-    color: var(--accent-color); /* Added yellow accent */
+    color: var(--accent-color);
 }
 
 .contact-email {

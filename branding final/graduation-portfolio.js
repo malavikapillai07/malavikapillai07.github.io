@@ -59,9 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (mobileMenuBtn && mainNav) {
     mobileMenuBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
       mobileMenuBtn.classList.toggle('active');
       mainNav.classList.toggle('active');
+      console.log('Mobile menu toggled'); // Debugging
     });
 
     const navLinks = mainNav.querySelectorAll('a');
@@ -81,12 +83,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
+    themeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       document.body.classList.toggle('dark-mode');
       if (document.body.classList.contains('dark-mode')) {
         localStorage.setItem('theme', 'dark');
       } else {
         localStorage.setItem('theme', 'light');
+      }
+      console.log('Theme toggled'); // Debugging
+    });
+  }
+
+  // Handle Back Button Visibility on Scroll
+  const backBtn = document.querySelector('.floating-back-btn');
+  if (backBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backBtn.classList.add('visible');
+      } else {
+        backBtn.classList.remove('visible');
       }
     });
   }
