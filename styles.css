@@ -671,6 +671,33 @@ body.dark-mode .project-img-placeholder {
         flex-direction: column;
         text-align: center;
         margin-top: 6rem; /* Move polaroid down on phone */
+        align-items: center; /* Center flex items horizontally */
+    }
+
+    .info-section {
+        align-items: center !important;
+        text-align: center !important;
+        transform: none !important; /* Remove desktop offset */
+        max-width: 100% !important;
+    }
+
+    .info-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-heading {
+        white-space: normal !important;
+        text-align: center !important;
+    }
+
+    .info-block p {
+        text-align: center !important;
+    }
+
+    .buttons-row {
+        justify-content: center !important;
     }
 
     /* Floating Navbar Rectangle */
