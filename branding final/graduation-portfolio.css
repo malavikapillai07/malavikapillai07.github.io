@@ -8,6 +8,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 :root {
@@ -36,6 +38,7 @@ body {
   font-weight: 300;
   line-height: 1.7;
   overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* Scroll Tracker */
