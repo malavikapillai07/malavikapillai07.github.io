@@ -638,16 +638,16 @@ body.dark-mode .project-img-placeholder {
 }
 
 /* Responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     header {
-        position: fixed;
-        left: 1rem;
-        right: 1rem;
-        top: 1rem;
-        width: auto;
-        margin: 0;
-        padding: 0.75rem 1rem;
-        z-index: 10001;
+        position: fixed !important;
+        left: 1rem !important;
+        right: 1rem !important;
+        top: 1rem !important;
+        width: auto !important;
+        margin: 0 !important;
+        padding: 0.75rem 1rem !important;
+        z-index: 10001 !important;
     }
 
     .logo {
@@ -664,83 +664,6 @@ body.dark-mode .project-img-placeholder {
 
     .mobile-menu-btn {
         display: flex;
-    }
-
-    .polaroid-flipcard {
-        width: 220px;
-        height: 320px;
-    }
-
-    .polaroid {
-        padding: 10px 10px 50px 10px;
-    }
-
-    #book-viewport {
-        padding-left: 0.5rem;
-    }
-
-    #flipbook-scroll-area {
-        height: 75vh; /* Reduced further to eliminate space after flip */
-    }
-
-    .about-section {
-        margin-top: 25rem !important; /* Move about page down from works on mobile */
-    }
-
-    #flipbook-sticky-wrapper {
-        height: 500px; /* Limit height on mobile */
-    }
-
-    #book-viewport {
-        padding-left: 0 !important;
-        padding-top: 1rem;
-        height: 400px;
-    }
-
-    .contact-section {
-        margin-top: 0rem !important; /* Reduce gap from flipbook */
-        padding-top: 1rem !important; /* Reduced top padding as requested */
-    }
-
-    .contact-heading {
-        margin-bottom: 2rem !important; /* Move it closer */
-    }
-
-    #main-nav {
-        position: absolute;
-        top: calc(100% + 15px);
-        right: 0;
-        width: auto;
-        min-width: 140px;
-        height: auto;
-        background-color: #1a1a1a;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        gap: 1.25rem;
-        padding: 1.25rem;
-        border-radius: 12px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px) scale(0.95);
-        transform-origin: top right;
-        transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-        z-index: 1000;
-    }
-
-    #main-nav.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0) scale(1);
-    }
-
-    #main-nav a {
-        font-size: 1.1rem;
-        color: #fff !important;
-        text-transform: uppercase;
-        letter-spacing: 1px;
     }
 
     .hero-container {
@@ -773,18 +696,23 @@ body.dark-mode .project-img-placeholder {
         gap: 2rem;
     }
 
-    main {
-        padding: 1rem;
+    .about-section {
+        margin-top: 25rem !important; /* Move about page down from works on mobile */
     }
 
+    .contact-section {
+        margin-top: 0rem !important;
+        padding-top: 1rem !important;
+    }
+
+    .contact-heading {
+        margin-bottom: 2rem !important;
+    }
+    
     #butterfly-wrapper {
-        left: -2rem; /* Adjust start position for mobile */
+        left: -2rem; 
         top: 4rem;
-        transform: scale(0.6); /* Make butterfly smaller on mobile */
-    }
-
-    #casual-butterfly {
-        width: 300px; /* Significantly smaller width for phone */
+        transform: scale(0.6);
     }
 }
 
