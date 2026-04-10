@@ -52,6 +52,8 @@ body::before {
     25% { transform: rotate(90deg); }
     50% { transform: rotate(180deg); }
     75% { transform: rotate(270deg); }
+}
+
 /* Base Styles */
 body {
     background-color: var(--bg-color);
