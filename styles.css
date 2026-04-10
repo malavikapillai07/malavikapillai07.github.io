@@ -692,6 +692,15 @@ body.dark-mode .project-img-placeholder {
         padding-left: 0.5rem;
     }
 
+    #flipbook-scroll-area {
+        height: 140vh; /* Reduced from 180vh for mobile */
+    }
+
+    .contact-section {
+        margin-top: 0rem !important; /* Tighten gap */
+        padding-top: 0rem;
+    }
+
     #main-nav {
         position: fixed;
         top: 0;
