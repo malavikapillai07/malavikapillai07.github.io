@@ -1,5 +1,7 @@
 // JavaScript to handle Dark/Light mode toggling
 const themeBtn = document.getElementById('theme-btn');
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mainNav = document.getElementById('main-nav');
 const emailCopyBtn = document.getElementById('email-copy-btn');
 const copyToast = document.getElementById('copy-toast');
 const emailToCopy = 'malavikapillaiofficial@gmail.com';
@@ -7,6 +9,25 @@ const dinelyCard = document.getElementById('dinely-card');
 const dinelyModal = document.getElementById('dinely-modal');
 const dinelyBackBtn = document.getElementById('dinely-back-btn');
 let copyToastTimer;
+
+// Mobile Menu Toggle
+if (mobileMenuBtn && mainNav) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.classList.toggle('active');
+        mainNav.classList.toggle('active');
+        document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close menu when a link is clicked
+    const navLinks = mainNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuBtn.classList.remove('active');
+            mainNav.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+}
 
 // Check for saved user preference
 if (localStorage.getItem('theme') === 'dark') {
