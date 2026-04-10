@@ -236,8 +236,9 @@ main {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 5rem;
-    max-width: 1100px;
+    gap: clamp(5rem, 8vw, 10rem);
+    max-width: 1400px;
+    min-height: 85vh; /* Pushes Works section off initial view */
     margin-top: 5rem;
 }
 
@@ -248,10 +249,8 @@ main {
 
 .polaroid-flipcard {
     position: relative;
-    width: 294px;
-    /* 270px image + 12px+12px padding */
-    height: 432px;
-    /* 350px image + 12px+70px padding */
+    width: clamp(294px, 22vw, 420px);
+    height: clamp(432px, 32vw, 617px);
     transform-style: preserve-3d;
     transform: rotate(-3deg);
     transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
@@ -277,7 +276,7 @@ main {
 
 .polaroid {
     background: var(--polaroid-bg);
-    padding: 12px 12px 70px 12px;
+    padding: clamp(12px, 1vw, 20px) clamp(12px, 1vw, 20px) clamp(70px, 5.5vw, 100px) clamp(12px, 1vw, 20px);
     border: 1px solid var(--polaroid-border);
     box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.12), 0px 2px 5px rgba(0, 0, 0, 0.06);
     width: 100%;
@@ -319,7 +318,7 @@ main {
 body.homepage .hero-heading {
     font-family: 'Hagrid', sans-serif !important;
     font-weight: 400;
-    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-size: clamp(2.5rem, 4.5vw, 4.5rem);
     line-height: 1.05;
     margin: 0 0 1rem 0;
     white-space: nowrap;
@@ -329,7 +328,7 @@ body.homepage .hero-heading {
 
 .info-block p {
     margin: 0;
-    font-size: 1.05rem;
+    font-size: clamp(1.05rem, 1.4vw, 1.4rem);
     line-height: 1.7;
     letter-spacing: 0.5px;
     font-family: 'Helvetica World', 'Helvetica', Arial, sans-serif; /* Added Helvetica World */
@@ -664,6 +663,15 @@ body.dark-mode .project-img-placeholder {
 
     .mobile-menu-btn {
         display: flex;
+    }
+
+    .polaroid-flipcard {
+        width: 220px !important;
+        height: 320px !important;
+    }
+
+    .polaroid {
+        padding: 10px 10px 50px 10px !important;
     }
 
     .hero-container {
