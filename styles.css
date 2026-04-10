@@ -693,11 +693,17 @@ body.dark-mode .project-img-placeholder {
     }
 
     #flipbook-scroll-area {
-        height: 140vh; /* Reduced from 180vh for mobile */
+        height: 110vh; /* Reduced further from 140vh to tighten scroll gap */
+    }
+
+    #book-viewport {
+        padding-left: 0.5rem;
+        padding-top: 2rem; /* Reduced from 4rem for mobile */
+        height: 400px; /* Adjusted from default 480px */
     }
 
     .contact-section {
-        margin-top: 0rem !important; /* Tighten gap */
+        margin-top: -2rem !important; /* Pull up further */
         padding-top: 0rem;
     }
 
