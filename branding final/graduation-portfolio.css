@@ -1341,11 +1341,15 @@ body.dark-mode .moon-icon {
 ═══════════════════════════════════ */
 @media (max-width: 900px) {
   header {
+    position: fixed !important;
     top: 1rem;
     left: 1rem;
     right: 1rem;
+    width: auto;
+    margin: 0;
     padding: 0.75rem 1.25rem;
     border-radius: 100px;
+    z-index: 10001;
   }
 
   .logo {
