@@ -28,18 +28,6 @@ html {
   --fb: 'Lexend', sans-serif;
 }
 
-/* Light Mode Overrides for Graduation Project */
-body:not(.dark-mode) {
-  --black: #f8f9fa;
-  --surface: #ffffff;
-  --surface2: #f1f3f5;
-  --surface3: #e9ecef;
-  --border: rgba(0, 0, 0, 0.08);
-  --border2: rgba(0, 0, 0, 0.15);
-  --text: #1a1a1a;
-  --muted: rgba(0, 0, 0, 0.6);
-  --dimmed: rgba(0, 0, 0, 0.4);
-}
 
 body {
   background: var(--black);
