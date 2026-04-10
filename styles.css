@@ -667,46 +667,76 @@ body.dark-mode .project-img-placeholder {
     }
 
     .hero-container {
-        gap: 3rem;
+        gap: 2rem;
         flex-direction: column;
         text-align: center;
-        margin-top: 3rem;
+        margin-top: 6rem; /* Move polaroid down on phone */
     }
 
-    .info-section {
-        align-items: center;
-        transform: none;
-        padding: 0 1rem;
+    /* Floating Navbar Rectangle */
+    #main-nav {
+        position: absolute;
+        top: calc(100% + 15px);
+        right: 0;
+        width: auto;
+        min-width: 160px;
+        background-color: var(--nav-glass-bg);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid var(--nav-glass-border);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px) scale(0.95);
+        transform-origin: top right;
+        transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+        z-index: 1000;
     }
 
-    .info-block p {
-        text-align: center;
+    #main-nav.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
     }
 
-    .hero-heading {
-        white-space: normal !important;
+    #main-nav a {
+        font-family: 'Hagrid', sans-serif !important;
+        font-size: 1rem;
+        color: var(--text-color) !important;
+        text-transform: none;
+        letter-spacing: 0.5px;
     }
 
-    .buttons-row {
-        justify-content: center;
+    .theme-toggle {
+        margin-right: 0.5rem; /* Closer to hamburger icon */
     }
 
     .projects-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 3rem; /* Larger gap for larger icons */
+    }
+
+    .project-card {
+        aspect-ratio: 1 / 1.1; /* Make "rectangle icons" more prominent/bigger */
     }
 
     .about-section {
-        margin-top: 25rem !important; /* Move about page down from works on mobile */
+        margin-top: 8rem !important; /* Reduced massive gap between works and about */
     }
 
     .contact-section {
-        margin-top: 0rem !important;
+        margin-top: 2rem !important; /* Reduced space after flipbook */
         padding-top: 1rem !important;
     }
 
     .contact-heading {
         margin-bottom: 2rem !important;
+        font-size: clamp(2rem, 10vw, 3rem) !important; /* Slightly smaller for phone */
     }
     
     #butterfly-wrapper {
