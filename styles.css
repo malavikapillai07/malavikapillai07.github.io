@@ -42,21 +42,15 @@ body::before {
     pointer-events: none;
     background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     z-index: 10;
-    animation: none; /* Stopped shaking as requested */
-    will-change: auto;
+    animation: static-noise 0.15s steps(4) infinite;
+    will-change: transform;
 }
 
 @keyframes static-noise {
-    0%, 100% { transform: translate3d(0, 0, 0); }
-    10% { transform: translate3d(-0.5%, -0.5%, 0); }
-    20% { transform: translate3d(-1%, 0.5%, 0); }
-    30% { transform: translate3d(0.5%, -1%, 0); }
-    40% { transform: translate3d(-0.5%, 1%, 0); }
-    50% { transform: translate3d(-1%, 0.5%, 0); }
-    60% { transform: translate3d(1%, 0, 0); }
-    70% { transform: translate3d(0, 1%, 0); }
-    80% { transform: translate3d(0.5%, 1.5%, 0); }
-    90% { transform: translate3d(-0.5%, 0.5%, 0); }
+    0% { transform: translate3d(0, 0, 0); }
+    25% { transform: translate3d(-1px, 1px, 0); }
+    50% { transform: translate3d(-2px, -1px, 0); }
+    75% { transform: translate3d(1px, -2px, 0); }
 }
 
 /* Base Styles */
