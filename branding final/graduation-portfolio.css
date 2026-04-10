@@ -197,8 +197,8 @@ body::after {
   pointer-events: none;
   z-index: 9999;
   opacity: 0.4;
-  animation: static-noise 0.8s steps(8) infinite;
-  will-change: transform;
+  animation: none;
+  will-change: auto;
 }
 
 @keyframes static-noise {
