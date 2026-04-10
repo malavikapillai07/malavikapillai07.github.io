@@ -20,11 +20,6 @@ body.dark-mode {
     box-sizing: border-box;
 }
 
-html, body {
-    overflow-x: hidden;
-    max-width: 100vw;
-}
-
 body {
     font-family: 'Space Mono', monospace;
     background-color: #e5e5e3;
