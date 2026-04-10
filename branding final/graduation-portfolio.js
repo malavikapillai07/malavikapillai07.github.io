@@ -52,6 +52,33 @@ updateScrollProgress();
     document.body.classList.add('dark-mode');
   }
 
+  // Mobile Menu Toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mainNav = document.getElementById('main-nav');
+
+  if (mobileMenuBtn && mainNav) {
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileMenuBtn.classList.toggle('active');
+      mainNav.classList.toggle('active');
+    });
+
+    const navLinks = mainNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        mobileMenuBtn.classList.remove('active');
+        mainNav.classList.remove('active');
+      }
+    });
+  }
+
   if (themeBtn) {
     themeBtn.addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');

@@ -12,10 +12,10 @@ let copyToastTimer;
 
 // Mobile Menu Toggle
 if (mobileMenuBtn && mainNav) {
-    mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         mobileMenuBtn.classList.toggle('active');
         mainNav.classList.toggle('active');
-        document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
     });
 
     // Close menu when a link is clicked
@@ -24,8 +24,15 @@ if (mobileMenuBtn && mainNav) {
         link.addEventListener('click', () => {
             mobileMenuBtn.classList.remove('active');
             mainNav.classList.remove('active');
-            document.body.style.overflow = '';
         });
+    });
+
+    // Close menu when clicking anywhere else
+    document.addEventListener('click', (e) => {
+        if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            mobileMenuBtn.classList.remove('active');
+            mainNav.classList.remove('active');
+        }
     });
 }
 
