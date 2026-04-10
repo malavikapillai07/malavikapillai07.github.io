@@ -184,59 +184,6 @@ body.dark-mode .moon-icon {
   display: block;
 }
 
-@media (max-width: 768px) {
-  header {
-    top: 1rem;
-    left: 1rem;
-    right: 1rem;
-    padding: 0.8rem 1.5rem;
-    border-radius: 100px;
-  }
-
-  .mobile-menu-btn {
-    display: flex;
-    margin-left: 0.5rem;
-  }
-
-    #main-nav {
-    position: absolute;
-    top: calc(100% + 15px);
-    right: 0;
-    width: auto;
-    min-width: 140px;
-    background-color: #1a1a1a;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.5rem;
-    gap: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px) scale(0.95);
-    transform-origin: top right;
-    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-    z-index: 1000;
-  }
-
-  #main-nav.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
-  }
-
-  #main-nav a {
-    color: #fff !important;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    margin: 0;
-  }
-
-  .scroll-tracker {
-    width: 40px;
-  }
-}
 
 /* NOISE */
 body::after {
@@ -1407,6 +1354,66 @@ body::after {
    RESPONSIVE
 ═══════════════════════════════════ */
 @media (max-width: 900px) {
+  header {
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 100px;
+  }
+
+  .logo {
+    font-size: 0.75rem;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+    margin-left: 0.5rem;
+  }
+
+  #main-nav {
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    width: auto;
+    min-width: 140px;
+    background-color: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transform-origin: top right;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 1000;
+  }
+
+  #main-nav.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  #main-nav a {
+    color: #fff !important;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+
+  .floating-back-btn {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
+    background: rgba(8, 8, 8, 0.8); /* Darker background for visibility */
+    border-color: var(--teal);
+  }
 
   .hero-content,
   .chapter,
@@ -1458,6 +1465,10 @@ body::after {
   .fitzkee-table th,
   .fitzkee-table td {
     padding: 8px 10px;
+  }
+
+  .scroll-tracker {
+    width: 40px;
   }
 }
 

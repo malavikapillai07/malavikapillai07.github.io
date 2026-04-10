@@ -1,32 +1,33 @@
-const progressEl = document.getElementById('scroll-progress');
-const percentEl = document.getElementById('scroll-percent');
+document.addEventListener('DOMContentLoaded', () => {
+  const progressEl = document.getElementById('scroll-progress');
+  const percentEl = document.getElementById('scroll-percent');
 
-const updateScrollProgress = () => {
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
-  const docHeight = Math.max(
-    document.body.scrollHeight, document.documentElement.scrollHeight,
-    document.body.offsetHeight, document.documentElement.offsetHeight,
-    document.body.clientHeight, document.documentElement.clientHeight
-  );
-  const scrollableHeight = docHeight - window.innerHeight;
+  const updateScrollProgress = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = Math.max(
+      document.body.scrollHeight, document.documentElement.scrollHeight,
+      document.body.offsetHeight, document.documentElement.offsetHeight,
+      document.body.clientHeight, document.documentElement.clientHeight
+    );
+    const scrollableHeight = docHeight - window.innerHeight;
 
-  let scrollPercent = 0;
-  if (scrollableHeight > 0) {
-    scrollPercent = (scrollTop / scrollableHeight) * 100;
-  }
+    let scrollPercent = 0;
+    if (scrollableHeight > 0) {
+      scrollPercent = (scrollTop / scrollableHeight) * 100;
+    }
 
-  scrollPercent = Math.min(100, Math.max(0, scrollPercent));
+    scrollPercent = Math.min(100, Math.max(0, scrollPercent));
 
-  if (progressEl && percentEl) {
-    progressEl.style.height = `${scrollPercent}%`;
-    percentEl.style.top = `${scrollPercent}%`;
-    percentEl.textContent = `${Math.round(scrollPercent)}%`;
-  }
-};
+    if (progressEl && percentEl) {
+      progressEl.style.height = `${scrollPercent}%`;
+      percentEl.style.top = `${scrollPercent}%`;
+      percentEl.textContent = `${Math.round(scrollPercent)}%`;
+    }
+  };
 
-window.addEventListener('scroll', updateScrollProgress);
-window.addEventListener('resize', updateScrollProgress);
-updateScrollProgress();
+  window.addEventListener('scroll', updateScrollProgress);
+  window.addEventListener('resize', updateScrollProgress);
+  updateScrollProgress();
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -89,3 +90,4 @@ updateScrollProgress();
       }
     });
   }
+});

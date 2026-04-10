@@ -945,20 +945,19 @@ body:not(.dark-mode) .contact-socials a {
 }
 
 #casual-butterfly {
-    width: 1000px; /* Massively increased size */
+    width: 500px;
     height: auto;
-    mix-blend-mode: multiply;
 }
 
 @keyframes flyAcross {
     0%   { transform: translate(0vw, 0vh) rotate(15deg); }
     12%  { transform: translate(15vw, 20vh) rotate(-10deg); }
-    25%  { transform: translate(35vw, -5vh) rotate(20deg); }
-    38%  { transform: translate(65vw, 30vh) rotate(-15deg); }
-    50%  { transform: translate(100vw, 50vh) rotate(10deg); } /* Screen right */
-    50.01%{ transform: translate(100vw, 70vh) scaleX(-1) rotate(15deg); } /* Flips to face left */
-    62%  { transform: translate(75vw, 50vh) scaleX(-1) rotate(-10deg); }
-    75%  { transform: translate(45vw, 65vh) scaleX(-1) rotate(20deg); }
-    88%  { transform: translate(15vw, 40vh) scaleX(-1) rotate(-15deg); }
+    25%  { transform: translate(30vw, -5vh) rotate(20deg); }
+    38%  { transform: translate(50vw, 30vh) rotate(-15deg); }
+    50%  { transform: translate(80vw, 50vh) rotate(10deg); } /* Stays more visible on the right */
+    50.01%{ transform: translate(80vw, 70vh) scaleX(-1) rotate(15deg); } /* Flips to face left */
+    62%  { transform: translate(60vw, 50vh) scaleX(-1) rotate(-10deg); }
+    75%  { transform: translate(35vw, 65vh) scaleX(-1) rotate(20deg); }
+    88%  { transform: translate(10vw, 40vh) scaleX(-1) rotate(-15deg); }
     100% { transform: translate(0vw, 0vh) scaleX(-1) rotate(10deg); } /* Loops back */
 }
