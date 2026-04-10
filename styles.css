@@ -688,6 +688,10 @@ body.dark-mode .project-img-placeholder {
         padding: 10px 10px 50px 10px;
     }
 
+    #book-viewport {
+        padding-left: 0.5rem;
+    }
+
     #main-nav {
         position: fixed;
         top: 0;
