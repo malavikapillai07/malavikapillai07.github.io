@@ -679,6 +679,15 @@ body.dark-mode .project-img-placeholder {
         display: flex;
     }
 
+    .polaroid-flipcard {
+        width: 220px;
+        height: 320px;
+    }
+
+    .polaroid {
+        padding: 10px 10px 50px 10px;
+    }
+
     #main-nav {
         position: fixed;
         top: 0;
