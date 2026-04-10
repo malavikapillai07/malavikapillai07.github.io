@@ -4,18 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Recreate</title>
-    <!-- Google Fonts for the monospace typewriter look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
+    <title>Malavika Pillai</title>
+    <!-- Add favicon for browser tab -->
+    <link rel="icon" type="image/png" href="logo white.PNG">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body class="homepage">
     <header>
-        <div class="logo"></div>
+        <a href="index.html" class="logo" aria-label="Go to home page">
+            <img src="logo black.PNG" alt="Logo" class="logo-light">
+            <img src="logo white.PNG" alt="Logo" class="logo-dark">
+        </a>
         <nav>
             <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme">
                 <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -35,14 +36,19 @@
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
             </button>
-            <a href="#">[HOME]</a>
-            <a href="#">[WORK]</a>
-            <a href="#">[ABOUT]</a>
-            <a href="#">[CONTACT]</a>
+            <a href="index.html">Home</a>
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
     <main>
+        <!-- Scroll-driven butterfly wrapper -->
+        <div id="butterfly-wrapper">
+            <img src="Butterfly.gif" id="casual-butterfly" alt="Flying Butterfly">
+        </div>
+        
         <div class="hero-container">
             <div class="polaroid-wrapper">
                 <div class="polaroid-flipcard">
@@ -58,7 +64,7 @@
                     <div class="polaroid-face polaroid-back">
                         <div class="polaroid">
                             <div class="image-crop">
-                                <img src="hi.PNG" alt="Malavika" class="profile-img">
+                                <img src="illustrated me.PNG" alt="Malavika" class="profile-img">
                             </div>
                         </div>
                     </div>
@@ -67,27 +73,29 @@
 
             <div class="info-section">
                 <div class="info-block">
-                    <h2>STATUS INFORMATION:</h2>
-                    <p>BASED IN KERALA<br>COMMUNICATION DESIGN STUDENT<br><span class="highlight-orange">AVAILABLE FOR
-                            HIRE</span></p>
+                    <h2 class="hero-heading">Hi, I'm Malavika</h2>
+                    <p>
+                        Based in Kerala
+
+                        <br>Communication design student
+
+                        <br><span class="highlight-orange">Research-driven designer</span>
+                    </p>
                 </div>
 
-                <div class="info-block">
-                    <h2>FEATURES:</h2>
-                    <p>UI/UX DESIGN<br>VISUAL DESIGN<br>DESIGN STRATEGY</p>
-                </div>
 
                 <div class="buttons-row">
-                    <a href="#" class="btn btn-primary">MORE INFO</a>
-                    <a href="#" class="btn btn-icon" aria-label="Email">
+                    <a href="#" class="btn btn-primary">Resume</a>
+                    <button type="button" class="btn btn-icon" id="email-copy-btn" aria-label="Copy Gmail">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
                             </path>
                             <polyline points="22,6 12,13 2,6"></polyline>
                         </svg>
-                    </a>
-                    <a href="#" class="btn btn-icon" aria-label="LinkedIn">
+                    </button>
+                    <a href="https://www.linkedin.com/in/malavika-pillai-b996ab371" class="btn btn-icon"
+                        aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
@@ -101,42 +109,83 @@
         </div>
 
         <section id="work" class="work-section">
-            <h2 class="section-title">WORKS //</h2>
+            <h2 class="section-title">Works </h2>
             <div class="projects-grid">
-                <a href="abc%20of%20fashion/index.html" class="project-card">
-                    <img src="abc front pg.jpg" alt="ABC of Fashion" class="project-img">
+                <a href="#" class="project-card" id="dinely-card">
+                    <img src="Finance Tracking App.png" alt="Finance Tracker" class="project-img">
                     <div class="project-info">
-                        <h3>ABC OF FASHION</h3>
-                        <p>Editorial Design and Illustration</p>
+                        <h3>Finance Tracker</h3>
+                        <p>Personal Finance Management & Expense Tracking</p>
                     </div>
                 </a>
-                <a href="branding%20final/graduation-portfolio.html" class="project-card">
-                    <img src="branding final/white (1) (1) (2).png" alt="Brand Identity" class="project-img">
+                <a href="branding%20final/graduation-portfolio.html" class="project-card project-card-branding">
+                    <img src="branding cover pg.png" alt="Brand Identity" class="project-img project-img-branding">
                     <div class="project-info">
-                        <h3>BRAND IDENTITY</h3>
+                        <h3>Brand Identity</h3>
                         <p>Graduation Showcase Identity.</p>
                     </div>
                 </a>
-                <div class="project-card">
-                    <div class="project-img-placeholder">PROJECT_IMG_02</div>
+                <a href="abc%20of%20fashion/index.html" class="project-card">
+                    <img src="abc front pg.jpg" alt="ABC of Fashion" class="project-img">
                     <div class="project-info">
-                        <h3>UI/UX DESIGN</h3>
-                        <p>Streamlined app experience.</p>
+                        <h3>ABC of Fashion</h3>
+                        <p>Editorial Design and Illustration</p>
                     </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-img-placeholder">PROJECT_IMG_04</div>
-                    <div class="project-info">
-                        <h3>WEB DEVELOPMENT</h3>
-                        <p>Interactive digital experiences.</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <!-- This container creates the scroll height for the flipbook animation -->
+            <div id="flipbook-scroll-area">
+                <div id="flipbook-sticky-wrapper">
+                    <h2 class="section-title">About</h2>
+
+                    <div id="book-viewport">
+                        <div id="book-shift">
+                            <div id="book">
+                                <!-- Base right page -->
+                                <div id="page-right" class="book-page">
+                                    <img src="3.png" alt="Toolkit and Journey">
+                                </div>
+                                <!-- Rotating cover page -->
+                                <div id="book-cover" class="book-page">
+                                    <div class="page-side side-front">
+                                        <img src="1.PNG" alt="Book Cover">
+                                    </div>
+                                    <div class="page-side side-back">
+                                        <img src="2.png" alt="About Malavika">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="footer-text">
-            CURRENTLY EXPLORING FULL TIME OPPORTUNITIES _
+        <section id="contact" class="contact-section">
+            <h2 class="contact-heading">Got an idea? Let’s talk.</h2>
+            
+            <a href="mailto:malavikapillaiofficial@gmail.com" class="contact-email">malavikapillaiofficial@gmail.com</a>
+            
+            <div class="contact-socials">
+                <a href="#" target="_blank">LINKEDIN</a>
+                <a href="https://www.behance.net/malavikapillai" target="_blank">BEHANCE</a>
+                <a href="#" target="_blank">INSTAGRAM</a>
+            </div>
+        </section>
+
+        <div id="dinely-modal" class="dinely-modal" aria-hidden="true">
+            <div class="dinely-modal-card" role="dialog" aria-modal="true" aria-labelledby="dinely-title">
+                <h3 id="dinely-title">Dinely</h3>
+                <p>Dinely is currently in the wireframing phase - shaping flows, structure, and overall experience.
+                    Full case study coming soon.</p>
+                <button type="button" class="btn" id="dinely-back-btn">Back</button>
+            </div>
         </div>
+
+        <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">Gmail copied</div>
 
     </main>
 

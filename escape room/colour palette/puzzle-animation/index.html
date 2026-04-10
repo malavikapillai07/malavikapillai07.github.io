@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequential Puzzle Animation</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Embedded fonts for a clean look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="puzzle-wrapper">
+            <!-- Base image serves as the static background (including the beige piece) -->
+            <img src="../Luxurious puzzle pieces in contrast.png" alt="Puzzle Base" class="puzzle-img base">
+            
+            <!-- Individual piece layers -->
+            <div class="piece red"></div>
+            <div class="piece black"></div>
+            <div class="piece gold"></div>
+        </div>
+        
+        <div class="caption">
+            Sequential Movement: <span id="current-piece">Red</span>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

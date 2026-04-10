@@ -1,16 +1,27 @@
+@font-face {
+    font-family: 'Hagrid';
+    src: url('hagrid_font/Hagrid-Regular-trial.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
 /* Root Variables */
 :root {
-    --bg-color: #e5e5e3; /* Very light grainy grey feel */
+    --bg-color: #e5e5e3;
+    /* Very light grainy grey feel */
     --text-color: #1a1a1a;
-    --accent-color: #f7b731; /* Vibrant warm yellow */
+    --accent-color: #f7b731;
+    /* Vibrant warm yellow */
     --polaroid-bg: #fdfdfd;
     --polaroid-border: #d2d2d2;
     --nav-glass-bg: rgba(255, 255, 255, 0.5);
     --nav-glass-border: rgba(255, 255, 255, 0.4);
+    --section-gap: clamp(16rem, 22vh, 24rem);
 }
 
 body.dark-mode {
-    --bg-color: #151515; /* Dark background */
+    --bg-color: #151515;
+    /* Dark background */
     --text-color: #f2f2f2;
     --nav-glass-bg: rgba(30, 30, 30, 0.5);
     --nav-glass-border: rgba(255, 255, 255, 0.05);
@@ -23,8 +34,10 @@ body.dark-mode {
 body::before {
     content: "";
     position: fixed;
-    top: -50%; left: -50%;
-    width: 200vw; height: 200vh;
+    top: -50%;
+    left: -50%;
+    width: 200vw;
+    height: 200vh;
     opacity: 0.25;
     pointer-events: none;
     background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
@@ -33,16 +46,47 @@ body::before {
 }
 
 @keyframes static-noise {
-    0%, 100% { transform: translate(0, 0); }
-    10% { transform: translate(-2%, -4%); }
-    20% { transform: translate(-6%, 2%); }
-    30% { transform: translate(3%, -8%); }
-    40% { transform: translate(-2%, 8%); }
-    50% { transform: translate(-6%, 4%); }
-    60% { transform: translate(6%, 0%); }
-    70% { transform: translate(0%, 6%); }
-    80% { transform: translate(2%, 10%); }
-    90% { transform: translate(-4%, 4%); }
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-2%, -4%);
+    }
+
+    20% {
+        transform: translate(-6%, 2%);
+    }
+
+    30% {
+        transform: translate(3%, -8%);
+    }
+
+    40% {
+        transform: translate(-2%, 8%);
+    }
+
+    50% {
+        transform: translate(-6%, 4%);
+    }
+
+    60% {
+        transform: translate(6%, 0%);
+    }
+
+    70% {
+        transform: translate(0%, 6%);
+    }
+
+    80% {
+        transform: translate(2%, 10%);
+    }
+
+    90% {
+        transform: translate(-4%, 4%);
+    }
 }
 
 /* Base Styles */
@@ -55,7 +99,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    text-transform: uppercase;
+    text-transform: none;
 }
 
 ::selection {
@@ -67,7 +111,7 @@ body {
 header {
     position: sticky;
     top: 1rem;
-    margin: 1rem 4rem;
+    margin: 1rem 5rem;
     z-index: 100;
     background-color: var(--nav-glass-bg);
     backdrop-filter: blur(12px);
@@ -78,14 +122,33 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2.5rem;
+    padding: 0.75rem 2.5rem 0.75rem 1.75rem;
     font-weight: 700;
 }
 
 .logo {
-    font-size: 1.1rem;
-    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    min-width: 120px;
     z-index: 20;
+}
+
+.logo img {
+    display: block;
+    height: 46px;
+    width: auto;
+}
+
+.logo-dark {
+    display: none !important;
+}
+
+body.dark-mode .logo-light {
+    display: none !important;
+}
+
+body.dark-mode .logo-dark {
+    display: block !important;
 }
 
 nav {
@@ -101,6 +164,13 @@ nav a {
     font-size: 1.05rem;
     letter-spacing: 1px;
     transition: color 0.2s ease;
+}
+
+body.homepage nav a {
+    font-family: 'Hagrid', sans-serif !important;
+    font-weight: 400;
+    font-size: 0.98rem;
+    text-transform: none;
 }
 
 nav a:hover {
@@ -125,7 +195,8 @@ nav a:hover {
 
 .moon-icon {
     display: none;
-    fill: #fdf5d3; /* Soft yellowish color for moon */
+    fill: #fdf5d3;
+    /* Soft yellowish color for moon */
     color: #fdf5d3;
 }
 
@@ -144,7 +215,8 @@ main {
     flex-direction: column;
     align-items: center;
     padding: 2rem 4rem;
-    z-index: 20; /* Keeps content above noise */
+    z-index: 20;
+    /* Keeps content above noise */
 }
 
 /* Hero Section */
@@ -165,8 +237,10 @@ main {
 
 .polaroid-flipcard {
     position: relative;
-    width: 294px;  /* 270px image + 12px+12px padding */
-    height: 432px; /* 350px image + 12px+70px padding */
+    width: 294px;
+    /* 270px image + 12px+12px padding */
+    height: 432px;
+    /* 350px image + 12px+70px padding */
     transform-style: preserve-3d;
     transform: rotate(-3deg);
     transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
@@ -194,7 +268,7 @@ main {
     background: var(--polaroid-bg);
     padding: 12px 12px 70px 12px;
     border: 1px solid var(--polaroid-border);
-    box-shadow: 2px 5px 20px rgba(0,0,0,0.12), 0px 2px 5px rgba(0,0,0,0.06);
+    box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.12), 0px 2px 5px rgba(0, 0, 0, 0.06);
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -204,7 +278,7 @@ main {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    border: 1px inset rgba(0,0,0,0.05);
+    border: 1px inset rgba(0, 0, 0, 0.05);
 }
 
 .profile-img {
@@ -219,8 +293,9 @@ main {
 .info-section {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 1.5rem; /* Reduced gap to move buttons closer to top */
     max-width: 450px;
+    transform: translateX(-1rem);
 }
 
 .info-block h2 {
@@ -230,27 +305,50 @@ main {
     letter-spacing: 1.5px;
 }
 
+body.homepage .hero-heading {
+    font-family: 'Hagrid', sans-serif !important;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    line-height: 1.05;
+    margin: 0 0 1rem 0;
+    white-space: nowrap;
+    text-transform: none; /* Hagrid looks better in mixed case as per your ref */
+    color: #1a1a1a;
+}
+
 .info-block p {
     margin: 0;
     font-size: 1.05rem;
     line-height: 1.7;
     letter-spacing: 0.5px;
+    font-family: 'Helvetica World', 'Helvetica', Arial, sans-serif; /* Added Helvetica World */
+    color: #1a1a1a;
+    text-transform: none; /* Changed to mixed case */
 }
 
 .highlight-orange {
-    color: var(--accent-color);
+    color: inherit;
+}
+
+body.dark-mode .hero-heading,
+body.dark-mode .info-block p {
+    color: #ffffff;
+}
+
+body.dark-mode .highlight-orange {
+    color: inherit;
 }
 
 /* Buttons */
 .buttons-row {
     display: flex;
     gap: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 0rem; /* Moved bit more to top */
 }
 
 .btn {
-    border: 1.5px solid var(--accent-color);
-    color: var(--accent-color);
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
     background: transparent;
     padding: 0.5rem 1rem;
     font-family: inherit;
@@ -264,11 +362,17 @@ main {
     text-decoration: none;
     transition: all 0.2s ease;
     letter-spacing: 1px;
+    text-transform: none; /* Changed to mixed case */
 }
 
 .btn:hover {
-    background: var(--accent-color);
-    color: var(--bg-color);
+    background: transparent;
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.btn-primary {
+    font-family: 'Hagrid', sans-serif !important; /* Resume button font */
 }
 
 .btn-icon {
@@ -279,10 +383,36 @@ main {
 .work-section {
     width: 100%;
     max-width: 1100px;
-    margin-top: 10rem; /* Give it breathing room below hero */
+    margin-top: var(--section-gap);
+    /* Space between hero and work */
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
+
+.about-section {
+    width: 100%;
+    max-width: 1100px;
+    margin-top: 15rem; /* Increased further down as requested */
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+}
+
+.about-card {
+    border: none;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+.about-media {
+    width: 100%;
+    min-height: 720px;
+    border: none;
+    background: transparent;
 }
 
 .section-title {
@@ -292,8 +422,20 @@ main {
     padding-bottom: 0.5rem;
     display: inline-block;
     align-self: flex-start;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem; /* Reduced from 1rem */
     font-weight: 700;
+}
+
+body.homepage .work-section .section-title {
+    font-family: 'Hagrid', sans-serif !important;
+    font-weight: 400;
+    text-transform: none;
+}
+
+body.homepage .about-section .section-title {
+    font-family: 'Hagrid', sans-serif !important;
+    font-weight: 400;
+    text-transform: none;
 }
 
 .projects-grid {
@@ -340,6 +482,16 @@ main {
     filter: brightness(0.45);
 }
 
+.project-img-branding {
+    object-fit: contain;
+    transform: none;
+    background: #111;
+}
+
+.project-card-branding:hover .project-img-branding {
+    transform: none;
+}
+
 /* Placeholder fills entire card like an image */
 .project-img-placeholder {
     width: 100%;
@@ -377,7 +529,7 @@ body.dark-mode .project-img-placeholder {
     transform: translateY(10px);
     transition: opacity 0.35s ease, transform 0.35s ease;
     pointer-events: none;
-    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.2) 60%, transparent 100%);
     border-radius: 16px;
 }
 
@@ -389,9 +541,10 @@ body.dark-mode .project-img-placeholder {
 .project-info h3 {
     margin: 0 0 0.4rem 0;
     font-size: 1.15rem;
-    letter-spacing: 2px;
+    letter-spacing: 0.4px;
     font-weight: 700;
     color: #fff;
+    font-family: 'Helvetica World', 'Helvetica', Arial, sans-serif;
 }
 
 .project-info p {
@@ -399,6 +552,7 @@ body.dark-mode .project-img-placeholder {
     font-size: 0.9rem;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.75);
+    font-family: 'Helvetica World', 'Helvetica', Arial, sans-serif;
 }
 
 /* Footer Section */
@@ -411,6 +565,67 @@ body.dark-mode .project-img-placeholder {
     letter-spacing: 1.5px;
 }
 
+.copy-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%) translateY(8px);
+    background: #111;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+    line-height: 1;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 300;
+}
+
+.copy-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dinely-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 250;
+    padding: 1.25rem;
+}
+
+.dinely-modal.show {
+    display: flex;
+}
+
+.dinely-modal-card {
+    width: min(560px, 100%);
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--nav-glass-border);
+    border-radius: 14px;
+    padding: 1.25rem 1.25rem 1rem;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.dinely-modal-card h3 {
+    margin: 0 0 0.6rem 0;
+    font-family: 'Hagrid', sans-serif !important;
+    font-size: 1.35rem;
+    font-weight: 400;
+}
+
+.dinely-modal-card p {
+    margin: 0 0 1rem 0;
+    font-family: 'Helvetica World', 'Helvetica', Arial, sans-serif;
+    line-height: 1.7;
+}
+
 /* Responsiveness */
 @media (max-width: 900px) {
     header {
@@ -421,7 +636,7 @@ body.dark-mode .project-img-placeholder {
         border-radius: 24px;
         text-align: center;
     }
-    
+
     nav {
         flex-wrap: wrap;
         justify-content: center;
@@ -435,8 +650,9 @@ body.dark-mode .project-img-placeholder {
 
     .info-section {
         align-items: center;
+        transform: none;
     }
-    
+
     .info-block p {
         text-align: center;
     }
@@ -444,4 +660,214 @@ body.dark-mode .project-img-placeholder {
     .buttons-row {
         justify-content: center;
     }
+}
+
+/* === Interactive Flipbook Styles === */
+#flipbook-scroll-area {
+    margin-top: 0; /* Resetting negative margin so the 15rem jump applies accurately */
+    height: 180vh; /* This dictates how long the scroll animation lasts */
+    position: relative;
+    width: 100%;
+}
+
+#flipbook-sticky-wrapper {
+    position: sticky;
+    top: 4.5rem; /* Slightly closer to header */
+    height: calc(100vh - 4.5rem);
+    display: flex;
+    flex-direction: column; /* Stack heading and book vertically */
+    align-items: stretch; /* Allows children to define their own alignment safely */
+    justify-content: flex-start; /* Keep them tightly glued to the top */
+    gap: 0;
+    overflow: visible;
+    padding-top: 0.5rem; /* Reduced from 2rem */
+}
+
+#book-viewport {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 480px; /* Reduced from 600px to remove height slack */
+    display: flex;
+    align-items: flex-start; /* Attaches the book to the top closest to the title */
+    justify-content: center;
+    padding-top: 4rem; /* Increased padding to give the book more breathing room below the title */
+    padding-left: 2rem; /* Decreased from 5rem to 2rem as requested */
+}
+
+#book-shift {
+    position: relative;
+    width: 0; /* Spine position */
+    height: 100%; /* Stretch vertically */
+    /* Remove transition to prevent fighting the scroll-driven transform */
+}
+
+#book {
+    position: relative;
+    width: 320px; /* Adjust based on your image aspect ratio */
+    height: 450px;
+    transform-style: preserve-3d;
+    perspective: 1500px;
+}
+
+.book-page {
+    position: absolute;
+    top: 0; /* Align to parent top */
+    width: 320px;
+    height: 450px;
+    background: transparent; /* Remove white background */
+    box-shadow: none; /* Removed heavy shadow to keep it clean */
+    transform-origin: left center;
+}
+
+#page-right {
+    left: 0;
+    z-index: 1;
+    border-radius: 0 10px 10px 0;
+    overflow: hidden;
+}
+
+#book-cover {
+    left: 0;
+    z-index: 2;
+    transform-style: preserve-3d;
+    /* Remove transition to prevent fighting the scroll-driven transform */
+    border-radius: 0 10px 10px 0;
+}
+
+.page-side {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+}
+
+.side-front {
+    z-index: 2;
+    border-radius: 0 10px 10px 0;
+}
+
+.side-back {
+    transform: rotateY(180deg);
+    z-index: 1;
+    border-radius: 10px 0 0 10px;
+    background: transparent;
+}
+
+.book-page img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    mix-blend-mode: multiply; /* Makes white background of PNGs transparent */
+}
+
+/* Page Curviness/Shadow Effect on Open */
+#book-cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.05), transparent);
+    pointer-events: none;
+    backface-visibility: hidden;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    #book, .book-page {
+        width: 260px;
+        height: 360px;
+    }
+}
+
+/* === Contact Section Styles === */
+.contact-section {
+    width: 100%;
+    margin-top: clamp(3rem, 5vh, 5rem); /* Reduced distance */
+    padding: 4rem 1rem 8rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.contact-heading {
+    font-family: 'Hagrid', sans-serif !important;
+    font-size: clamp(2.5rem, 8vw, 6rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin: 0 0 4rem 0;
+    letter-spacing: -1px;
+    color: var(--accent-color); /* Added yellow accent */
+}
+
+.contact-email {
+    font-family: 'Helvetica World', 'Helvetica', Arial, sans-serif;
+    font-size: 0.95rem;
+    color: #a0a0a0;
+    text-decoration: none;
+    margin-bottom: 2.5rem;
+    transition: color 0.2s ease;
+}
+
+.contact-email:hover {
+    color: var(--accent-color);
+}
+
+.contact-socials {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 0; /* Removed bottom margin since nothing sits beneath it anymore */
+}
+
+.contact-socials a {
+    font-family: 'Helvetica World', 'Helvetica', Arial, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #a0a0a0;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact-socials a:hover {
+    color: var(--accent-color);
+}
+
+body:not(.dark-mode) .contact-email,
+body:not(.dark-mode) .contact-socials a {
+    color: #555;
+}
+
+/* === Casual Butterfly Animation === */
+#butterfly-wrapper {
+    position: fixed;
+    top: 2rem; /* Start near logo */
+    left: 5rem;
+    z-index: 15;
+    pointer-events: none;
+    animation: flyAcross 30s linear infinite; /* Non-stop casual flying! */
+}
+
+#casual-butterfly {
+    width: 1000px; /* Massively increased size */
+    height: auto;
+    mix-blend-mode: multiply;
+}
+
+@keyframes flyAcross {
+    0%   { transform: translate(0vw, 0vh) rotate(15deg); }
+    12%  { transform: translate(15vw, 20vh) rotate(-10deg); }
+    25%  { transform: translate(35vw, -5vh) rotate(20deg); }
+    38%  { transform: translate(65vw, 30vh) rotate(-15deg); }
+    50%  { transform: translate(100vw, 50vh) rotate(10deg); } /* Screen right */
+    50.01%{ transform: translate(100vw, 70vh) scaleX(-1) rotate(15deg); } /* Flips to face left */
+    62%  { transform: translate(75vw, 50vh) scaleX(-1) rotate(-10deg); }
+    75%  { transform: translate(45vw, 65vh) scaleX(-1) rotate(20deg); }
+    88%  { transform: translate(15vw, 40vh) scaleX(-1) rotate(-15deg); }
+    100% { transform: translate(0vw, 0vh) scaleX(-1) rotate(10deg); } /* Loops back */
 }
