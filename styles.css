@@ -452,6 +452,7 @@ body.homepage .about-section .section-title {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
+    align-items: stretch;
 }
 
 .project-card {
@@ -462,12 +463,13 @@ body.homepage .about-section .section-title {
     color: inherit;
     background: #111;
     cursor: pointer;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1592 / 1034;
     transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
     /* remove old border/padding */
     border: none;
     padding: 0;
+    display: block;
 }
 
 .project-card:hover {
@@ -757,7 +759,7 @@ body.dark-mode .project-img-placeholder {
     }
 
     .project-card {
-        aspect-ratio: 1 / 1.1; /* Make "rectangle icons" more prominent/bigger */
+        /* Make "rectangle icons" more prominent/bigger */
     }
 
     .about-section {

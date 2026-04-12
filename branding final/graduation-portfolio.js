@@ -49,7 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Theme Toggle Logic
   const themeBtn = document.getElementById('theme-btn');
-  if (localStorage.getItem('theme') === 'dark') {
+  if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.remove('dark-mode');
+  } else {
     document.body.classList.add('dark-mode');
   }
 

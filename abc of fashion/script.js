@@ -42,7 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateScrollProgress();
 
     // Check for saved user preference
-    if (localStorage.getItem('theme') === 'dark') {
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.remove('dark-mode');
+    } else {
         document.body.classList.add('dark-mode');
     }
 
