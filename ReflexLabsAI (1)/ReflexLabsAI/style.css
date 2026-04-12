@@ -1036,7 +1036,7 @@ header {
 }
 
 .logo {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Hagrid', sans-serif !important;
     font-size: 0.95rem;
     letter-spacing: 1.5px;
     z-index: 20;
@@ -1104,10 +1104,15 @@ nav#main-nav a:hover {
     color: var(--orange);
 }
 
+/* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
+    section {
+        padding: 60px 24px;
+    }
+
     header {
-        left: 1rem;
-        right: 1rem;
+        left: 1.5rem;
+        right: 1.5rem;
         padding: 0.8rem 1.5rem;
         top: 1rem;
     }
@@ -1145,8 +1150,55 @@ nav#main-nav a:hover {
         transform: translateY(0) scale(1);
     }
 
+    /* Stacking Grids */
+    .two-col, .three-col, .four-col {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .process-row {
+        grid-template-columns: 1fr;
+    }
+
+    .process-step {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .comp-cards, .persona-grid, .insight-row, .outcome-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cover-meta-row {
+        gap: 24px;
+        justify-content: flex-start;
+    }
+
+    .screens-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .screen-slot.wide {
+        grid-column: span 1;
+    }
+
+    .cover-title {
+        font-size: clamp(50px, 12vw, 80px);
+    }
+
+    .big-text {
+        font-size: clamp(28px, 6vw, 40px);
+    }
+
     .scroll-tracker {
         width: 40px !important;
+    }
+
+    .floating-back-btn {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        padding: 0.6rem 1rem;
+        font-size: 0.75rem;
     }
 }
 
