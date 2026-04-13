@@ -996,6 +996,42 @@
         padding: 32px 24px;
       }
     }
+
+    /* ─── VERTICAL SCROLL PROGRESS ─── */
+    .scroll-v-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 100vh;
+      background: rgba(240, 237, 232, 0.03);
+      z-index: 500;
+      pointer-events: none;
+    }
+
+    .scroll-v-bar {
+      width: 100%;
+      height: 0%;
+      background: var(--red);
+      box-shadow: 0 0 25px var(--red-glow);
+      transition: height 0.1s ease-out;
+    }
+
+    .scroll-v-number {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--red);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      opacity: 0.8;
+    }
+
   </style>
 </head>
 
@@ -1004,6 +1040,12 @@
   <!-- Custom Cursor -->
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
+
+  <!-- Vertical Scroll Progress -->
+  <div class="scroll-v-container">
+    <div class="scroll-v-bar" id="v-scroll-bar"></div>
+    <div class="scroll-v-number" id="v-scroll-num">00%</div>
+  </div>
 
   <!-- NAV -->
   <nav>
@@ -1521,6 +1563,19 @@
       if (title) title.style.transition = 'opacity 0.3s ease';
       if (desc) desc.style.transition = 'opacity 0.3s ease';
     });
+
+    /* ─── VERTICAL SCROLL PROGRESS ─── */
+    window.addEventListener('scroll', () => {
+      const bar = document.getElementById('v-scroll-bar');
+      const num = document.getElementById('v-scroll-num');
+      if (bar && num) {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = Math.max(0, Math.min(100, (window.scrollY / total) * 100));
+        bar.style.height = `${progress}%`;
+        num.textContent = Math.round(progress).toString().padStart(2, '0') + '%';
+      }
+    });
+
   </script>
 </body>
 
