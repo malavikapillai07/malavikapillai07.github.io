@@ -158,36 +158,4 @@ if (flipbookScrollArea && bookCover && bookShift) {
 }
 
 
-/* === Custom Cursor Logic === */
-const cursor = document.getElementById('cursor');
-const cursorRing = document.getElementById('cursor-ring');
-
-if (cursor && cursorRing) {
-    document.addEventListener('mousemove', (e) => {
-        const posX = e.clientX;
-        const posY = e.clientY;
-        
-        // Use requestAnimationFrame for smoother movement
-        requestAnimationFrame(() => {
-            cursor.style.left = `${posX}px`;
-            cursor.style.top = `${posY}px`;
-            cursorRing.style.left = `${posX}px`;
-            cursorRing.style.top = `${posY}px`;
-        });
-    });
-
-    const interactiveElements = document.querySelectorAll('a, button, .project-card, .btn');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.transform = 'translate(-50%, -50%) scale(2)';
-            cursorRing.style.transform = 'translate(-50%, -50%) scale(1.5)';
-            cursorRing.style.borderColor = 'rgba(200, 16, 46, 0.8)';
-        });
-        el.addEventListener('mouseleave', () => {
-            cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-            cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
-            cursorRing.style.borderColor = 'rgba(200, 16, 46, 0.5)';
-        });
-    });
-}
-
+/* Custom cursor logic has been removed as per user request */

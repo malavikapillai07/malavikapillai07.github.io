@@ -108,9 +108,9 @@
       left: 5rem;
       right: 5rem;
       z-index: 10000;
-      background-color: rgba(15, 15, 15, 0.5);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background-color: rgba(15, 15, 15, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 100px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
@@ -199,7 +199,7 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #f7b731;
+      color: var(--red);
       padding: 0.8rem 1.6rem;
       border-radius: 100px;
       text-decoration: none;
@@ -213,9 +213,9 @@
 
     .floating-back-btn:hover {
       transform: translateY(-5px) scale(1.05);
-      background: rgba(247, 183, 49, 0.1);
-      border-color: #f7b731;
-      box-shadow: 0 15px 40px rgba(247, 183, 49, 0.2);
+      background: rgba(200, 16, 46, 0.1);
+      border-color: var(--red);
+      box-shadow: 0 15px 40px rgba(200, 16, 46, 0.2);
     }
 
     @media (max-width: 900px) {
@@ -1137,8 +1137,8 @@
       font-size: 18px;
       color: var(--red);
       font-weight: 900;
-      font-family: 'Hagrid', sans-serif;
-      text-shadow: 0 0 10px var(--red-glow);
+      font-family: var(--sans);
+      text-shadow: none;
     }
 
   </style>
@@ -1146,9 +1146,7 @@
 
 <body>
 
-  <!-- Custom Cursor -->
-  <div id="cursor"></div>
-  <div id="cursor-ring"></div>
+  <!-- Custom cursor removed -->
 
   <!-- Vertical Scroll Progress -->
   <div class="scroll-v-container">
@@ -1160,15 +1158,15 @@
   <header>
     <a href="../index.html" class="logo">VOID</a>
     <div class="header-right">
+      <button class="theme-toggle" id="theme-btn" style="margin-right: 1.5rem;">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      </button>
       <nav id="main-nav">
         <a href="../index.html">Home</a>
         <a href="../index.html#work">Work</a>
         <a href="../index.html#about">About</a>
         <a href="../index.html#contact">Contact</a>
       </nav>
-      <button class="theme-toggle" id="theme-btn">
-        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-      </button>
       <button class="mobile-menu-btn" id="mobile-menu-btn">
         <span class="bar"></span>
         <span class="bar"></span>
@@ -1720,51 +1718,7 @@
       });
     }
 
-    /* ─── CURSOR TRACKING ─── */
-    const dot = document.getElementById('cursor');
-    const ring = document.getElementById('cursor-ring');
-    let mouseX = 0, mouseY = 0;
-    let dotX = 0, dotY = 0;
-    let ringX = 0, ringY = 0;
-
-    window.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    function animate() {
-      dotX += (mouseX - dotX) * 0.2;
-      dotY += (mouseY - dotY) * 0.2;
-      ringX += (mouseX - ringX) * 0.15;
-      ringY += (mouseY - ringY) * 0.15;
-
-      if (dot) dot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
-      if (ring) ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
-
-      requestAnimationFrame(animate);
-    }
-    animate();
-
-    // Hover Scaling
-    const interactive = document.querySelectorAll('a, button, .fp-tab, .decision-card');
-    interactive.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        if (dot) dot.style.transform += ' scale(2)';
-        if (ring) {
-          ring.style.width = '60px';
-          ring.style.height = '60px';
-          ring.style.borderColor = 'rgba(247, 183, 49, 0.4)';
-        }
-      });
-      el.addEventListener('mouseleave', () => {
-        if (dot) dot.style.transform = dot.style.transform.replace(' scale(2)', '');
-        if (ring) {
-          ring.style.width = '40px';
-          ring.style.height = '40px';
-          ring.style.borderColor = '#f7b731';
-        }
-      });
-    });
+    /* Cursor Tracking removed as per request */
 
 
   </script>

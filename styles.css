@@ -47,35 +47,7 @@ body::before {
     scale: 1.5; /* Increased scale to cover corners during rotation */
 }
 
-/* Custom Cursor */
-#cursor {
-    width: 8px;
-    height: 8px;
-    background-color: #f7b731; /* Vibrant Yellow */
-    border-radius: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 10002;
-    transform: translate(-50%, -50%);
-    transition: transform 0.08s, width 0.2s, height 0.2s, background 0.2s;
-    mix-blend-mode: normal;
-}
-
-#cursor-ring {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #f7b731; /* Vibrant Yellow */
-    border-radius: 50%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 10001;
-    transform: translate(-50%, -50%);
-    transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-}
+/* Custom cursor removed as per request */
 
 @keyframes static-noise {
     0% { transform: rotate(0deg); }
@@ -95,7 +67,6 @@ body {
     flex-direction: column;
     min-height: 100vh;
     text-transform: none;
-    cursor: none; /* Hide default cursor */
 }
 
 ::selection {
