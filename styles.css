@@ -252,6 +252,16 @@ main {
     /* Keeps content above noise */
 }
 
+.footer-copyright {
+    margin-top: 5rem;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    opacity: 0.5;
+    letter-spacing: 1px;
+    font-family: 'Space Mono', monospace;
+    text-transform: none;
+}
+
 /* Hero Section */
 .hero-container {
     display: flex;
