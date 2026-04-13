@@ -47,6 +47,27 @@ body::before {
     scale: 1.5; /* Increased scale to cover corners during rotation */
 }
 
+/* Scroll Progress Bar (Left Side) */
+.scroll-progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px; /* Thickness as requested */
+    height: 100vh;
+    background: transparent;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.scroll-progress-bar {
+    width: 100%;
+    height: 0%;
+    background: #c8102e; /* Red color */
+    box-shadow: 0 0 15px rgba(200, 16, 46, 0.3);
+    border-radius: 0 0 4px 0;
+    transition: height 0.15s ease-out;
+}
+
 @keyframes static-noise {
     0% { transform: rotate(0deg); }
     25% { transform: rotate(90deg); }
@@ -176,8 +197,9 @@ nav a {
 body.homepage nav a {
     font-family: 'Hagrid', sans-serif !important;
     font-weight: 400;
-    font-size: 0.98rem;
+    font-size: 1.05rem; /* Slightly larger for Hagrid */
     text-transform: none;
+    letter-spacing: 0.5px;
 }
 
 nav a:hover {

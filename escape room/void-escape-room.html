@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VOID — Escape Room · Sensory Visual Experience</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Syne:wght@400;500;700;800&family=DM+Mono:ital@0;1&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ─────────────────────────────────────────
+   ROOT & RESET
+───────────────────────────────────────── */
+    :root {
+      --red: #c8102e;
+      --red-dim: #8b0b1e;
+      --red-glow: rgba(200, 16, 46, 0.35);
+      --black: #0a0a0a;
+      --black-mid: #111111;
+      --black-card: #161616;
+      --white: #f0ede8;
+      --white-dim: rgba(240, 237, 232, 0.55);
+      --white-faint: rgba(240, 237, 232, 0.12);
+      --mono: 'DM Mono', monospace;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Syne', sans-serif;
+      --gold: #D4AF37;
+      --gold-glow: rgba(212, 175, 55, 0.35);
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────────────────
+   CUSTOM CURSOR
+───────────────────────────────────────── */
+    #cursor {
+      width: 12px;
+      height: 12px;
+      background: var(--red);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s, width 0.2s, height 0.2s, background 0.2s;
+      mix-blend-mode: normal;
+    }
+
+    #cursor-ring {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(200, 16, 46, 0.5);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, width 0.25s, height 0.25s, border-color 0.25s;
+    }
+
+    body:hover #cursor {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    a:hover~#cursor,
+    button:hover~#cursor {
+      transform: translate(-50%, -50%) scale(2);
+    }
+
+    /* ─────────────────────────────────────────
+   NOISE OVERLAY
+───────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9990;
+      opacity: 0.5;
+    }
+
+    /* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 48px;
+      z-index: 100;
+      background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, transparent 100%);
+      backdrop-filter: blur(4px);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--red);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--red);
+      border: 1px solid var(--red);
+      padding: 4px 10px;
+      border-radius: 2px;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 0 48px 80px;
+      position: relative;
+      overflow: hidden;
+      background: url('final image1.jpg') no-repeat center center;
+      background-size: cover;
+    }
+
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.95) 100%);
+      z-index: 1;
+    }
+
+    #hero>*:not(.hero-bg-overlay) {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 75% 40%, rgba(200, 16, 46, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 30% at 20% 70%, rgba(200, 16, 46, 0.06) 0%, transparent 60%),
+        var(--black);
+    }
+
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200, 16, 46, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 16, 46, 0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    .hero-number {
+      position: absolute;
+      top: 140px;
+      right: 48px;
+      font-family: var(--serif);
+      font-size: clamp(160px, 22vw, 320px);
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(200, 16, 46, 0.06);
+      line-height: 1;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--red);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(72px, 12vw, 180px);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .hero-title span {
+      color: var(--white);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      margin-bottom: 48px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 48px;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-meta-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      opacity: 0.7;
+    }
+
+    .hero-meta-value {
+      font-size: 13px;
+      color: var(--white-dim);
+      letter-spacing: 0.04em;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      right: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-faint);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(180deg, transparent, var(--red));
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(6px)
+      }
+    }
+
+    /* ─────────────────────────────────────────
+   SECTION WRAPPER
+───────────────────────────────────────── */
+    section {
+      padding: 100px 48px;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .section-full {
+      max-width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200, 16, 46, 0.3), transparent);
+      margin: 0 48px;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .section-heading {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 48px;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    /* ─────────────────────────────────────────
+   CONCEPT SECTION
+───────────────────────────────────────── */
+    #concept {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .concept-text p {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--white-dim);
+      margin-bottom: 20px;
+    }
+
+    .concept-text p strong {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .concept-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    .concept-card {
+      background: #141414;
+      border: 1px solid rgba(240, 237, 232, 0.04);
+      padding: 40px;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .concept-card-number {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-family: var(--serif);
+      font-size: 160px;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(200, 16, 46, 0.05);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .concept-stat {
+      position: relative;
+      z-index: 1;
+    }
+
+    .concept-stat-num {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 900;
+      font-style: italic;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .concept-stat-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+    }
+
+    /* ──── USER FLOW (Side-by-Side Boxed Layout) ──── */
+    #userflow {
+      padding-top: 100px;
+      padding-bottom: 60px;
+    }
+
+    .flow-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      /* Reduced gap */
+      margin-top: 40px;
+    }
+
+    .flow-box {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #141414;
+      /* Matched to Concept Card */
+      border: 1px solid rgba(240, 237, 232, 0.04);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .flow-box:hover {
+      border-color: rgba(200, 16, 46, 0.2);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .flow-image-box {
+      width: 100%;
+      height: 220px;
+      /* Even smaller for a compact look */
+      background: #0d0d0d;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ─── FINAL GALLERY STYLES ─── */
+    #final-gallery {
+      position: relative;
+      height: 80vh;
+      /* Increased height for bigger images */
+      margin-top: 60px;
+      background: #0d0d0d;
+      overflow: hidden;
+      border-top: 1px solid rgba(240, 237, 232, 0.05);
+    }
+
+    .gallery-slide {
+      position: absolute;
+      inset: 0;
+      /* Cover entire area */
+      opacity: 0;
+      transition: opacity 1.2s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-slide.active {
+      opacity: 1;
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Fill the screen width completely */
+      filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.8));
+    }
+
+    .flow-img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .flow-img.active {
+      opacity: 1;
+    }
+
+    .flow-text-box {
+      padding: 32px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: #141414;
+      /* Matched to Concept Card */
+    }
+
+    .flow-bg-num {
+      position: absolute;
+      top: -20px;
+      right: -10px;
+      font-family: var(--serif);
+      font-size: 140px;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(200, 16, 46, 0.04);
+      line-height: 1;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .flow-step-idx {
+      font-family: var(--serif);
+      font-size: 42px;
+      font-weight: 900;
+      font-style: italic;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow-content-area {
+      position: relative;
+      z-index: 1;
+    }
+
+    .flow-badge {
+      display: none;
+      /* Replaced by large number */
+    }
+
+    .flow-floor {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 9px;
+      padding: 3px 8px;
+      border: 1px solid rgba(200, 16, 46, 0.25);
+      border-radius: 2px;
+      color: rgba(200, 16, 46, 0.7);
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+
+    .flow-text-box h4 {
+      font-family: var(--serif);
+      font-size: 18px;
+      /* Slightly smaller */
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .flow-text-box p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--white-dim);
+    }
+
+    .flow-sensory {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(240, 237, 232, 0.05);
+      font-size: 11px;
+      color: rgba(200, 16, 46, 0.6);
+      font-family: var(--mono);
+    }
+
+    .staff-badge {
+      display: inline-block;
+      background: rgba(200, 16, 46, 0.12);
+      border: 1px solid var(--red);
+      color: var(--red);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      padding: 3px 10px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    /* ──── LAYOUT (New Implementation) ──── */
+    #floorplans {
+      padding: 100px 48px;
+    }
+
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-top: 48px;
+    }
+
+    .layout-img-area {
+      background: #111;
+      border: 1px solid rgba(240, 237, 232, 0.08);
+      border-radius: 4px;
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .layout-img-area img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.5));
+    }
+
+    .layout-text-area {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .layout-text-area h3 {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 24px;
+    }
+
+    .layout-text-area p {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--white-dim);
+      white-space: pre-line;
+      /* Essential for the new multi-paragraph descriptions */
+    }
+
+    .fp-tabs {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 48px;
+      border-bottom: 1px solid rgba(240, 237, 232, 0.08);
+    }
+
+    .fp-tab {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      cursor: pointer;
+      color: var(--white-dim);
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      background: none;
+      border: none;
+      margin-bottom: -1px;
+    }
+
+    .fp-tab.active {
+      color: var(--red);
+      border-bottom-color: var(--red);
+    }
+
+    /* ─────────────────────────────────────────
+   PALETTE SECTION
+───────────────────────────────────────── */
+    #palette {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    .palette-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 48px;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 120px;
+    }
+
+    .palette-swatch {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      padding: 14px 18px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: default;
+      transition: flex 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .palette-swatch:hover {
+      flex: 2.5;
+    }
+
+    .palette-swatch span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .swatch-red {
+      background: #c8102e;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .swatch-gold {
+      background: #D4AF37;
+      color: rgba(10, 10, 10, 0.6);
+    }
+
+    .swatch-black {
+      background: #0a0a0a;
+      color: rgba(240, 237, 232, 0.4);
+      border: 1px solid rgba(240, 237, 232, 0.06);
+    }
+
+    .swatch-black-mid {
+      background: #161616;
+      color: rgba(240, 237, 232, 0.3);
+    }
+
+    .swatch-white {
+      background: #f0ede8;
+      color: rgba(10, 10, 10, 0.5);
+    }
+
+    .swatch-white-dim {
+      background: #b8b4ae;
+      color: rgba(10, 10, 10, 0.5);
+    }
+
+    .palette-desc {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .palette-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .palette-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .palette-item h5 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .palette-item p {
+      font-size: 12px;
+      color: var(--white-dim);
+      line-height: 1.6;
+    }
+
+    /* ─────────────────────────────────────────
+   DESIGN DECISIONS
+───────────────────────────────────────── */
+    #decisions {
+      padding-top: 0;
+      padding-bottom: 100px;
+    }
+
+    .decisions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .decision-card {
+      background: var(--black-card);
+      padding: 48px;
+      border: 1px solid rgba(240, 237, 232, 0.04);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .decision-card:hover {
+      background: #141010;
+    }
+
+    .decision-card::before {
+      content: attr(data-num);
+      font-family: var(--serif);
+      font-size: 80px;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(200, 16, 46, 0.05);
+      position: absolute;
+      bottom: 12px;
+      right: 24px;
+      line-height: 1;
+    }
+
+    .decision-card h3 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .decision-card p {
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--white-dim);
+    }
+
+    .decision-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    /* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+    footer {
+      padding: 64px 48px 48px;
+      border-top: 1px solid rgba(240, 237, 232, 0.06);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .footer-title {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(200, 16, 46, 0.15);
+      line-height: 1;
+    }
+
+    .footer-info {
+      text-align: right;
+    }
+
+    .footer-info p {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      opacity: 0.4;
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    /* ─────────────────────────────────────────
+   FADE-IN ANIMATION
+───────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav {
+        padding: 18px 24px;
+      }
+
+      #hero {
+        padding: 0 24px 64px;
+      }
+
+      section {
+        padding: 64px 24px;
+      }
+
+      #concept {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .sensory-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fp-floor.active {
+        grid-template-columns: 1fr;
+      }
+
+      .decisions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .palette-desc {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .footer-info {
+        text-align: left;
+      }
+
+      .flow-box {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-image-box {
+        height: 280px;
+      }
+
+      .flow-text-box {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- NAV -->
+  <nav>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <div id="hero">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-number">VOID</div>
+
+    <div class="hero-eyebrow"></div>
+    <h1 class="hero-title">
+      VOID<br><span>Escape</span>
+    </h1>
+    <p class="hero-subtitle"></p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label"></span>
+        <span class="hero-meta-value"></span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label"></span>
+        <span class="hero-meta-value"></span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label"></span>
+        <span class="hero-meta-value"></span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label"></span>
+        <span class="hero-meta-value"></span>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+
+  <!-- ══ CONCEPT ══ -->
+  <section>
+    <div id="concept" class="fade-up">
+      <div class="concept-text">
+        <div class="section-label">01 — The Concept</div>
+        <h2 class="section-heading">A room you <em>feel</em> your way out of.</h2>
+        <p>
+          <strong>VOID</strong> is a multi-floor escape room experience where every spatial decision is a sensory
+          statement. The exterior is deliberately understated — no signage screaming "escape room," no neon lights. Just
+          a door. The nonchalance is the first clue.
+        </p>
+        <p>
+          Once inside, the rules of normal space collapse. Furniture is exaggerated and theatrical — oversized chairs
+          you sink into, undersized tables that demand you crouch. Nothing is comfortable in the conventional sense, but
+          everything is intentional. <strong>You are inside an experience, not a room.</strong>
+        </p>
+        <p>
+          Each floor requires solving before the next can be accessed. The final escape involves crossing a water body
+          via stepping stones — a full-body, sensory-rich culmination of the journey.
+        </p>
+        <div class="concept-tags">
+          <span class="tag">Spatial Design</span>
+          <span class="tag">Sensory Experience</span>
+          <span class="tag">Gamification</span>
+          <span class="tag">User Journey</span>
+          <span class="tag">Progressive Access</span>
+          <span class="tag">Staff UX</span>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-number">3</div>
+        <div class="concept-stat">
+          <div class="concept-stat-num">3</div>
+          <div class="concept-stat-label">Floors of escalating challenge</div>
+        </div>
+        <div class="concept-stat">
+          <div class="concept-stat-num">2</div>
+          <div class="concept-stat-label">Parallel systems — Player & Staff</div>
+        </div>
+        <div class="concept-stat">
+          <div class="concept-stat-num">5+</div>
+          <div class="concept-stat-label">Distinct sensory zones</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="section-divider"></div>
+
+  <!-- ══ COLOUR PALETTE ══ -->
+  <section id="palette" class="fade-up">
+    <div class="section-label">02 — Colour Palette</div>
+    <h2 class="section-heading">Three colours.<br><em>Infinite tension.</em></h2>
+
+    <div class="palette-row">
+      <div class="palette-swatch swatch-red"><span>Danger Red<br>#C8102E</span></div>
+      <div class="palette-swatch swatch-gold"><span>Gold<br>#D4AF37</span></div>
+      <div class="palette-swatch swatch-black"><span>Void Black<br>#0A0A0A</span></div>
+      <div class="palette-swatch swatch-white"><span>Bone White<br>#F0EDE8</span></div>
+    </div>
+
+    <div class="palette-desc">
+      <div class="palette-item">
+        <div class="palette-dot" style="background:#C8102E;"></div>
+        <div>
+          <h5>Red — the activator</h5>
+          <p>Used for entry carpets, alert zones, unlock moments, and all CTA elements. Red raises the pulse. It marks
+            what matters.</p>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-dot" style="background:#0A0A0A; border:1px solid rgba(240,237,232,0.15);"></div>
+        <div>
+          <h5>Black — the unknown</h5>
+          <p>The dominant field. Black creates the void that guests are moving through. It makes every detail feel like
+            a discovery rather than decoration.</p>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-dot" style="background:#F0EDE8; border:1px solid rgba(10,10,10,0.1);"></div>
+        <div>
+          <h5>White — the reveal</h5>
+          <p>Bone white appears sparingly — on walls, stepping stones, key props. Its rarity gives it power. When white
+            appears, it means something.</p>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-dot" style="background:#D4AF37;"></div>
+        <div>
+          <h5>Gold — the reward</h5>
+          <p>Gold marks the completion of key tasks and the final escape. It symbolizes value, achievement, and the
+            earned nature of the escape.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══ LAYOUT (New Implementation) ══ -->
+  <section id="floorplans" class="fade-up">
+    <div class="fp-inner">
+      <div class="section-label">03 — Layout</div>
+      <h1 class="layout-title"
+        style="font-family: var(--serif); font-size: 80px; font-weight: 900; font-style: italic; color: var(--red); margin: -20px 0 40px -4px; letter-spacing: -0.04em;">
+        Layout</h1>
+
+      <div class="fp-tabs">
+        <button class="fp-tab active" onclick="switchFloor('ground', this)">Ground Floor</button>
+        <button class="fp-tab" onclick="switchFloor('first', this)">First Floor</button>
+        <button class="fp-tab" onclick="switchFloor('second', this)">Second Floor</button>
+      </div>
+
+      <div class="layout-grid">
+        <div class="layout-img-area">
+          <img id="floor-img" src="ground_floor_inverted.PNG" alt="Floor Plan">
+        </div>
+        <div class="layout-text-area">
+          <h3 id="floor-title">Ground Floor</h3>
+          <p id="floor-description">The experience begins at the reception, defined by a black-and-white tiled floor
+            that subtly references a chessboard, setting up a sense of strategy and anticipation. The space feels
+            familiar but slightly exaggerated, creating an underlying tension.
+
+            A thick, tinted-glass door leads into the preparation room, marking a clear transition. Here, players store
+            belongings, remove shoes, and prepare for a sensory-driven experience. This pause acts as a mental and
+            physical shift from the outside world into the game.
+
+            Behind the scenes, a staff-only system runs parallel including a lift-access room and a CCTV monitoring
+            space that ensures seamless operation and safety without interrupting the experience.
+
+            Sensory cues: Contrast · Threshold · Controlled transition</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══ USER FLOW (Boxed side-by-side) ══ -->
+  <section id="userflow" class="fade-up">
+    <div class="section-label">04 — User Flow</div>
+    <h2 class="section-heading">How you move <em>through</em> VOID.</h2>
+
+    <div class="flow-container">
+
+      <!-- Step 1 -->
+      <div class="flow-box">
+        <div class="flow-image-box">
+          <img src="arrival.jpg" class="flow-img active" alt="Step 01 Arrival">
+        </div>
+        <div class="flow-text-box">
+          <div class="flow-bg-num">01</div>
+          <div class="flow-step-idx">01</div>
+          <div class="flow-content-area">
+            <span class="flow-floor">Ground Floor · Exterior</span>
+            <h4>Arrive at the Unmarked Door</h4>
+            <p>The exterior gives nothing away. No branding, no noise, no signage. The nonchalance is the first sensory
+              signal — curiosity and slight unease are triggered before stepping inside.</p>
+            <div class="flow-sensory">Sensory cue: Visual restraint · Anticipation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="flow-box">
+        <div class="flow-image-box" id="step2-images">
+          <img src="red carpet.jpg" class="flow-img active" alt="Step 02 Reception 1">
+          <img src="red carpet (2).jpg" class="flow-img" alt="Step 02 Reception 2">
+        </div>
+        <div class="flow-text-box">
+          <div class="flow-bg-num">02</div>
+          <div class="flow-step-idx">02</div>
+          <div class="flow-content-area">
+            <span class="flow-floor">Ground Floor · Reception</span>
+            <h4>Enter the Reception Area</h4>
+            <p>Red carpet. Sofa. TV. A reception desk. It feels like a lobby but something is slightly off — the
+              furniture
+              is too big, the proportions wrong. Players check in here.</p>
+            <div class="flow-sensory">Sensory cue: Red carpet · Scale distortion</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="flow-box">
+        <div class="flow-image-box">
+          <img src="shoe.jpg" class="flow-img active" alt="Step 03 Storage">
+        </div>
+        <div class="flow-text-box">
+          <div class="flow-bg-num">03</div>
+          <div class="flow-step-idx">03</div>
+          <div class="flow-content-area">
+            <span class="flow-floor">Ground Floor · Storage</span>
+            <h4>Remove Shoes · Store Belongings</h4>
+            <p>Players move to the storage room. Cushioned stools invite them to sit, remove shoes, and store everything
+              they brought. The ritual slows the body and transitions the mind.</p>
+            <div class="flow-sensory">Sensory cue: Tactile barefoot · Threshold ritual</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="flow-box">
+        <div class="flow-image-box">
+          <img src="staircase.jpg" class="flow-img active" alt="Step 04 Stairs">
+        </div>
+        <div class="flow-text-box">
+          <div class="flow-bg-num">04</div>
+          <div class="flow-step-idx">04</div>
+          <div class="flow-content-area">
+            <span class="flow-floor">Ground Floor → First Floor</span>
+            <h4>Climb the Staircase</h4>
+            <p>The main staircase leads to the first floor. Ascending barefoot is a different sensation — the texture
+              underfoot, the slight chill, the change in air.</p>
+            <div class="flow-sensory">Sensory cue: Temperature shift · Surface texture</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="flow-box">
+        <div class="flow-image-box">
+          <img src="first floor.jpg" class="flow-img active" alt="Step 05 Level 1">
+        </div>
+        <div class="flow-text-box">
+          <div class="flow-bg-num">05</div>
+          <div class="flow-step-idx">05</div>
+          <div class="flow-content-area">
+            <span class="flow-floor">First Floor · Level 1</span>
+            <h4>Solve Level One</h4>
+            <p>The first floor contains Level 1 — a room with clues, objects, and challenges to solve. The space is
+              filled
+              with exaggerated props and deliberate sensory design.</p>
+            <div class="flow-sensory">Sensory cue: Visual overstimulation · Discovery tension</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="flow-box">
+        <div class="flow-image-box">
+          <img src="secret.jpg" class="flow-img active" alt="Step 06 Passage">
+        </div>
+        <div class="flow-text-box">
+          <div class="flow-bg-num">06</div>
+          <div class="flow-step-idx">06</div>
+          <div class="flow-content-area">
+            <span class="flow-floor">First Floor → Second Floor</span>
+            <h4>Access Opens — Hidden Passage</h4>
+            <p>Once solved, a passage inside the first floor room unlocks — bypassing the main staircase. The second
+              floor
+              access feels secret, earned, and slightly transgressive.</p>
+            <div class="flow-sensory">Sensory cue: Auditory unlock · Surprise spatial reveal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 7 -->
+      <div class="flow-box">
+        <div class="flow-image-box">
+          <img src="water.jpg" class="flow-img active" alt="Step 07 Level 2">
+        </div>
+        <div class="flow-text-box">
+          <div class="flow-bg-num">07</div>
+          <div class="flow-step-idx">07</div>
+          <div class="flow-content-area">
+            <span class="flow-floor">Second Floor · Level 2</span>
+            <h4>Cross the Water · Solve Final Clue</h4>
+            <p>The second floor features a shallow water body with stepping stones. Players must physically cross it to
+              reach the final clue — barefoot, balancing, feeling cold water.</p>
+            <div class="flow-sensory">Sensory cue: Touch · Sound · Balance immersion</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 8 -->
+      <div class="flow-box">
+        <div class="flow-image-box">
+          <img src="exit stairway.jpg" class="flow-img active" alt="Step 08 Exit">
+        </div>
+        <div class="flow-text-box">
+          <div class="flow-bg-num">08</div>
+          <div class="flow-step-idx">08</div>
+          <div class="flow-content-area">
+            <span class="flow-floor">Second Floor → Ground Floor</span>
+            <h4>Descend · Collect · Exit</h4>
+            <p>With the main door open, players take the main staircase back down to collect their belongings. The
+              descent
+              is calm — a designed decompression.</p>
+            <div class="flow-sensory">Sensory cue: Decompression · Re-orientation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 9 -->
+      <div class="flow-box">
+        <div class="flow-image-box" id="step9-images">
+          <img src="lift.jpg" class="flow-img active" alt="Step 09 Staff 1">
+          <img src="staff lift.jpg" class="flow-img" alt="Step 09 Staff 2">
+        </div>
+        <div class="flow-text-box">
+          <div class="flow-bg-num">09</div>
+          <div class="flow-step-idx">09</div>
+          <div class="flow-content-area">
+            <span class="staff-badge">Staff Only</span>
+            <span class="flow-floor">All Floors · Staff System</span>
+            <h4>Parallel Staff Infrastructure</h4>
+            <p>A separate door leads to a staff-only area with a lift. In emergencies, staff can access any floor
+              instantly without disrupting the player experience.</p>
+            <div class="flow-sensory">UX consideration: Safety · Invisible ops layer</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══ DESIGN DECISIONS ══ -->
+  <section id="decisions" class="fade-up">
+    <div class="section-label">05 — Key Design Decisions</div>
+    <h2 class="section-heading">Why everything is the <em>way it is.</em></h2>
+
+    <div class="decisions-grid">
+      <div class="decision-card" data-num="01">
+        <span class="decision-label">Spatial UX</span>
+        <h3>The Exterior Reveals Nothing</h3>
+        <p>An escape room that announces itself undermines its own premise. VOID's exterior is deliberately low-key — no
+          theming, no signage beyond a door number. The first psychological game begins before you enter. Anticipation
+          is a design material.</p>
+      </div>
+      <div class="decision-card" data-num="02">
+        <span class="decision-label">Interaction Design</span>
+        <h3>Progressive Access Over Linearity</h3>
+        <p>Each floor unlocking only after solving the previous creates genuine stakes. The hidden passage from Floor 1
+          to Floor 2 — bypassing the main staircase — makes progress feel transgressive and secret. The architecture
+          rewards you, not just the puzzle answer.</p>
+      </div>
+      <div class="decision-card" data-num="03">
+        <span class="decision-label">Sensory Design</span>
+        <h3>Exaggerated Furniture as Disorientation Tool</h3>
+        <p>When everything is the wrong size, your brain can't go on autopilot. Oversized chairs and misscaled objects
+          force attention. You cannot move through this space habitually — you must be present. This is the core UX
+          principle: design that demands engagement.</p>
+      </div>
+      <div class="decision-card" data-num="04">
+        <span class="decision-label">Safety UX</span>
+        <h3>The Invisible Staff Layer</h3>
+        <p>The entire staff system — lift, CCTV room, separate access — operates invisibly. Players never feel monitored
+          despite being constantly safe. This dual-layer design (player experience vs. operational infrastructure) is a
+          core UX architecture decision: safety must not break immersion.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FINAL GALLERY ══ -->
+  <section id="final-gallery" class="section-full fade-up">
+    <div class="gallery-overlay"></div>
+    <div class="gallery-slide active"><img src="final image 2.jpg" class="gallery-img" alt="VOID Space 2"></div>
+    <div class="gallery-slide"><img src="final image 4.jpg" class="gallery-img" alt="VOID Space 4"></div>
+    <div class="gallery-slide"><img src="final image 5.jpg" class="gallery-img" alt="VOID Space 5"></div>
+    <div class="gallery-slide"><img src="final image1.jpg" class="gallery-img" alt="VOID Space 1"></div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-title">VOID</div>
+    <div class="footer-info">
+      <p>Sensory Visual Experience · Academic Project</p>
+      <p>Escape Room Design · Spatial UX · Multi-Floor Concept</p>
+      <p>Colour Palette: Red · Black · White</p>
+    </div>
+  </footer>
+
+
+  <script>
+    /* ─── FLOOR PLAN SWITCHER ─── */
+    const floorData = {
+      ground: {
+        title: "Ground Floor",
+        img: "ground_floor_inverted.PNG",
+        desc: "The threshold. Includes the unmarked entry, the unsettlingly scaled reception, and the storage area where players undergo the ritual of shoe removal, transitioning from the outside world into the VOID."
+      },
+      first: {
+        title: "First Floor",
+        img: "floor_plan1_inverted.PNG",
+        desc: "A rustic staircase with brass details leads to the first game zone, introducing a tactile and atmospheric shift. The space draws from a surreal, time-warped aesthetic, with exaggerated furniture, layered textures, and objects that invite exploration.\n\nPlayers navigate through clues within an environment designed to feel slightly overwhelming yet engaging. Visual complexity and spatial distortion encourage curiosity and active participation.\n\nA hidden staff access point connects this level to the lift and support areas, remaining completely invisible to players.\n\nSensory cues: Texture · Visual intensity · Discovery"
+      },
+      second: {
+        title: "Second Floor",
+        img: "floor_plan2_inverted.PNG",
+        desc: "Unlocked through the first level, the second floor introduces a more physical form of interaction. A shallow water zone with stepping stones requires players to move carefully, heightening awareness of balance, touch, and sound.\n\nBeyond this, a more structured puzzle area brings focus to the final clues. Once solved, the exit is revealed, leading back to the main staircase — completing the journey as a full loop.\n\nStaff access continues discreetly on this level, maintaining operational control without breaking immersion.\n\nSensory cues: Movement · Water · Balance · Release"
+      }
+    };
+
+    function switchFloor(floorId, btn) {
+      const data = floorData[floorId];
+      if (!data) return;
+
+      const img = document.getElementById('floor-img');
+      const title = document.getElementById('floor-title');
+      const desc = document.getElementById('floor-description');
+
+      // Add fade out effect
+      img.style.opacity = '0';
+      title.style.opacity = '0';
+      desc.style.opacity = '0';
+
+      setTimeout(() => {
+        img.src = data.img;
+        title.textContent = data.title;
+        desc.textContent = data.desc;
+
+        // Fade in
+        img.style.opacity = '1';
+        title.style.opacity = '1';
+        desc.style.opacity = '1';
+      }, 300);
+
+      document.querySelectorAll('.fp-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    /* ─── AUTO-SWITCHER LOGIC ─── */
+    function initAutoSwitch(containerId, interval = 3000) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const imgs = container.querySelectorAll('.flow-img');
+      if (imgs.length <= 1) return;
+
+      let idx = 0;
+      setInterval(() => {
+        imgs[idx].classList.remove('active');
+        idx = (idx + 1) % imgs.length;
+        imgs[idx].classList.add('active');
+      }, interval);
+    }
+
+    /* ─── FINAL GALLERY ─── */
+    function initFinalGallery() {
+      const slides = document.querySelectorAll('.gallery-slide');
+      if (slides.length === 0) return;
+      let idx = 0;
+      setInterval(() => {
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+      }, 3000);
+    }
+
+    initAutoSwitch('step2-images', 3000);
+    initAutoSwitch('step9-images', 3000);
+    initFinalGallery();
+
+    /* ─── SCROLL FADE-IN ─── */
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    // Set initial transition styles
+    document.addEventListener('DOMContentLoaded', () => {
+      const img = document.getElementById('floor-img');
+      const title = document.getElementById('floor-title');
+      const desc = document.getElementById('floor-description');
+      if (img) img.style.transition = 'opacity 0.3s ease';
+      if (title) title.style.transition = 'opacity 0.3s ease';
+      if (desc) desc.style.transition = 'opacity 0.3s ease';
+    });
+  </script>
+</body>
+
+</html>

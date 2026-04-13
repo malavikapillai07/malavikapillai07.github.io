@@ -156,3 +156,14 @@ if (flipbookScrollArea && bookCover && bookShift) {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 }
+
+/* === Scroll Progress Bar Logic === */
+const scrollBar = document.getElementById('scroll-bar');
+if (scrollBar) {
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        scrollBar.style.height = `${scrollPercent}%`;
+    });
+}

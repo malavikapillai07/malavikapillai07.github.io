@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VOID — Escape Room · Sensory Visual Experience</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Syne:wght@400;500;700;800&family=DM+Mono:ital@0;1&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ─────────────────────────────────────────
+   ROOT & RESET
+───────────────────────────────────────── */
+    :root {
+      --red: #c8102e;
+      --red-dim: #8b0b1e;
+      --red-glow: rgba(200, 16, 46, 0.35);
+      --black: #0a0a0a;
+      --black-mid: #111111;
+      --black-card: #161616;
+      --white: #f0ede8;
+      --white-dim: rgba(240, 237, 232, 0.55);
+      --white-faint: rgba(240, 237, 232, 0.12);
+      --mono: 'DM Mono', monospace;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Syne', sans-serif;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--sans);
+      cursor: none;
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────────────────
+   CUSTOM CURSOR
+───────────────────────────────────────── */
+    #cursor {
+      width: 12px;
+      height: 12px;
+      background: var(--red);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s, width 0.2s, height 0.2s, background 0.2s;
+      mix-blend-mode: normal;
+    }
+
+    #cursor-ring {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(200, 16, 46, 0.5);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, width 0.25s, height 0.25s, border-color 0.25s;
+    }
+
+    body:hover #cursor {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    a:hover~#cursor,
+    button:hover~#cursor {
+      transform: translate(-50%, -50%) scale(2);
+    }
+
+    /* ─────────────────────────────────────────
+   NOISE OVERLAY
+───────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9990;
+      opacity: 0.5;
+    }
+
+    /* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 48px;
+      z-index: 100;
+      background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, transparent 100%);
+      backdrop-filter: blur(4px);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--red);
+      letter-spacing: 0.08em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--red);
+      border: 1px solid var(--red);
+      padding: 4px 10px;
+      border-radius: 2px;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 0 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 75% 40%, rgba(200, 16, 46, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 30% at 20% 70%, rgba(200, 16, 46, 0.06) 0%, transparent 60%),
+        var(--black);
+    }
+
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200, 16, 46, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 16, 46, 0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    .hero-number {
+      position: absolute;
+      top: 140px;
+      right: 48px;
+      font-family: var(--serif);
+      font-size: clamp(160px, 22vw, 320px);
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(200, 16, 46, 0.06);
+      line-height: 1;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--red);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(72px, 12vw, 180px);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .hero-title span {
+      color: var(--red);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      margin-bottom: 48px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .hero-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 64px;
+      row-gap: 12px;
+    }
+
+    .hero-meta-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      opacity: 0.7;
+    }
+
+    .hero-meta-value {
+      font-size: 15px;
+      color: var(--white-dim);
+      letter-spacing: 0.04em;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      right: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white-faint);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(180deg, transparent, var(--red));
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(6px)
+      }
+    }
+
+    /* ─────────────────────────────────────────
+   SECTION WRAPPER
+───────────────────────────────────────── */
+    section {
+      padding: 100px 48px;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .section-full {
+      max-width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200, 16, 46, 0.3), transparent);
+      margin: 0 48px;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .section-heading {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 48px;
+    }
+
+    .section-heading em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    /* ─────────────────────────────────────────
+   CONCEPT SECTION
+───────────────────────────────────────── */
+    #concept {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .concept-text p {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--white-dim);
+      margin-bottom: 20px;
+    }
+
+    .concept-text p strong {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .concept-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid rgba(200, 16, 46, 0.35);
+      border-radius: 2px;
+      color: var(--red);
+      background: rgba(200, 16, 46, 0.05);
+    }
+
+    .concept-card {
+      background: var(--black-card);
+      border: 1px solid rgba(240, 237, 232, 0.06);
+      border-radius: 4px;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .concept-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red), transparent);
+    }
+
+    .concept-card-number {
+      font-family: var(--serif);
+      font-size: 96px;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(200, 16, 46, 0.08);
+      position: absolute;
+      top: 12px;
+      right: 24px;
+      line-height: 1;
+    }
+
+    .concept-stat {
+      margin-bottom: 32px;
+    }
+
+    .concept-stat-num {
+      font-family: var(--serif);
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+    }
+
+    .concept-stat-label {
+      font-size: 12px;
+      color: var(--white-dim);
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    /* ─────────────────────────────────────────
+   SENSORY DESIGN SECTION
+───────────────────────────────────────── */
+    #sensory {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    .sensory-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .sensory-card {
+      background: var(--black-card);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: background 0.3s;
+      border: 1px solid rgba(240, 237, 232, 0.04);
+    }
+
+    .sensory-card:hover {
+      background: #1c1010;
+    }
+
+    .sensory-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 0;
+      background: var(--red);
+      transition: height 0.4s ease;
+    }
+
+    .sensory-card:hover::after {
+      height: 2px;
+    }
+
+    .sensory-icon {
+      font-size: 32px;
+      margin-bottom: 28px;
+      display: block;
+      filter: grayscale(1);
+      transition: filter 0.3s;
+    }
+
+    .sensory-card:hover .sensory-icon {
+      filter: none;
+    }
+
+    .sensory-card-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--red);
+      letter-spacing: 0.18em;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .sensory-card h3 {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .sensory-card p {
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--white-dim);
+    }
+
+    .sensory-card .sensory-detail {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(240, 237, 232, 0.06);
+      font-family: var(--mono);
+      font-size: 10px;
+      color: rgba(200, 16, 46, 0.7);
+      letter-spacing: 0.1em;
+    }
+
+    /* ─────────────────────────────────────────
+   USER FLOW SECTION
+───────────────────────────────────────── */
+    #userflow {
+      padding-top: 100px;
+      padding-bottom: 60px;
+    }
+
+    .flow-container {
+      position: relative;
+      margin-top: 60px;
+    }
+
+    /* Vertical spine */
+    .flow-spine {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(200, 16, 46, 0.3) 10%, rgba(200, 16, 46, 0.3) 90%, transparent);
+      transform: translateX(-50%);
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 48px;
+      position: relative;
+      gap: 0;
+    }
+
+    .flow-step:nth-child(odd) {
+      flex-direction: row;
+    }
+
+    .flow-step:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .flow-card {
+      width: calc(50% - 48px);
+      background: var(--black-card);
+      border: 1px solid rgba(240, 237, 232, 0.06);
+      border-radius: 4px;
+      padding: 32px;
+      position: relative;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .flow-card:hover {
+      border-color: rgba(200, 16, 46, 0.3);
+      box-shadow: 0 0 40px rgba(200, 16, 46, 0.06);
+    }
+
+    .flow-step:nth-child(odd) .flow-card {
+      margin-right: auto;
+    }
+
+    .flow-step:nth-child(even) .flow-card {
+      margin-left: auto;
+    }
+
+    /* Connector dot */
+    .flow-dot {
+      position: absolute;
+      left: 50%;
+      top: 36px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--red);
+      border: 2px solid var(--black);
+      transform: translateX(-50%);
+      z-index: 2;
+      box-shadow: 0 0 16px var(--red-glow);
+    }
+
+    /* Arrow lines */
+    .flow-step:nth-child(odd) .flow-card::after {
+      content: '';
+      position: absolute;
+      right: -49px;
+      top: 38px;
+      width: 49px;
+      height: 1px;
+      background: rgba(200, 16, 46, 0.3);
+    }
+
+    .flow-step:nth-child(even) .flow-card::after {
+      content: '';
+      position: absolute;
+      left: -49px;
+      top: 38px;
+      width: 49px;
+      height: 1px;
+      background: rgba(200, 16, 46, 0.3);
+    }
+
+    .flow-badge {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .flow-floor {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 9px;
+      padding: 3px 8px;
+      border: 1px solid rgba(200, 16, 46, 0.25);
+      border-radius: 2px;
+      color: rgba(200, 16, 46, 0.7);
+      margin-bottom: 12px;
+    }
+
+    .flow-card h4 {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .flow-card p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--white-dim);
+    }
+
+    .flow-card .flow-sensory {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(240, 237, 232, 0.06);
+      font-size: 11px;
+      color: rgba(200, 16, 46, 0.65);
+      font-family: var(--mono);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .flow-card .flow-sensory::before {
+      content: '◆';
+      font-size: 7px;
+    }
+
+    /* staff-only badge */
+    .staff-badge {
+      display: inline-block;
+      background: rgba(200, 16, 46, 0.12);
+      border: 1px solid var(--red);
+      color: var(--red);
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      padding: 3px 10px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+
+    /* ─────────────────────────────────────────
+   FLOOR PLANS (INTERACTIVE)
+───────────────────────────────────────── */
+    #floorplans {
+      padding: 100px 0;
+      background: var(--black-mid);
+      border-top: 1px solid rgba(240, 237, 232, 0.04);
+      border-bottom: 1px solid rgba(240, 237, 232, 0.04);
+    }
+
+    .fp-inner {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .fp-tabs {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 48px;
+      border-bottom: 1px solid rgba(240, 237, 232, 0.08);
+    }
+
+    .fp-tab {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      cursor: pointer;
+      color: var(--white-dim);
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      margin-bottom: -1px;
+    }
+
+    .fp-tab:hover {
+      color: var(--white);
+    }
+
+    .fp-tab.active {
+      color: var(--red);
+      border-bottom-color: var(--red);
+    }
+
+    .fp-floor {
+      display: none;
+    }
+
+    .fp-floor.active {
+      display: block;
+    }
+
+    /* The actual SVG floor plan */
+    .fp-plan-wrap {
+      position: relative;
+      background: #0f0f0f;
+      border: 1px solid rgba(240, 237, 232, 0.08);
+      border-radius: 4px;
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .fp-plan-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200, 16, 46, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 16, 46, 0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .fp-plan-wrap svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Hover zone base */
+    .fp-zone {
+      pointer-events: none;
+    }
+
+    /* compass */
+    .fp-compass {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      font-family: var(--mono);
+      font-size: 9px;
+      color: rgba(200, 16, 46, 0.3);
+      letter-spacing: 0.1em;
+    }
+
+    /* ─────────────────────────────────────────
+   PALETTE SECTION
+───────────────────────────────────────── */
+    #palette {
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+
+    .palette-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 48px;
+      border-radius: 4px;
+      overflow: hidden;
+      height: 120px;
+    }
+
+    .palette-swatch {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      padding: 14px 18px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: default;
+      transition: flex 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .palette-swatch:hover {
+      flex: 2.5;
+    }
+
+    .palette-swatch span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .swatch-red {
+      background: #c8102e;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .swatch-dark-red {
+      background: #8b0b1e;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .swatch-black {
+      background: #0a0a0a;
+      color: rgba(240, 237, 232, 0.4);
+      border: 1px solid rgba(240, 237, 232, 0.06);
+    }
+
+    .swatch-black-mid {
+      background: #161616;
+      color: rgba(240, 237, 232, 0.3);
+    }
+
+    .swatch-white {
+      background: #f0ede8;
+      color: rgba(10, 10, 10, 0.5);
+    }
+
+    .swatch-white-dim {
+      background: #b8b4ae;
+      color: rgba(10, 10, 10, 0.5);
+    }
+
+    .palette-desc {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .palette-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .palette-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .palette-item h5 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .palette-item p {
+      font-size: 12px;
+      color: var(--white-dim);
+      line-height: 1.6;
+    }
+
+    /* ─────────────────────────────────────────
+   DESIGN DECISIONS
+───────────────────────────────────────── */
+    #decisions {
+      padding-top: 0;
+      padding-bottom: 100px;
+    }
+
+    .decisions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .decision-card {
+      background: var(--black-card);
+      padding: 48px;
+      border: 1px solid rgba(240, 237, 232, 0.04);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .decision-card:hover {
+      background: #141010;
+    }
+
+    .decision-card::before {
+      content: attr(data-num);
+      font-family: var(--serif);
+      font-size: 80px;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(200, 16, 46, 0.05);
+      position: absolute;
+      bottom: 12px;
+      right: 24px;
+      line-height: 1;
+    }
+
+    .decision-card h3 {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .decision-card p {
+      font-size: 13px;
+      line-height: 1.75;
+      color: var(--white-dim);
+    }
+
+    .decision-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    /* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+    footer {
+      padding: 64px 48px 48px;
+      border-top: 1px solid rgba(240, 237, 232, 0.06);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .footer-title {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 900;
+      font-style: italic;
+      color: rgba(200, 16, 46, 0.15);
+      line-height: 1;
+    }
+
+    .footer-info {
+      text-align: right;
+    }
+
+    .footer-info p {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white-dim);
+      opacity: 0.4;
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    /* ─────────────────────────────────────────
+   FADE-IN ANIMATION
+───────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav {
+        padding: 18px 24px;
+      }
+
+      #hero {
+        padding: 0 24px 64px;
+      }
+
+      .hero-meta-row {
+        column-gap: 32px;
+        row-gap: 10px;
+      }
+
+      section {
+        padding: 64px 24px;
+      }
+
+      #concept {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .sensory-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fp-floor.active {
+        grid-template-columns: 1fr;
+      }
+
+      .decisions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .palette-desc {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .footer-info {
+        text-align: left;
+      }
+
+      .flow-step,
+      .flow-step:nth-child(even) {
+        flex-direction: column;
+      }
+
+      .flow-card {
+        width: 90%;
+        margin: 0 auto 0 10%;
+      }
+
+      .flow-spine {
+        left: 10%;
+      }
+
+      .flow-dot {
+        left: 10%;
+      }
+
+      .flow-step:nth-child(odd) .flow-card::after,
+      .flow-step:nth-child(even) .flow-card::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ══ HERO ══ -->
+  <div id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-number">VOID</div>
+
+    <div class="hero-eyebrow">Sensory Visual Experience · Escape Room Design</div>
+    <h1 class="hero-title">
+      VOID<br><span>Escape</span>
+    </h1>
+    <p class="hero-subtitle">A multi-floor sensory experience where escape is earned, not given</p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-row">
+        <span class="hero-meta-label">Floors</span>
+        <span class="hero-meta-label">Palette</span>
+        <span class="hero-meta-label">Sensory Zones</span>
+        <span class="hero-meta-label">Journey</span>
+      </div>
+      <div class="hero-meta-row">
+        <span class="hero-meta-value">3 Levels</span>
+        <span class="hero-meta-value">Red · Black · White</span>
+        <span class="hero-meta-value">Spatial UX · Sensory Design</span>
+        <span class="hero-meta-value">Concept · Ongoing</span>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+
+  <!-- ══ CONCEPT ══ -->
+  <section>
+    <div id="concept" class="fade-up">
+      <div class="concept-text">
+        <div class="section-label">01 — The Concept</div>
+        <h2 class="section-heading">A room you <em>feel</em> your way out of.</h2>
+        <p>
+          <strong>VOID</strong> is a multi-floor escape room experience where every spatial decision is a sensory
+          statement. The exterior is deliberately understated, no signage screaming “escape room,” no over-the-top,
+          in-your-face signs. Just a door. The nonchalance is the first clue.
+
+        <p>
+          Once inside, the rules of normal space collapse. Furniture is exaggerated and theatrical — oversized chairs
+          you sink into, undersized tables that demand you crouch. Nothing is comfortable in the conventional sense, but
+          everything is intentional. <strong>You are inside an experience, not a room.</strong>
+        </p>
+        <p>
+          Each floor requires solving before the next can be accessed. The final escape involves crossing a water body
+          via stepping stones — a full-body, sensory-rich culmination of the journey.
+        </p>
+        <div class="concept-tags">
+          <span class="tag">Spatial Design</span>
+          <span class="tag">Sensory Experience</span>
+          <span class="tag">Interaction</span>
+          <span class="tag">User Journey</span>
+          <span class="tag">Progressive Access</span>
+          <span class="tag">Staff Experience</span>
+        </div>
+      </div>
+      <div class="concept-card">
+        <div class="concept-card-number">3</div>
+        <div class="concept-stat">
+          <div class="concept-stat-num">3</div>
+          <div class="concept-stat-label">Floors of escalating challenge</div>
+        </div>
+        <div class="concept-stat">
+          <div class="concept-stat-num">2</div>
+          <div class="concept-stat-label">Parallel systems — Player & Staff</div>
+        </div>
+        <div class="concept-stat">
+          <div class="concept-stat-num">5+</div>
+          <div class="concept-stat-label">Distinct sensory zones</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══ COLOUR PALETTE ══ -->
+  <section id="palette" class="fade-up">
+    <div class="section-label">02 — Colour Palette</div>
+    <h2 class="section-heading">Three colours.<br><em>Infinite tension.</em></h2>
+
+    <div class="palette-row">
+      <div class="palette-swatch swatch-red"><span>Danger Red<br>#C8102E</span></div>
+      <div class="palette-swatch swatch-dark-red"><span>Deep Red<br>#8B0B1E</span></div>
+      <div class="palette-swatch swatch-black"><span>Void Black<br>#0A0A0A</span></div>
+      <div class="palette-swatch swatch-black-mid"><span>Surface<br>#161616</span></div>
+      <div class="palette-swatch swatch-white"><span>Bone White<br>#F0EDE8</span></div>
+      <div class="palette-swatch swatch-white-dim"><span>Dim White<br>#B8B4AE</span></div>
+    </div>
+
+    <div class="palette-desc">
+      <div class="palette-item">
+        <div class="palette-dot" style="background:#C8102E;"></div>
+        <div>
+          <h5>Red — the activator</h5>
+          <p>Used for entry carpets, alert zones, unlock moments, and all CTA elements. Red raises the pulse. It marks
+            what matters.</p>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-dot" style="background:#0A0A0A; border:1px solid rgba(240,237,232,0.15);"></div>
+        <div>
+          <h5>Black — the unknown</h5>
+          <p>The dominant field. Black creates the void that guests are moving through. It makes every detail feel like
+            a discovery rather than decoration.</p>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-dot" style="background:#F0EDE8; border:1px solid rgba(10,10,10,0.1);"></div>
+        <div>
+          <h5>White — the reveal</h5>
+          <p>Bone white appears sparingly — on walls, stepping stones, key props. Its rarity gives it power. When white
+            appears, it means something.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══ FLOOR PLANS ══ -->
+  <div id="floorplans" class="fade-up">
+    <div class="fp-inner">
+      <div class="section-label">03 — Floor Plans</div>
+      <h2 class="section-heading"><em>Layout</em></h2>
+
+      <div class="fp-tabs">
+        <button class="fp-tab active" onclick="switchFloor('ground',this)">Ground Floor</button>
+        <button class="fp-tab" onclick="switchFloor('first',this)">First Floor</button>
+        <button class="fp-tab" onclick="switchFloor('second',this)">Second Floor</button>
+      </div>
+
+      <!-- ─── GROUND FLOOR ─── -->
+      <div class="fp-floor active" id="floor-ground">
+        <div class="fp-plan-wrap">
+          <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
+            <image href="ground_floor_inverted.PNG" width="700" height="700" x="0" y="0" />
+            
+            <g class="fp-zone" data-room="prep-gf">
+              <rect x="175" y="140" width="245" height="175" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="reception-gf">
+              <rect x="175" y="315" width="245" height="245" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="stairs-gf">
+              <rect x="420" y="140" width="35" height="175" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="control-gf">
+              <rect x="455" y="140" width="140" height="175" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="staff-gf">
+              <rect x="455" y="315" width="140" height="140" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="lift-gf">
+              <rect x="455" y="455" width="140" height="105" fill="transparent" />
+            </g>
+          </svg>
+          <div class="fp-compass">N ↑</div>
+        </div>
+
+      </div>
+
+      <!-- ─── FIRST FLOOR ─── -->
+      <div class="fp-floor" id="floor-first">
+        <div class="fp-plan-wrap">
+          <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
+            <image href="floor_plan1_inverted.PNG" width="700" height="700" x="0" y="0" />
+            
+            <g class="fp-zone" data-room="prep-f1">
+              <rect x="175" y="140" width="245" height="175" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="reception-f1">
+              <rect x="175" y="315" width="245" height="245" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="stairs-f1">
+              <rect x="420" y="140" width="35" height="175" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="control-f1">
+              <rect x="455" y="140" width="140" height="175" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="staff-f1">
+              <rect x="455" y="315" width="140" height="140" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="lift-f1">
+              <rect x="455" y="455" width="140" height="105" fill="transparent" />
+            </g>
+          </svg>
+          <div class="fp-compass">N ↑</div>
+        </div>
+
+      </div>
+
+      <!-- ─── SECOND FLOOR ─── -->
+      <div class="fp-floor" id="floor-second">
+        <div class="fp-plan-wrap">
+          <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
+            <image href="floor_plan2_inverted.PNG" width="700" height="700" x="0" y="0" />
+            
+            <g class="fp-zone" data-room="prep-f2">
+              <rect x="175" y="140" width="245" height="175" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="reception-f2">
+              <rect x="175" y="315" width="245" height="245" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="stairs-f2">
+              <rect x="420" y="140" width="35" height="175" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="control-f2">
+              <rect x="455" y="140" width="140" height="175" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="staff-f2">
+              <rect x="455" y="315" width="140" height="140" fill="transparent" />
+            </g>
+            <g class="fp-zone" data-room="lift-f2">
+              <rect x="455" y="455" width="140" height="105" fill="transparent" />
+            </g>
+          </svg>
+          <div class="fp-compass">N ↑</div>
+        </div>
+
+      </div>
+
+    </div><!-- fp-inner -->
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ══ USER FLOW ══ -->
+  <section id="userflow" class="fade-up">
+    <div class="section-label">05 — User Flow</div>
+    <h2 class="section-heading">How you move <em>through</em> VOID.</h2>
+
+    <div class="flow-container">
+      <div class="flow-spine"></div>
+
+      <!-- Step 1 -->
+      <div class="flow-step">
+        <div class="flow-dot"></div>
+        <div class="flow-card">
+          <span class="flow-badge">Step 01</span>
+          <span class="flow-floor">Ground Floor · Exterior</span>
+          <h4>Arrive at the Unmarked Door</h4>
+          <p>The exterior gives nothing away. No branding, no noise, no signage. The nonchalance is the first sensory
+            signal — curiosity and slight unease are triggered before stepping inside.</p>
+          <div class="flow-sensory">Sensory cue: Visual restraint · Anticipation architecture</div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="flow-step">
+        <div class="flow-dot"></div>
+        <div class="flow-card">
+          <span class="flow-badge">Step 02</span>
+          <span class="flow-floor">Ground Floor · Reception</span>
+          <h4>Enter the Reception Area</h4>
+          <p>Red carpet. Sofa. TV. A reception desk. It feels like a lobby but something is slightly off — the furniture
+            is too big, the proportions wrong. Players check in here. The door to the staff room is visible but locked
+            to them.</p>
+          <div class="flow-sensory">Sensory cue: Red carpet · Scale distortion · Visual intrigue</div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="flow-step">
+        <div class="flow-dot"></div>
+        <div class="flow-card">
+          <span class="flow-badge">Step 03</span>
+          <span class="flow-floor">Ground Floor · Storage</span>
+          <h4>Remove Shoes · Store Belongings</h4>
+          <p>Players move to the storage room. Cushioned stools invite them to sit, remove shoes, and store everything
+            they brought. The ritual slows the body and transitions the mind. You are no longer a visitor — you are a
+            participant.</p>
+          <div class="flow-sensory">Sensory cue: Tactile barefoot · Cushion softness · Psychological threshold</div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="flow-step">
+        <div class="flow-dot"></div>
+        <div class="flow-card">
+          <span class="flow-badge">Step 04</span>
+          <span class="flow-floor">Ground Floor → First Floor</span>
+          <h4>Climb the Staircase</h4>
+          <p>The main staircase leads to the first floor. Ascending barefoot on a staircase is a different sensation —
+            the texture underfoot, the slight chill, the change in air. The game has already begun.</p>
+          <div class="flow-sensory">Sensory cue: Temperature shift · Surface texture · Spatial ascent</div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="flow-step">
+        <div class="flow-dot"></div>
+        <div class="flow-card">
+          <span class="flow-badge">Step 05</span>
+          <span class="flow-floor">First Floor · Level 1</span>
+          <h4>Solve Level One</h4>
+          <p>The first floor contains Level 1 — a room with clues, objects, and challenges to solve. The space is filled
+            with exaggerated props and deliberate sensory design. Players cannot access the second floor until this
+            level is solved.</p>
+          <div class="flow-sensory">Sensory cue: Visual overstimulation · Deliberate clutter · Discovery tension</div>
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="flow-step">
+        <div class="flow-dot"></div>
+        <div class="flow-card">
+          <span class="flow-badge">Step 06</span>
+          <span class="flow-floor">First Floor → Second Floor</span>
+          <h4>Access Opens — Hidden Passage to Floor 2</h4>
+          <p>Once solved, a passage inside the first floor room unlocks — bypassing the main staircase. This is
+            deliberate: the second floor access feels secret, earned, and slightly transgressive. A different door, a
+            different route.</p>
+          <div class="flow-sensory">Sensory cue: Auditory unlock · Surprise spatial reveal · Reward dopamine</div>
+        </div>
+      </div>
+
+      <!-- Step 7 -->
+      <div class="flow-step">
+        <div class="flow-dot"></div>
+        <div class="flow-card">
+          <span class="flow-badge">Step 07</span>
+          <span class="flow-floor">Second Floor · Level 2</span>
+          <h4>Cross the Water · Solve the Final Clue</h4>
+          <p>The second floor features a shallow water body with stepping stones. Players must physically cross it to
+            reach the final clue — barefoot, balancing, feeling cold water, hearing splashing. Once the clue is solved,
+            the main exit door unlocks. Escape is complete.</p>
+          <div class="flow-sensory">Sensory cue: Touch · Sound · Cold · Balance · Full physical immersion</div>
+        </div>
+      </div>
+
+      <!-- Step 8 -->
+      <div class="flow-step">
+        <div class="flow-dot"></div>
+        <div class="flow-card">
+          <span class="flow-badge">Step 08</span>
+          <span class="flow-floor">Second Floor → Ground Floor</span>
+          <h4>Descend · Collect · Exit</h4>
+          <p>With the main door open, players take the main staircase back down to the storage area to collect their
+            shoes and belongings. The descent is calm, unhurried — a decompression. Then they exit through the front
+            door. The nonchalant exterior greets them again, differently this time.</p>
+          <div class="flow-sensory">Sensory cue: Physical decompression · Re-orientation · Emotional afterglow</div>
+        </div>
+      </div>
+
+      <!-- Staff step -->
+      <div class="flow-step">
+        <div class="flow-dot"></div>
+        <div class="flow-card">
+          <span class="staff-badge">Staff Only</span>
+          <span class="flow-floor">All Floors · Staff System</span>
+          <h4>Parallel Staff Infrastructure</h4>
+          <p>A separate door in the reception leads to a staff-only area with a lift accessible across all floors. The
+            ground floor staff room connects to a CCTV monitoring room. In emergencies — injury, distress — staff can
+            use the lift to access any floor instantly without disrupting the player experience.</p>
+          <div class="flow-sensory">UX consideration: Safety access · Emergency protocol · Invisible operations layer
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+
+  <!-- ══ DESIGN DECISIONS ══ -->
+  <section id="decisions" class="fade-up">
+    <div class="section-label">06 — Key Design Decisions</div>
+    <h2 class="section-heading">Why everything is the <em>way it is.</em></h2>
+
+    <div class="decisions-grid">
+      <div class="decision-card" data-num="01">
+        <span class="decision-label">Spatial UX</span>
+        <h3>The Exterior Reveals Nothing</h3>
+        <p>An escape room that announces itself undermines its own premise. VOID's exterior is deliberately low-key — no
+          theming, no signage beyond a door number. The first psychological game begins before you enter. Anticipation
+          is a design material.</p>
+      </div>
+      <div class="decision-card" data-num="02">
+        <span class="decision-label">Interaction Design</span>
+        <h3>Progressive Access Over Linearity</h3>
+        <p>Each floor unlocking only after solving the previous creates genuine stakes. The hidden passage from Floor 1
+          to Floor 2 — bypassing the main staircase — makes progress feel transgressive and secret. The architecture
+          rewards you, not just the puzzle answer.</p>
+      </div>
+      <div class="decision-card" data-num="03">
+        <span class="decision-label">Sensory Design</span>
+        <h3>Exaggerated Furniture as Disorientation Tool</h3>
+        <p>When everything is the wrong size, your brain can't go on autopilot. Oversized chairs and misscaled objects
+          force attention. You cannot move through this space habitually — you must be present. This is the core UX
+          principle: design that demands engagement.</p>
+      </div>
+      <div class="decision-card" data-num="04">
+        <span class="decision-label">Safety UX</span>
+        <h3>The Invisible Staff Layer</h3>
+        <p>The entire staff system — lift, CCTV room, separate access — operates invisibly. Players never feel monitored
+          despite being constantly safe. This dual-layer design (player experience vs. operational infrastructure) is a
+          core UX architecture decision: safety must not break immersion.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-title">VOID</div>
+    <div class="footer-info">
+      <p>Sensory Visual Experience · Academic Project</p>
+      <p>Escape Room Design · Spatial UX · Multi-Floor Concept</p>
+      <p>Colour Palette: Red · Black · White</p>
+    </div>
+  </footer>
+
+
+  <script>
+    /* ─── CURSOR ─── */
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    (function animRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
+
+    document.querySelectorAll('a, button, .sensory-card, .flow-card, .palette-swatch').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        ring.style.width = '52px';
+        ring.style.height = '52px';
+        ring.style.borderColor = 'rgba(200,16,46,0.8)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '12px';
+        cursor.style.height = '12px';
+        ring.style.width = '36px';
+        ring.style.height = '36px';
+        ring.style.borderColor = 'rgba(200,16,46,0.5)';
+      });
+    });
+
+    /* ─── FLOOR PLAN TABS ─── */
+    function switchFloor(id, btn) {
+      document.querySelectorAll('.fp-floor').forEach(f => f.classList.remove('active'));
+      document.querySelectorAll('.fp-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('floor-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    /* ─── SCROLL FADE-IN ─── */
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>
