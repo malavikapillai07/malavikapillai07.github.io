@@ -9,6 +9,13 @@
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,900&family=Syne:wght@400;500;700;800&family=DM+Mono:ital@0;1&display=swap"
     rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'Hagrid';
+      src: url('../hagrid_font/Hagrid-Regular-trial.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+
     /* ─────────────────────────────────────────
    ROOT & RESET
 ───────────────────────────────────────── */
@@ -53,32 +60,32 @@
    CUSTOM CURSOR
 ───────────────────────────────────────── */
     #cursor {
-      width: 12px;
-      height: 12px;
-      background: var(--red);
+      width: 8px;
+      height: 8px;
+      background: #f7b731;
       border-radius: 50%;
       position: fixed;
       top: 0;
       left: 0;
       pointer-events: none;
-      z-index: 9999;
+      z-index: 10002;
       transform: translate(-50%, -50%);
       transition: transform 0.08s, width 0.2s, height 0.2s, background 0.2s;
       mix-blend-mode: normal;
     }
 
     #cursor-ring {
-      width: 36px;
-      height: 36px;
-      border: 1.5px solid rgba(200, 16, 46, 0.5);
+      width: 40px;
+      height: 40px;
+      border: 1px solid #f7b731;
       border-radius: 50%;
       position: fixed;
       top: 0;
       left: 0;
       pointer-events: none;
-      z-index: 9998;
+      z-index: 10001;
       transform: translate(-50%, -50%);
-      transition: transform 0.18s ease, width 0.25s, height 0.25s, border-color 0.25s;
+      transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
     }
 
     body:hover #cursor {
@@ -92,61 +99,167 @@
 
     /* ─────────────────────────────────────────
    NOISE OVERLAY
+    /* ─────────────────────────────────────────
+   HEADER & NAVIGATION
 ───────────────────────────────────────── */
-    body::before {
-      content: '';
+    header {
       position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9990;
-      opacity: 0.5;
+      top: 1rem;
+      left: 5rem;
+      right: 5rem;
+      z-index: 10000;
+      background-color: rgba(15, 15, 15, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 100px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 2.5rem;
+      font-weight: 700;
     }
 
-    /* ─────────────────────────────────────────
-   NAV
-───────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+    .logo {
+      font-family: 'Hagrid', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      text-decoration: none;
+      text-transform: uppercase;
+      z-index: 20;
+    }
+
+    .header-right {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 22px 48px;
-      z-index: 100;
-      background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, transparent 100%);
-      backdrop-filter: blur(4px);
+      gap: 1.5rem;
     }
 
-    .nav-logo {
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 22px;
-      color: var(--red);
-      letter-spacing: 0.08em;
+    nav {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    nav a {
+      font-family: 'Hagrid', sans-serif !important;
+      font-weight: 400;
+      font-size: 0.98rem;
+      text-transform: none;
       text-decoration: none;
+      color: var(--white);
+      letter-spacing: 1px;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: #f7b731;
+    }
+
+    .theme-toggle {
+      background: transparent;
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 0;
+      transition: color 0.2s ease;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .mobile-menu-btn .bar {
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Floating Back Button */
+    .floating-back-btn {
+      position: fixed;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      z-index: 10000;
+      background: rgba(10, 10, 10, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #f7b731;
+      padding: 0.8rem 1.6rem;
+      border-radius: 100px;
+      text-decoration: none;
+      font-family: 'Hagrid', sans-serif !important;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .floating-back-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      background: rgba(247, 183, 49, 0.1);
+      border-color: #f7b731;
+      box-shadow: 0 15px 40px rgba(247, 183, 49, 0.2);
+    }
+
+    @media (max-width: 900px) {
+      header {
+        left: 1rem;
+        right: 1rem;
+        padding: 0.8rem 1.5rem;
+      }
+      nav { display: none; }
+      .mobile-menu-btn { display: flex; }
+      #main-nav.active {
+          display: flex;
+          position: absolute;
+          top: calc(100% + 15px);
+          right: 0;
+          background: #111;
+          padding: 20px;
+          flex-direction: column;
+          border-radius: 12px;
+      }
+    } align-items: center;
+      gap: 10px;
     }
 
     .nav-links {
       display: flex;
-      gap: 36px;
+      gap: 32px;
       list-style: none;
     }
 
     .nav-links a {
-      font-size: 11px;
-      letter-spacing: 0.18em;
+      font-size: 12px;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--white-dim);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.2s, transform 0.2s;
     }
 
     .nav-links a:hover {
       color: var(--red);
+      transform: translateY(-2px);
     }
+
 
     .nav-tag {
       font-family: var(--mono);
@@ -1019,17 +1132,13 @@
 
     .scroll-v-number {
       position: absolute;
-      top: 50%;
-      left: 20px;
-      transform: translateY(-50%);
-      font-family: var(--mono);
-      font-size: 11px;
+      top: 20px;
+      left: 14px;
+      font-size: 18px;
       color: var(--red);
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      opacity: 0.8;
+      font-weight: 900;
+      font-family: 'Hagrid', sans-serif;
+      text-shadow: 0 0 10px var(--red-glow);
     }
 
   </style>
@@ -1048,8 +1157,27 @@
   </div>
 
   <!-- NAV -->
-  <nav>
-  </nav>
+  <header>
+    <a href="../index.html" class="logo">VOID</a>
+    <div class="header-right">
+      <nav id="main-nav">
+        <a href="../index.html">Home</a>
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" id="theme-btn">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      </button>
+      <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <a href="../index.html#work" class="floating-back-btn">[BACK]</a>
 
   <!-- ══ HERO ══ -->
   <div id="hero">
@@ -1575,6 +1703,69 @@
         num.textContent = Math.round(progress).toString().padStart(2, '0') + '%';
       }
     });
+
+    /* ─── THEME TOGGLE ─── */
+    const themeBtn = document.getElementById('theme-btn');
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    /* ─── MOBILE MENU ─── */
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mainNav = document.getElementById('main-nav');
+    if (mobileBtn && mainNav) {
+      mobileBtn.addEventListener('click', () => {
+        mobileBtn.classList.toggle('active');
+        mainNav.classList.toggle('active');
+      });
+    }
+
+    /* ─── CURSOR TRACKING ─── */
+    const dot = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mouseX = 0, mouseY = 0;
+    let dotX = 0, dotY = 0;
+    let ringX = 0, ringY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animate() {
+      dotX += (mouseX - dotX) * 0.2;
+      dotY += (mouseY - dotY) * 0.2;
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+
+      if (dot) dot.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
+      if (ring) ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Hover Scaling
+    const interactive = document.querySelectorAll('a, button, .fp-tab, .decision-card');
+    interactive.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        if (dot) dot.style.transform += ' scale(2)';
+        if (ring) {
+          ring.style.width = '60px';
+          ring.style.height = '60px';
+          ring.style.borderColor = 'rgba(247, 183, 49, 0.4)';
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        if (dot) dot.style.transform = dot.style.transform.replace(' scale(2)', '');
+        if (ring) {
+          ring.style.width = '40px';
+          ring.style.height = '40px';
+          ring.style.borderColor = '#f7b731';
+        }
+      });
+    });
+
 
   </script>
 </body>

@@ -49,9 +49,9 @@ body::before {
 
 /* Custom Cursor */
 #cursor {
-    width: 12px;
-    height: 12px;
-    background: #c8102e; /* Red color */
+    width: 8px;
+    height: 8px;
+    background-color: #f7b731; /* Vibrant Yellow */
     border-radius: 50%;
     position: fixed;
     top: 0;
@@ -64,9 +64,9 @@ body::before {
 }
 
 #cursor-ring {
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid rgba(200, 16, 46, 0.5);
+    width: 40px;
+    height: 40px;
+    border: 1px solid #f7b731; /* Vibrant Yellow */
     border-radius: 50%;
     position: fixed;
     top: 0;
@@ -74,7 +74,7 @@ body::before {
     pointer-events: none;
     z-index: 10001;
     transform: translate(-50%, -50%);
-    transition: transform 0.18s ease, width 0.25s, height 0.25s, border-color 0.25s;
+    transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
 }
 
 @keyframes static-noise {
@@ -108,7 +108,7 @@ header {
     position: sticky;
     top: 1rem;
     margin: 1rem 5rem;
-    z-index: 100;
+    z-index: 1000;
     background-color: var(--nav-glass-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
