@@ -1203,6 +1203,11 @@ nav#main-nav a:hover {
 }
 
 @media (max-width: 560px) {
+    html,
+    body {
+        overflow-x: hidden;
+    }
+
     header {
         left: 0.75rem;
         right: 0.75rem;
@@ -1228,8 +1233,9 @@ nav#main-nav a:hover {
 
     .cover {
         min-height: auto;
-        padding-top: 96px;
-        padding-bottom: 40px;
+        justify-content: flex-start;
+        padding-top: 88px;
+        padding-bottom: 28px;
     }
 
     .cover-grid {
@@ -1237,26 +1243,43 @@ nav#main-nav a:hover {
     }
 
     .hero-logo {
-        transform: scale(0.82);
-        margin-bottom: 20px;
+        transform: scale(0.72);
+        margin-bottom: 14px;
     }
 
     .cover-title {
-        font-size: clamp(42px, 14vw, 72px);
+        font-size: clamp(34px, 12vw, 56px);
         text-align: center;
+        margin-bottom: 8px;
     }
 
     .cover-descriptor {
-        font-size: 18px;
+        font-size: 15px;
         text-align: center;
+        max-width: 18ch;
+        margin-bottom: 14px;
     }
 
     .cover-bottom,
     .hero-meta,
     .end-meta {
-        gap: 18px;
+        gap: 14px;
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .cover-bottom {
+        max-width: 100%;
+        padding-top: 14px;
+        margin-top: 8px;
+    }
+
+    .cover-meta-row {
+        gap: 18px;
+    }
+
+    .cover-meta-item p {
+        font-size: 14px;
     }
 
     .body-text,
