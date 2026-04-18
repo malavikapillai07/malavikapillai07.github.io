@@ -831,7 +831,7 @@ body.dark-mode .project-img-placeholder {
     }
 
     .contact-section {
-        margin-top: -0.5rem !important; /* Reduced space after flipbook */
+        margin-top: -5rem !important; /* Heavily reduced space after flipbook */
         padding-top: 0 !important;
     }
 
@@ -1013,7 +1013,11 @@ body.dark-mode .project-img-placeholder {
     }
 
     #flipbook-scroll-area {
-        height: 124vh;
+        height: 100vh;
+    }
+
+    #flipbook-sticky-wrapper {
+        height: 60vh; /* Reduced from 100vh to bring contact section up */
     }
 
     #book, .book-page {
