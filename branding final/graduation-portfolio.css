@@ -1610,11 +1610,11 @@ body.dark-mode .moon-icon {
 
   .wordcloud-photo,
   .sketch-main-photo {
-    min-height: 340px;
+    min-height: 430px;
   }
 
   .wordcloud-photo {
-    padding: 16px !important;
+    padding: 12px !important;
   }
 
   .wordcloud-photo img {
@@ -1630,26 +1630,31 @@ body.dark-mode .moon-icon {
   }
 
   #flipbook-scroll-area {
-    height: 145vh;
+    height: 132vh;
   }
 
   #flipbook-sticky-wrapper {
-    top: 4.25rem;
-    height: calc(100vh - 4.25rem);
+    top: 4rem;
+    height: calc(100vh - 4rem);
     padding-top: 0;
   }
 
   #book-viewport {
     height: auto;
-    padding: 2rem 0 0;
+    padding: 1.25rem 0 0;
     padding-left: 0;
+  }
+
+  #gp-flipbook-wrap,
+  #bm-flipbook-wrap {
+    padding: 24px 0 !important;
   }
 
   #book,
   .book-page {
-    width: min(82vw, 260px);
+    width: min(90vw, 290px);
     height: auto;
-    aspect-ratio: 320 / 450;
+    aspect-ratio: 640 / 430;
   }
 
   .floating-back-btn {

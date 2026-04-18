@@ -1419,17 +1419,17 @@
           var bmBookEl = document.getElementById('bm-book');
           if (bmBookEl) {
             var bmFlipbook = new PF(bmBookEl, {
-              width: 800,
-              height: 800,
+              width: isMobile ? 640 : 800,
+              height: isMobile ? 430 : 800,
               size: 'stretch',
-              minWidth: 300,
-              maxWidth: 1000,
-              minHeight: 300,
-              maxHeight: 1000,
+              minWidth: isMobile ? 280 : 300,
+              maxWidth: isMobile ? 720 : 1000,
+              minHeight: isMobile ? 240 : 300,
+              maxHeight: isMobile ? 500 : 1000,
               showCover: true,
               drawShadow: true,
               maxShadowOpacity: 0.3,
-              usePortrait: isMobile,
+              usePortrait: false,
               mobileScrollSupport: true
             });
 
@@ -1504,17 +1504,17 @@
           var gpBookEl = document.getElementById('gp-book');
           if (gpBookEl) {
             var gpFlipbook = new PF(gpBookEl, {
-              width: 800,
-              height: 800,
+              width: isMobile ? 640 : 800,
+              height: isMobile ? 430 : 800,
               size: 'stretch',
-              minWidth: 300,
-              maxWidth: 1000,
-              minHeight: 300,
-              maxHeight: 1000,
+              minWidth: isMobile ? 280 : 300,
+              maxWidth: isMobile ? 720 : 1000,
+              minHeight: isMobile ? 240 : 300,
+              maxHeight: isMobile ? 500 : 1000,
               showCover: true,
               drawShadow: true,
               maxShadowOpacity: 0.3,
-              usePortrait: isMobile,
+              usePortrait: false,
               mobileScrollSupport: true
             });
 
