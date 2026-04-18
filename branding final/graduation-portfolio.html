@@ -1414,17 +1414,18 @@
 
           var vw = window.innerWidth;
           var isMobile = vw < 768;
+          var mobileBookSize = Math.max(160, Math.min(190, Math.floor(vw * 0.42)));
 
           // 1. BRAND MANUAL FLIPBOOK (40 Pages)
           var bmBookEl = document.getElementById('bm-book');
           if (bmBookEl) {
             var bmFlipbook = new PF(bmBookEl, {
-              width: isMobile ? 640 : 800,
-              height: isMobile ? 430 : 800,
+              width: isMobile ? mobileBookSize : 800,
+              height: isMobile ? mobileBookSize : 800,
               size: 'stretch',
-              minWidth: isMobile ? 280 : 300,
+              minWidth: isMobile ? 160 : 300,
               maxWidth: isMobile ? 720 : 1000,
-              minHeight: isMobile ? 240 : 300,
+              minHeight: isMobile ? 160 : 300,
               maxHeight: isMobile ? 500 : 1000,
               showCover: true,
               drawShadow: true,
@@ -1504,12 +1505,12 @@
           var gpBookEl = document.getElementById('gp-book');
           if (gpBookEl) {
             var gpFlipbook = new PF(gpBookEl, {
-              width: isMobile ? 640 : 800,
-              height: isMobile ? 430 : 800,
+              width: isMobile ? mobileBookSize : 800,
+              height: isMobile ? mobileBookSize : 800,
               size: 'stretch',
-              minWidth: isMobile ? 280 : 300,
+              minWidth: isMobile ? 160 : 300,
               maxWidth: isMobile ? 720 : 1000,
-              minHeight: isMobile ? 240 : 300,
+              minHeight: isMobile ? 160 : 300,
               maxHeight: isMobile ? 500 : 1000,
               showCover: true,
               drawShadow: true,

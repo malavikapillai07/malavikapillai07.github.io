@@ -1608,19 +1608,21 @@ body.dark-mode .moon-icon {
     font-size: 12px;
   }
 
-  .wordcloud-photo,
-  .sketch-main-photo {
-    min-height: 430px;
+  .wordcloud-photo {
+    min-height: 540px;
+    padding: 8px !important;
   }
 
-  .wordcloud-photo {
-    padding: 12px !important;
+  .sketch-main-photo {
+    min-height: 340px;
   }
 
   .wordcloud-photo img {
     transform: none !important;
     max-width: 100% !important;
     width: 100% !important;
+    max-height: none !important;
+    height: auto !important;
   }
 
   .fitzkee-table {
@@ -1647,14 +1649,14 @@ body.dark-mode .moon-icon {
 
   #gp-flipbook-wrap,
   #bm-flipbook-wrap {
-    padding: 24px 0 !important;
+    padding: 16px 0 !important;
   }
 
   #book,
   .book-page {
-    width: min(90vw, 290px);
+    width: min(74vw, 190px);
     height: auto;
-    aspect-ratio: 640 / 430;
+    aspect-ratio: 1 / 1;
   }
 
   .floating-back-btn {
