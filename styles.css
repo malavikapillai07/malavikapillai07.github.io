@@ -827,7 +827,7 @@ body.dark-mode .project-img-placeholder {
     }
 
     .about-section {
-        margin-top: 4rem !important; /* Reduced massive gap between works and about */
+        margin-top: 6rem !important; /* Keep more distance between works and about */
     }
 
     .contact-section {
@@ -966,8 +966,8 @@ body.dark-mode .project-img-placeholder {
     }
 
     #book-viewport {
-        height: 280px;
-        padding-top: 0.25rem;
+        height: 300px;
+        padding-top: 1rem;
         padding-left: 0;
         overflow: visible;
     }
@@ -1004,7 +1004,7 @@ body.dark-mode .project-img-placeholder {
     }
 
     #flipbook-scroll-area {
-        height: 132vh;
+        height: 124vh;
     }
 
     #book, .book-page {
@@ -1013,8 +1013,8 @@ body.dark-mode .project-img-placeholder {
     }
 
     #book-viewport {
-        height: 240px;
-        padding-top: 0.15rem;
+        height: 260px;
+        padding-top: 0.8rem;
     }
 
     #book {
