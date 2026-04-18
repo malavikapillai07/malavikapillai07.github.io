@@ -827,16 +827,16 @@ body.dark-mode .project-img-placeholder {
     }
 
     .about-section {
-        margin-top: 8rem !important; /* Reduced massive gap between works and about */
+        margin-top: 6rem !important; /* Reduced massive gap between works and about */
     }
 
     .contact-section {
-        margin-top: 2rem !important; /* Reduced space after flipbook */
-        padding-top: 1rem !important;
+        margin-top: 1rem !important; /* Reduced space after flipbook */
+        padding-top: 0.5rem !important;
     }
 
     .contact-heading {
-        margin-bottom: 2rem !important;
+        margin-bottom: 1.25rem !important;
         font-size: clamp(2rem, 10vw, 3rem) !important; /* Slightly smaller for phone */
     }
     
@@ -966,8 +966,8 @@ body.dark-mode .project-img-placeholder {
     }
 
     #book-viewport {
-        height: 320px;
-        padding-top: 1rem;
+        height: 300px;
+        padding-top: 0.5rem;
         padding-left: 0;
         overflow: visible;
     }
@@ -1013,8 +1013,8 @@ body.dark-mode .project-img-placeholder {
     }
 
     #book-viewport {
-        height: 280px;
-        padding-top: 0.75rem;
+        height: 260px;
+        padding-top: 0.35rem;
     }
 
     #book {
