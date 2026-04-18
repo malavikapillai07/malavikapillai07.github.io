@@ -225,7 +225,7 @@ body.dark-mode .moon-icon {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 120px 60px 80px;
+  padding: 60px 60px 40px; /* Further reduced from 85px to move title higher */
   position: relative;
   z-index: 2;
 }
@@ -1499,7 +1499,7 @@ body.dark-mode .moon-icon {
   }
 
   .hero-content {
-    padding-top: 104px;
+    padding-top: 80px; /* Reduced from 104px */
     padding-bottom: 24px;
   }
 
