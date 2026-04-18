@@ -1473,6 +1473,11 @@ body.dark-mode .moon-icon {
 }
 
 @media (max-width: 600px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
   header {
     left: 0.75rem !important;
     right: 0.75rem !important;
@@ -1496,6 +1501,42 @@ body.dark-mode .moon-icon {
   .hero-content {
     padding-top: 104px;
     padding-bottom: 24px;
+  }
+
+  section.s-dark > div[style*="margin-left:-64px"] {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 0 8px 0 !important;
+  }
+
+  section.s-dark > div[style*="margin-left:-64px"] > div[style*="max-width:1000px"] {
+    max-width: 100% !important;
+    margin: 0 0 28px 0 !important;
+  }
+
+  section.s-dark > div[style*="margin-left:-64px"] > div[style*="display:flex; gap:24px; max-width:1100px; margin:0 auto 16px auto;"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    max-width: 100% !important;
+    margin: 0 0 8px 0 !important;
+  }
+
+  section.s-dark > div[style*="margin-left:-64px"] img[alt="High Fidelity Hero"],
+  section.s-dark > div[style*="margin-left:-64px"] img[alt="Team Inside 1"],
+  section.s-dark > div[style*="margin-left:-64px"] img[alt="Team Inside 2"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  section.s-darker > div[style*="display:grid;grid-template-columns:1fr 1fr;gap:20px;"] {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  section.s-darker > div[style*="display:grid;grid-template-columns:1fr 1fr;gap:20px;"] > div {
+    min-width: 0 !important;
   }
 
   .hero-title {
