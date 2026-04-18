@@ -67,6 +67,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     text-transform: none;
+    overflow-x: hidden;
 }
 
 ::selection {
@@ -228,7 +229,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 4rem;
+    padding: clamp(1rem, 2.5vw, 2rem) clamp(1rem, 4vw, 4rem);
     z-index: 20;
     /* Keeps content above noise */
 }
@@ -466,6 +467,7 @@ body.homepage .about-section .section-title {
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
     align-items: stretch;
+    width: 100%;
 }
 
 .project-card {
@@ -483,6 +485,7 @@ body.homepage .about-section .section-title {
     border: none;
     padding: 0;
     display: block;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .project-card:hover {
@@ -664,6 +667,11 @@ body.dark-mode .project-img-placeholder {
         z-index: 10001 !important;
     }
 
+    main {
+        padding-top: 5.5rem;
+        padding-inline: 1rem;
+    }
+
     .logo {
         min-width: 100px;
     }
@@ -768,11 +776,46 @@ body.dark-mode .project-img-placeholder {
 
     .projects-grid {
         grid-template-columns: 1fr;
-        gap: 3rem; /* Larger gap for larger icons */
+        gap: 1.15rem;
+        width: 100%;
     }
 
     .project-card {
-        /* Make "rectangle icons" more prominent/bigger */
+        aspect-ratio: 1592 / 1034;
+        border-radius: 14px;
+    }
+
+    .project-img,
+    .project-info {
+        border-radius: 14px;
+    }
+
+    .project-info {
+        opacity: 1;
+        transform: none;
+        padding: 1rem 1rem 0.9rem;
+        justify-content: flex-end;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.26) 62%, transparent 100%);
+    }
+
+    .project-info h3 {
+        font-size: 1rem;
+    }
+
+    .project-info p {
+        font-size: 0.82rem;
+    }
+
+    .project-card:hover {
+        transform: none;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .project-card:hover .project-img,
+    .project-card:hover .project-info,
+    .project-card-branding:hover .project-img-branding {
+        transform: none;
+        filter: none;
     }
 
     .about-section {
@@ -912,6 +955,37 @@ body.dark-mode .project-img-placeholder {
     #book, .book-page {
         width: 260px;
         height: 360px;
+    }
+
+    .work-section {
+        margin-top: 8rem;
+    }
+
+    .project-info {
+        padding: 0.9rem 0.9rem 0.8rem;
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        padding-inline: 0.9rem;
+    }
+
+    .work-section {
+        gap: 1rem;
+    }
+
+    .projects-grid {
+        gap: 0.9rem;
+    }
+
+    .project-info h3 {
+        font-size: 0.95rem;
+    }
+
+    .project-info p {
+        font-size: 0.78rem;
+        line-height: 1.35;
     }
 }
 

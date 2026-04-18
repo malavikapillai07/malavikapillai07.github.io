@@ -1110,6 +1110,161 @@
       }
     }
 
+    @media (max-width: 640px) {
+      body {
+        cursor: auto;
+      }
+
+      #cursor,
+      #cursor-ring {
+        display: none !important;
+      }
+
+      nav {
+        display: none;
+      }
+
+      header {
+        left: 0.75rem;
+        right: 0.75rem;
+        top: 0.75rem;
+        padding: 0.7rem 1rem;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      #main-nav {
+        position: absolute;
+        top: calc(100% + 12px);
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        min-width: 170px;
+        padding: 1rem;
+        border-radius: 12px;
+        background: rgba(15, 15, 15, 0.96);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+      }
+
+      #main-nav.active {
+        display: flex;
+      }
+
+      #hero {
+        min-height: 92vh;
+        padding: 0 18px 36px;
+        background-position: center top;
+      }
+
+      .hero-number {
+        top: 110px;
+        right: 18px;
+        font-size: clamp(96px, 28vw, 160px);
+      }
+
+      .hero-title {
+        font-size: clamp(46px, 14vw, 80px);
+      }
+
+      .hero-subtitle {
+        font-size: 11px;
+        margin-bottom: 28px;
+      }
+
+      .hero-meta {
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .hero-scroll-hint {
+        right: 18px;
+        bottom: 18px;
+      }
+
+      section {
+        padding: 56px 18px;
+      }
+
+      #floorplans {
+        padding: 56px 18px;
+      }
+
+      .section-divider {
+        margin: 0 18px;
+      }
+
+      .section-heading {
+        font-size: clamp(28px, 7.5vw, 42px);
+      }
+
+      .concept-card,
+      .layout-img-area {
+        padding: 20px 16px;
+      }
+
+      .flow-box {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-image-box {
+        height: 210px;
+      }
+
+      .flow-text-box {
+        padding: 24px 18px;
+      }
+
+      .layout-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .layout-text-area h3 {
+        font-size: 28px;
+      }
+
+      .layout-text-area p {
+        font-size: 13px;
+      }
+
+      .fp-tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+
+      .palette-row {
+        height: auto;
+        flex-direction: column;
+      }
+
+      .palette-swatch {
+        min-height: 88px;
+      }
+
+      footer {
+        padding: 48px 18px 32px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .footer-title {
+        font-size: 36px;
+      }
+
+      .floating-back-btn {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.55rem 0.95rem;
+        font-size: 0.72rem;
+      }
+    }
+
     /* ─── VERTICAL SCROLL PROGRESS ─── */
     .scroll-v-container {
       position: fixed;

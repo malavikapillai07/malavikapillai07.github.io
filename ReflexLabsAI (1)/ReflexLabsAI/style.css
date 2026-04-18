@@ -1202,6 +1202,155 @@ nav#main-nav a:hover {
     }
 }
 
+@media (max-width: 560px) {
+    header {
+        left: 0.75rem;
+        right: 0.75rem;
+        padding: 0.7rem 1rem;
+    }
+
+    .logo {
+        font-size: 0.68rem;
+    }
+
+    .hero-content,
+    .chapter,
+    .collateral-chapter,
+    .philosophy-section,
+    .project-footer,
+    .end-section,
+    section {
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 72px;
+        padding-bottom: 72px;
+    }
+
+    .cover {
+        min-height: auto;
+        padding-top: 96px;
+        padding-bottom: 40px;
+    }
+
+    .cover-grid {
+        background-size: 48px 48px;
+    }
+
+    .hero-logo {
+        transform: scale(0.82);
+        margin-bottom: 20px;
+    }
+
+    .cover-title {
+        font-size: clamp(42px, 14vw, 72px);
+        text-align: center;
+    }
+
+    .cover-descriptor {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .cover-bottom,
+    .hero-meta,
+    .end-meta {
+        gap: 18px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .body-text,
+    .ch-sub,
+    .comp-attr-val,
+    .insight-card p,
+    .reflect-cell p,
+    .end-item p {
+        font-size: 12px;
+    }
+
+    .big-text {
+        font-size: clamp(26px, 8vw, 38px);
+    }
+
+    .two-col,
+    .three-col,
+    .four-col,
+    .process-row,
+    .comp-cards,
+    .persona-grid,
+    .empathy-grid,
+    .ia-row,
+    .ds-row,
+    .screens-grid,
+    .insight-row,
+    .outcome-grid,
+    .reflect-grid,
+    .elements-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .screen-slot.wide {
+        grid-column: auto;
+    }
+
+    .process-step,
+    .comp-card,
+    .persona-card,
+    .emp-cell,
+    .ia-label,
+    .ia-items,
+    .outcome-cell,
+    .reflect-cell,
+    .element-card {
+        padding: 22px 18px;
+    }
+
+    .swatch {
+        gap: 14px;
+        align-items: flex-start;
+    }
+
+    .swatch-block {
+        width: 74px;
+        height: 74px;
+    }
+
+    .screen-inner {
+        aspect-ratio: 4 / 3;
+    }
+
+    .screen-slot {
+        overflow-x: hidden;
+    }
+
+    .fitzkee-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .scroll-tracker {
+        width: 28px;
+    }
+
+    .scroll-track,
+    .scroll-progress {
+        width: 6px;
+    }
+
+    .scroll-percent {
+        left: 10px;
+        font-size: 11px;
+    }
+
+    .floating-back-btn {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.55rem 0.9rem;
+        font-size: 0.68rem;
+    }
+}
+
 /* --- Scroll Tracker UI --- */
 .scroll-tracker {
     position: fixed;

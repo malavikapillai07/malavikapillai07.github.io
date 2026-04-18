@@ -1472,6 +1472,143 @@ body.dark-mode .moon-icon {
   }
 }
 
+@media (max-width: 600px) {
+  header {
+    left: 0.75rem !important;
+    right: 0.75rem !important;
+    padding: 0.7rem 1rem;
+  }
+
+  .logo {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+  }
+
+  .hero-content,
+  .chapter,
+  .collateral-chapter,
+  .philosophy-section,
+  .project-footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-content {
+    padding-top: 104px;
+    padding-bottom: 24px;
+  }
+
+  .hero-title {
+    font-size: clamp(44px, 14vw, 72px);
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .hero-bottom {
+    padding: 18px 16px 22px;
+  }
+
+  .hero-meta {
+    gap: 18px;
+  }
+
+  .hero-meta .meta-item span {
+    font-size: 12px;
+  }
+
+  .ch-heading {
+    font-size: clamp(30px, 9vw, 48px);
+  }
+
+  .ch-sub {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .brief-card,
+  .stat-card,
+  .competitor-body,
+  .wordcloud-wrap,
+  .fitzkee-wrap,
+  .sketch-main-photo,
+  .reflect-cell,
+  .end-section {
+    padding: 20px 16px;
+  }
+
+  .stats-row,
+  .four-col {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card .stat-num {
+    font-size: 36px;
+  }
+
+  .competitor-img {
+    min-height: 180px;
+  }
+
+  .competitor-body h4 {
+    font-size: 16px;
+  }
+
+  .comp-points li,
+  .fitzkee-table td,
+  .fitzkee-table th,
+  .wordcloud-desc,
+  .fitzkee-desc,
+  .sketch-intro p,
+  .reflect-cell p {
+    font-size: 12px;
+  }
+
+  .wordcloud-photo,
+  .sketch-main-photo {
+    min-height: 280px;
+  }
+
+  .fitzkee-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  #flipbook-scroll-area {
+    height: 145vh;
+  }
+
+  #flipbook-sticky-wrapper {
+    top: 4.25rem;
+    height: calc(100vh - 4.25rem);
+    padding-top: 0;
+  }
+
+  #book-viewport {
+    height: auto;
+    padding: 2rem 0 0;
+    padding-left: 0;
+  }
+
+  #book,
+  .book-page {
+    width: min(82vw, 260px);
+    height: auto;
+    aspect-ratio: 320 / 450;
+  }
+
+  .floating-back-btn {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.7rem;
+  }
+}
+
 /* Flipbook empty page fix */
 .st-page {
   background-color: transparent !important;
