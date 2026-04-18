@@ -1159,6 +1159,9 @@
         min-height: 92vh;
         padding: 0 18px 36px;
         background-position: center top;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: var(--black);
       }
 
       .hero-number {
@@ -1262,6 +1265,28 @@
         right: 1rem;
         padding: 0.55rem 0.95rem;
         font-size: 0.72rem;
+      }
+
+      #final-gallery {
+        height: auto;
+        min-height: 0;
+      }
+
+      #final-gallery .gallery-slide {
+        position: relative;
+        inset: auto;
+        display: none;
+        height: auto;
+      }
+
+      #final-gallery .gallery-slide.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      #final-gallery .gallery-img {
+        height: auto;
+        object-fit: contain;
       }
     }
 

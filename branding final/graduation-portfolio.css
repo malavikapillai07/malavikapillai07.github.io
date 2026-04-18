@@ -1610,7 +1610,17 @@ body.dark-mode .moon-icon {
 
   .wordcloud-photo,
   .sketch-main-photo {
-    min-height: 280px;
+    min-height: 340px;
+  }
+
+  .wordcloud-photo {
+    padding: 16px !important;
+  }
+
+  .wordcloud-photo img {
+    transform: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
   }
 
   .fitzkee-table {
