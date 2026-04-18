@@ -257,14 +257,18 @@ main {
 }
 
 /* Polaroid Flip Card */
-.polaroid-wrapper {
-    perspective: 1200px;
-}
+    .polaroid-wrapper {
+        perspective: 1200px;
+    }
 
-.polaroid-flipcard {
-    position: relative;
-    width: clamp(294px, 22vw, 420px);
-    height: clamp(432px, 32vw, 617px);
+    .polaroid-wrapper.is-flipped .polaroid-flipcard {
+        transform: rotate(0deg) rotateY(180deg);
+    }
+
+    .polaroid-flipcard {
+        position: relative;
+        width: clamp(294px, 22vw, 420px);
+        height: clamp(432px, 32vw, 617px);
     transform-style: preserve-3d;
     transform: rotate(-3deg);
     transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
@@ -697,6 +701,10 @@ body.dark-mode .project-img-placeholder {
         padding: 10px 10px 50px 10px !important;
     }
 
+    .polaroid-wrapper:hover .polaroid-flipcard {
+        transform: rotate(-3deg);
+    }
+
     .hero-container {
         gap: 2rem;
         flex-direction: column;
@@ -776,7 +784,7 @@ body.dark-mode .project-img-placeholder {
 
     .projects-grid {
         grid-template-columns: 1fr;
-        gap: 1.15rem;
+        gap: 2rem;
         width: 100%;
     }
 
@@ -953,8 +961,14 @@ body.dark-mode .project-img-placeholder {
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     #book, .book-page {
-        width: 260px;
-        height: 360px;
+        width: 220px;
+        height: 308px;
+    }
+
+    #book-viewport {
+        height: 400px;
+        padding-top: 1.75rem;
+        padding-left: 0;
     }
 
     .work-section {
@@ -976,7 +990,7 @@ body.dark-mode .project-img-placeholder {
     }
 
     .projects-grid {
-        gap: 0.9rem;
+        gap: 1.5rem;
     }
 
     .project-info h3 {
@@ -986,6 +1000,20 @@ body.dark-mode .project-img-placeholder {
     .project-info p {
         font-size: 0.78rem;
         line-height: 1.35;
+    }
+
+    #flipbook-scroll-area {
+        height: 150vh;
+    }
+
+    #book, .book-page {
+        width: 200px;
+        height: 280px;
+    }
+
+    #book-viewport {
+        height: 340px;
+        padding-top: 1.25rem;
     }
 }
 

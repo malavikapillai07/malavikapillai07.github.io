@@ -8,7 +8,9 @@ const emailToCopy = 'malavikapillaiofficial@gmail.com';
 const dinelyCard = document.getElementById('dinely-card');
 const dinelyModal = document.getElementById('dinely-modal');
 const dinelyBackBtn = document.getElementById('dinely-back-btn');
+const polaroidWrapper = document.querySelector('.polaroid-wrapper');
 let copyToastTimer;
+let polaroidFlipTimer;
 
 // Mobile Menu Toggle
 if (mobileMenuBtn && mainNav) {
@@ -148,13 +150,53 @@ if (flipbookScrollArea && bookCover && bookShift) {
         bookCover.style.transform = `rotateY(${progress * -180}deg)`;
         
         // Shift the book horizontally to keep it centered
-        const pageWidth = window.innerWidth <= 768 ? 130 : 160; 
+        const pageWidth = window.innerWidth <= 600 ? 105 : window.innerWidth <= 768 ? 120 : 160;
         const shiftX = -pageWidth * (1 - progress);
         bookShift.style.transform = `translateX(${shiftX}px)`;
     };
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
+}
+
+/* === Mobile Polaroid Auto-Flip === */
+const isTouchMobile = () => (
+    window.matchMedia('(max-width: 900px)').matches &&
+    (window.matchMedia('(hover: none)').matches || window.matchMedia('(pointer: coarse)').matches)
+);
+
+const stopPolaroidAutoFlip = () => {
+    if (polaroidFlipTimer) {
+        clearInterval(polaroidFlipTimer);
+        polaroidFlipTimer = null;
+    }
+
+    if (polaroidWrapper) {
+        polaroidWrapper.classList.remove('is-flipped');
+    }
+};
+
+const startPolaroidAutoFlip = () => {
+    if (!polaroidWrapper) return;
+
+    stopPolaroidAutoFlip();
+    polaroidFlipTimer = setInterval(() => {
+        polaroidWrapper.classList.toggle('is-flipped');
+    }, 4000);
+};
+
+if (polaroidWrapper) {
+    const syncPolaroidMode = () => {
+        if (isTouchMobile()) {
+            startPolaroidAutoFlip();
+        } else {
+            stopPolaroidAutoFlip();
+        }
+    };
+
+    syncPolaroidMode();
+    window.addEventListener('resize', syncPolaroidMode);
+    window.addEventListener('orientationchange', syncPolaroidMode);
 }
 
 
