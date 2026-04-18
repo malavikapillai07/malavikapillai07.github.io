@@ -274,7 +274,7 @@ main {
     transition: transform 0.75s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-.polaroid-wrapper:hover .polaroid-flipcard {
+.polaroid-wrapper:not(.is-flipped):hover .polaroid-flipcard {
     transform: rotate(0deg) rotateY(180deg);
 }
 
@@ -701,7 +701,7 @@ body.dark-mode .project-img-placeholder {
         padding: 10px 10px 50px 10px !important;
     }
 
-    .polaroid-wrapper:hover .polaroid-flipcard {
+    .polaroid-wrapper:not(.is-flipped):hover .polaroid-flipcard {
         transform: rotate(-3deg);
     }
 
