@@ -784,7 +784,7 @@ body.dark-mode .project-img-placeholder {
 
     .projects-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 3rem;
         width: 100%;
     }
 
@@ -961,14 +961,15 @@ body.dark-mode .project-img-placeholder {
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     #book, .book-page {
-        width: 220px;
-        height: 308px;
+        width: 190px;
+        height: 266px;
     }
 
     #book-viewport {
-        height: 400px;
-        padding-top: 1.75rem;
+        height: 320px;
+        padding-top: 1rem;
         padding-left: 0;
+        overflow: visible;
     }
 
     .work-section {
@@ -990,7 +991,7 @@ body.dark-mode .project-img-placeholder {
     }
 
     .projects-grid {
-        gap: 1.5rem;
+        gap: 2.5rem;
     }
 
     .project-info h3 {
@@ -1003,17 +1004,22 @@ body.dark-mode .project-img-placeholder {
     }
 
     #flipbook-scroll-area {
-        height: 150vh;
+        height: 140vh;
     }
 
     #book, .book-page {
-        width: 200px;
-        height: 280px;
+        width: 170px;
+        height: 238px;
     }
 
     #book-viewport {
-        height: 340px;
-        padding-top: 1.25rem;
+        height: 280px;
+        padding-top: 0.75rem;
+    }
+
+    #book {
+        transform: scale(0.92);
+        transform-origin: top center;
     }
 }
 
