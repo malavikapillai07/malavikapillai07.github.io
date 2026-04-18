@@ -224,8 +224,8 @@ body.dark-mode .moon-icon {
 .hero-content {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 60px 60px 40px; /* Further reduced from 85px to move title higher */
+  justify-content: flex-start; /* Changed from flex-end to move content to top */
+  padding: 140px 60px 40px; /* Adjusted padding for better top-alignment */
   position: relative;
   z-index: 2;
 }
@@ -1499,8 +1499,9 @@ body.dark-mode .moon-icon {
   }
 
   .hero-content {
-    padding-top: 80px; /* Reduced from 104px */
+    padding-top: 110px; /* Adjusted for top-alignment on mobile */
     padding-bottom: 24px;
+    justify-content: flex-start !important;
   }
 
   section.s-dark > div[style*="margin-left:-64px"] {
