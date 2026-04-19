@@ -422,6 +422,7 @@ body.dark-mode .highlight-orange {
     width: 100%;
     max-width: 1100px;
     margin-top: 15rem; /* Increased further down as requested */
+    margin-bottom: clamp(1rem, 2vh, 2rem);
     display: flex;
     flex-direction: column;
     gap: 0rem;
@@ -515,13 +516,26 @@ body.homepage .about-section .section-title {
 }
 
 .project-img-branding {
-    object-fit: contain;
-    transform: none;
+    object-fit: cover;
+    object-position: center center;
     background: #111;
+    transform: none;
 }
 
 .project-card-branding:hover .project-img-branding {
     transform: none;
+    filter: brightness(0.45);
+}
+
+.project-img-contain {
+    object-fit: cover;
+    object-position: 15% center;
+    background: #111;
+}
+
+.project-card-contain:hover .project-img-contain {
+    transform: none;
+    filter: brightness(0.45);
 }
 
 /* Placeholder fills entire card like an image */
@@ -676,6 +690,10 @@ body.dark-mode .project-img-placeholder {
         padding-inline: 1rem;
     }
 
+    body.homepage main {
+        padding-top: 4.5rem;
+    }
+
     .logo {
         min-width: 100px;
     }
@@ -709,7 +727,7 @@ body.dark-mode .project-img-placeholder {
         gap: 2rem;
         flex-direction: column;
         text-align: center;
-        margin-top: 6rem; /* Move polaroid down on phone */
+        margin-top: 3.5rem; /* Bring the landing content closer to the navbar */
         align-items: center; /* Center flex items horizontally */
     }
 
