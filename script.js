@@ -136,7 +136,8 @@ if (flipbookScrollArea && bookCover && bookShift) {
         const viewHeight = window.innerHeight;
         
         // Sticky offset (4.5rem). We convert to pixels for more accurate math
-        const stickyOffset = 4.5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+        const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+        const stickyOffset = window.innerWidth <= 768 ? 1 * rootFontSize : 4.5 * rootFontSize;
         
         // The animation should happen during the "sticky" window.
         // It starts when rect.top hits stickyOffset, and ends when it hit -(rect.height - viewHeight)

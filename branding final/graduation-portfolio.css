@@ -1219,6 +1219,18 @@ body.dark-mode .moon-icon {
   border-radius: 20px;
 }
 
+.standees-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.standee-col {
+  flex: 0 0 calc(25% - 10px);
+  min-height: 580px;
+  padding: 0;
+  overflow: hidden;
+}
 
 
 
@@ -1424,6 +1436,17 @@ body.dark-mode .moon-icon {
     padding-right: 24px;
   }
 
+  .chapter,
+  .collateral-chapter,
+  .philosophy-section,
+  .project-footer {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .chapter.tight-top { padding-top: 48px; }
+  .chapter.tight-bottom { padding-bottom: 48px; }
+
   .hero-bottom {
     padding: 24px;
     flex-direction: column;
@@ -1447,11 +1470,13 @@ body.dark-mode .moon-icon {
   .colour-meaning,
   .three-col {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .stats-row,
   .four-col {
     grid-template-columns: 1fr 1fr;
+    gap: 24px;
   }
 
   .colour-swatches {
@@ -1461,6 +1486,8 @@ body.dark-mode .moon-icon {
   .fitzkee-table {
     font-size: 11px;
   }
+
+
 
   .fitzkee-table th,
   .fitzkee-table td {
@@ -1498,10 +1525,26 @@ body.dark-mode .moon-icon {
     padding-right: 16px;
   }
 
+  .chapter,
+  .collateral-chapter,
+  .philosophy-section,
+  .project-footer {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .chapter.tight-top { padding-top: 32px; }
+  .chapter.tight-bottom { padding-bottom: 32px; }
+  .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
   .hero-content {
-    padding-top: 110px; /* Adjusted for top-alignment on mobile */
-    padding-bottom: 24px;
-    justify-content: flex-start !important;
+    padding-top: 80px; /* Reduced for vertical centering */
+    padding-bottom: 40px; /* Increased to separate from bottom */
+    justify-content: center !important;
   }
 
   section.s-dark > div[style*="margin-left:-64px"] {
@@ -1555,7 +1598,10 @@ body.dark-mode .moon-icon {
   }
 
   .hero-meta {
-    gap: 18px;
+    display: grid !important;
+    grid-template-columns: 100px 1fr;
+    gap: 24px 16px;
+    width: 100%;
   }
 
   .hero-meta .meta-item span {
@@ -1614,14 +1660,19 @@ body.dark-mode .moon-icon {
     padding: 8px !important;
   }
 
+  .standee-col {
+    flex: 0 0 100%;
+    min-height: 400px;
+  }
+
   .sketch-main-photo {
     min-height: 340px;
   }
 
   .wordcloud-photo img {
-    transform: none !important;
-    max-width: 100% !important;
-    width: 100% !important;
+    transform: scale(1.6) !important;
+    max-width: unset !important;
+    width: 140% !important;
     max-height: none !important;
     height: auto !important;
   }
@@ -1671,4 +1722,13 @@ body.dark-mode .moon-icon {
 /* Flipbook empty page fix */
 .st-page {
   background-color: transparent !important;
+}
+
+@media (max-width: 768px) {
+  .gp-bm-container {
+    min-height: 280px !important;
+  }
+  .gp-bm-image {
+    object-fit: contain !important;
+  }
 }

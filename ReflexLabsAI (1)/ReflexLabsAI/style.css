@@ -436,6 +436,42 @@ section{
   text-align:center;
 }
 
+/* ── INTERNSHIP BANNER ── */
+.internship-banner {
+  padding: 60px 64px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+.internship-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  white-space: nowrap;
+}
+.internship-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+.internship-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  max-width: 860px;
+  margin: 12px auto 0 auto;
+}
+
 /* tech bar */
 .tech-bar-row{
   display:flex;
@@ -902,6 +938,16 @@ section{
 .cover-descriptor{animation:fadeUp .8s .4s both;}
 .cover-bottom{animation:fadeUp .8s .55s both;}
 
+/* ── WIREFRAMES ── */
+.wireframe-col-4 {
+  position: relative;
+  width: calc(25% - 12px);
+}
+.wireframe-col-3 {
+  position: relative;
+  width: calc(33.333% - 12px);
+}
+
 /* ── ELEMENTS SECTION ── */
 .elements-grid {
   display: grid;
@@ -1178,6 +1224,10 @@ nav#main-nav a:hover {
         grid-template-columns: 1fr;
     }
 
+    .wireframe-col-4, .wireframe-col-3 {
+        width: calc(50% - 8px);
+    }
+
     .screen-slot.wide {
         grid-column: span 1;
     }
@@ -1231,11 +1281,21 @@ nav#main-nav a:hover {
         padding-bottom: 72px;
     }
 
+    .internship-banner {
+        padding: 48px 16px;
+    }
+
+    .internship-title {
+        font-size: 15px;
+    }
+
+    .internship-text {
+        font-size: 13.5px;
+    }
+
     .cover {
-        min-height: auto;
-        justify-content: flex-start;
-        padding-top: 88px;
-        padding-bottom: 28px;
+        padding: 120px 24px 60px 24px !important;
+        min-height: auto !important;
     }
 
     .cover-grid {
@@ -1243,8 +1303,18 @@ nav#main-nav a:hover {
     }
 
     .hero-logo {
-        transform: scale(0.72);
-        margin-bottom: 14px;
+        display: grid;
+        grid-template-columns: repeat(4, 28px);
+        grid-template-rows: repeat(4, 28px);
+        gap: 8px;
+        margin: 0 auto 32px auto;
+        position: relative;
+        z-index: 2;
+        transform: none;
+    }
+
+    .cover-content {
+        align-items: center;
     }
 
     .cover-title {
@@ -1265,7 +1335,7 @@ nav#main-nav a:hover {
     .end-meta {
         gap: 14px;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
     }
 
     .cover-bottom {
@@ -1276,6 +1346,9 @@ nav#main-nav a:hover {
 
     .cover-meta-row {
         gap: 18px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .cover-meta-item p {
@@ -1314,6 +1387,10 @@ nav#main-nav a:hover {
 
     .screen-slot.wide {
         grid-column: auto;
+    }
+
+    .wireframe-col-4, .wireframe-col-3 {
+        width: 100%;
     }
 
     .process-step,

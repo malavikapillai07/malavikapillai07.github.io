@@ -234,6 +234,10 @@ main {
     /* Keeps content above noise */
 }
 
+body.homepage main {
+    padding-top: clamp(0.5rem, 1.25vw, 1rem);
+}
+
 .footer-copyright {
     margin-top: 5rem;
     font-size: 0.85rem;
@@ -252,8 +256,8 @@ main {
     justify-content: center;
     gap: clamp(5rem, 8vw, 10rem);
     max-width: 1400px;
-    min-height: 85vh; /* Pushes Works section off initial view */
-    margin-top: 5rem;
+    min-height: 78vh; /* Keeps the hero higher on the page */
+    margin-top: 2.5rem;
 }
 
 /* Polaroid Flip Card */
@@ -844,17 +848,25 @@ body.dark-mode .project-img-placeholder {
         filter: none;
     }
 
+    .project-card-contain:hover .project-img-contain {
+        transform: none;
+        filter: none;
+    }
+
     .about-section {
-        margin-top: 6rem !important; /* Keep more distance between works and about */
+        margin-top: -4rem !important;
+        margin-bottom: 0 !important;
     }
 
     .contact-section {
-        margin-top: -5rem !important; /* Heavily reduced space after flipbook */
-        padding-top: 0 !important;
+        margin-top: 0 !important;
+        min-height: auto !important;
+        padding: 0.25rem 1rem 0 !important;
+        justify-content: flex-start !important;
     }
 
     .contact-heading {
-        margin-bottom: 0.25rem !important;
+        margin-bottom: 0.75rem !important;
         font-size: clamp(2.4rem, 11vw, 3.6rem) !important; /* Larger on phone */
         line-height: 0.95 !important;
         display: flex !important;
@@ -865,6 +877,11 @@ body.dark-mode .project-img-placeholder {
 
     .contact-heading span {
         display: block;
+    }
+
+    .contact-section .footer-copyright {
+        margin-top: 0.75rem !important;
+        padding-top: 3.5rem !important;
     }
     
     #butterfly-wrapper {
@@ -899,7 +916,7 @@ body.dark-mode .project-img-placeholder {
     position: relative;
     width: 100%;
     max-width: 1000px;
-    height: 480px; /* Reduced from 600px to remove height slack */
+    height: 540px; /* Slightly taller so the larger book fits cleanly */
     display: flex;
     align-items: flex-start; /* Attaches the book to the top closest to the title */
     justify-content: center;
@@ -916,8 +933,8 @@ body.dark-mode .project-img-placeholder {
 
 #book {
     position: relative;
-    width: 320px; /* Adjust based on your image aspect ratio */
-    height: 450px;
+    width: 360px; /* Slight desktop size increase */
+    height: 506px;
     transform-style: preserve-3d;
     perspective: 1500px;
 }
@@ -925,26 +942,28 @@ body.dark-mode .project-img-placeholder {
 .book-page {
     position: absolute;
     top: 0; /* Align to parent top */
-    width: 320px;
-    height: 450px;
+    width: 360px;
+    height: 506px;
     background: transparent; /* Remove white background */
     box-shadow: none; /* Removed heavy shadow to keep it clean */
     transform-origin: left center;
 }
 
 #page-right {
-    left: 0;
+    left: -1px;
     z-index: 1;
     border-radius: 0 10px 10px 0;
     overflow: hidden;
+    width: calc(100% + 1px);
 }
 
 #book-cover {
-    left: 0;
+    left: -1px;
     z-index: 2;
     transform-style: preserve-3d;
     /* Remove transition to prevent fighting the scroll-driven transform */
     border-radius: 0 10px 10px 0;
+    width: calc(100% + 1px);
 }
 
 .page-side {
@@ -987,14 +1006,26 @@ body.dark-mode .project-img-placeholder {
 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
+    #flipbook-scroll-area {
+        height: 115vh;
+    }
+
+    #flipbook-sticky-wrapper {
+        top: 0;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        padding-top: 0;
+    }
+
     #book, .book-page {
-        width: 190px;
-        height: 266px;
+        width: 208px;
+        height: 291px;
     }
 
     #book-viewport {
         height: 300px;
-        padding-top: 1rem;
+        padding-top: 2.75rem;
         padding-left: 0;
         overflow: visible;
     }
@@ -1011,6 +1042,10 @@ body.dark-mode .project-img-placeholder {
 @media (max-width: 600px) {
     main {
         padding-inline: 0.9rem;
+    }
+
+    body.homepage main {
+        padding-top: 4rem;
     }
 
     .work-section {
@@ -1031,25 +1066,29 @@ body.dark-mode .project-img-placeholder {
     }
 
     #flipbook-scroll-area {
-        height: 100vh;
+        height: 115vh;
     }
 
     #flipbook-sticky-wrapper {
-        height: 60vh; /* Reduced from 100vh to bring contact section up */
+        top: 0;
+        height: 100vh; /* Bring the About title closer to the top */
+        justify-content: center;
+        align-items: center;
+        padding-top: 0;
     }
 
     #book, .book-page {
-        width: 160px;
-        height: 224px;
+        width: 180px;
+        height: 252px;
     }
 
     #book-viewport {
         height: 260px;
-        padding-top: 0.8rem;
+        padding-top: 2.5rem;
     }
 
     #book {
-        transform: scale(0.85);
+        transform: scale(0.93);
         transform-origin: top center;
     }
 }
@@ -1057,12 +1096,14 @@ body.dark-mode .project-img-placeholder {
 /* === Contact Section Styles === */
 .contact-section {
     width: 100%;
-    margin-top: clamp(3rem, 5vh, 5rem); /* Reduced distance */
-    padding: 4rem 1rem 8rem 1rem;
+    min-height: auto;
+    margin-top: 0;
+    padding: clamp(1.5rem, 3vh, 2.5rem) 1rem 0;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
 }
 

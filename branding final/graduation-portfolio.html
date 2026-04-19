@@ -321,7 +321,7 @@
         <div class="wordcloud-photo"
           style="overflow: hidden; padding: 0px; background: transparent; display: flex; align-items: center; justify-content: center; min-height: 700px;">
           <img src="wordcloud.PNG" alt="Word Cloud Mind Map"
-            style="width: 100%; max-width: 1300px; height: auto; object-fit: contain; display: block; transform: scale(1.15);">
+            style="width: 100%; max-width: 1300px; height: auto; object-fit: contain; display: block; transform: scale(1.4);">
         </div>
 
         <div class="wordcloud-keywords" style="margin-top:40px;">
@@ -942,14 +942,14 @@
               <span class="coll-spec">Per Department</span>
             </div>
             <div class="two-col reveal" style="gap: 16px;">
-              <div
-                style="min-height:400px; padding:24px; overflow:hidden; display:flex; align-items:center; justify-content:center; background: var(--surface);">
-                <img src="GP&BM/gpcover.jpg" alt="GP Booklet — Cover Design"
-                  style="width: 100%; height: 100%; object-fit: contain; display: block;">
+              <div class="gp-bm-container"
+                style="min-height:400px; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center; background: var(--surface);">
+                <img src="GP&BM/gpcover.jpg" alt="GP Booklet — Cover Design" class="gp-bm-image"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
               </div>
-              <div
+              <div class="gp-bm-container"
                 style="min-height:400px; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-                <img src="GP&BM/gpbook mockup.jpg" alt="GP Booklet — Mockup on table"
+                <img src="GP&BM/gpbook mockup.jpg" alt="GP Booklet — Mockup on table" class="gp-bm-image"
                   style="width: 100%; height: 100%; object-fit: cover; display: block;">
               </div>
             </div>
@@ -999,14 +999,14 @@
               <span class="coll-spec">Brand Guidelines</span>
             </div>
             <div class="two-col reveal" style="gap: 16px;">
-              <div
-                style="min-height:400px; padding:24px; overflow:hidden; display:flex; align-items:center; justify-content:center; background: var(--surface);">
-                <img src="GP&BM/bmcover1.png" alt="Brand Manual — Cover Design"
-                  style="width: 100%; height: 100%; object-fit: contain; display: block;">
+              <div class="gp-bm-container"
+                style="min-height:400px; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center; background: var(--surface);">
+                <img src="GP&BM/bmcover1.png" alt="Brand Manual — Cover Design" class="gp-bm-image"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
               </div>
-              <div
+              <div class="gp-bm-container"
                 style="min-height:400px; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-                <img src="GP&BM/brand manual mockup.jpg" alt="Brand Manual — Physical Mockup"
+                <img src="GP&BM/brand manual mockup.jpg" alt="Brand Manual — Physical Mockup" class="gp-bm-image"
                   style="width: 100%; height: 100%; object-fit: cover; display: block;">
               </div>
             </div>
@@ -1127,82 +1127,67 @@
 
           <div class="coll-section-title reveal" style="font-size:16px; margin-bottom:16px;">Standee Designs
           </div>
-          <div style="display:flex; flex-direction:column; align-items:center; gap:24px; margin-bottom:48px;"
-            class="reveal">
-            <div class="photo-placeholder"
-              style="width:100%; max-width:800px; min-height:800px; padding:0; overflow:hidden; background:transparent; border:none;">
-              <img src="standees/flat standees/bft standee.png" alt="Flat — Technova"
+          <div class="standees-grid reveal" style="margin-bottom:48px;">
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/flat standees/bft standee.jpg" alt="Flat — Technova" loading="lazy"
                 style="width:100%; height:100%; object-fit:contain; display:block;">
             </div>
-            <div class="photo-placeholder"
-              style="width:100%; max-width:800px; min-height:800px; padding:0; overflow:hidden; background:transparent; border:none;">
-              <img src="standees/flat standees/standee td.png" alt="Flat — Tantu"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/flat standees/standee td.jpg" alt="Flat — Tantu" loading="lazy"
                 style="width:100%; height:100%; object-fit:contain; display:block;">
             </div>
-            <div class="photo-placeholder"
-              style="width:100%; max-width:800px; min-height:800px; padding:0; overflow:hidden; background:transparent; border:none;">
-              <img src="standees/flat standees/kd standee.png" alt="Flat — Knitmoda"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/flat standees/kd standee.jpg" alt="Flat — Knitmoda" loading="lazy"
                 style="width:100%; height:100%; object-fit:contain; display:block;">
             </div>
-            <div class="photo-placeholder"
-              style="width:100%; max-width:800px; min-height:800px; padding:0; overflow:hidden; background:transparent; border:none;">
-              <img src="standees/flat standees/fd standee.png" alt="Flat — Fashionova"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/flat standees/fd standee.jpg" alt="Flat — Fashionova" loading="lazy"
                 style="width:100%; height:100%; object-fit:contain; display:block;">
             </div>
-            <div class="photo-placeholder"
-              style="width:100%; max-width:800px; min-height:800px; padding:0; overflow:hidden; background:transparent; border:none;">
-              <img src="standees/flat standees/standee fc.png" alt="Flat — Communiqué"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/flat standees/standee fc.jpg" alt="Flat — Communiqué" loading="lazy"
                 style="width:100%; height:100%; object-fit:contain; display:block;">
             </div>
-            <div class="photo-placeholder"
-              style="width:100%; max-width:800px; min-height:800px; padding:0; overflow:hidden; background:transparent; border:none;">
-              <img src="standees/flat standees/mfm standee.png" alt="Flat — Bottom Line"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/flat standees/mfm standee.jpg" alt="Flat — Bottom Line" loading="lazy"
                 style="width:100%; height:100%; object-fit:contain; display:block;">
             </div>
-            <div class="photo-placeholder"
-              style="width:100%; max-width:800px; min-height:800px; padding:0; overflow:hidden; background:transparent; border:none;">
-              <img src="standees/flat standees/mdes standee.png" alt="Flat — Mishran"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/flat standees/mdes standee.jpg" alt="Flat — Mishran" loading="lazy"
                 style="width:100%; height:100%; object-fit:contain; display:block;">
             </div>
           </div>
 
           <div class="coll-section-title reveal" style="font-size:16px; margin-bottom:16px; margin-top: 120px;">Standee
             Mockups</div>
-          <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px;" class="reveal">
-            <div class="photo-placeholder no-pattern"
-              style="flex: 0 0 calc(25% - 10px); min-height:580px; padding:0; overflow:hidden;">
-              <img src="standees/mockups/bft mockup.jpg" alt="Technova 2026 Standee"
+          <div class="standees-grid reveal">
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/mockups/bft mockup.jpg" alt="Technova 2026 Standee" loading="lazy"
                 style="width:100%; height:100%; object-fit:cover; display:block; mix-blend-mode:multiply;">
             </div>
-            <div class="photo-placeholder no-pattern"
-              style="flex: 0 0 calc(25% - 10px); min-height:580px; padding:0; overflow:hidden;">
-              <img src="standees/mockups/td mockup.jpg" alt="Tantu 2026 Standee"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/mockups/td mockup.jpg" alt="Tantu 2026 Standee" loading="lazy"
                 style="width:100%; height:100%; object-fit:cover; display:block; mix-blend-mode:multiply;">
             </div>
-            <div class="photo-placeholder no-pattern"
-              style="flex: 0 0 calc(25% - 10px); min-height:580px; padding:0; overflow:hidden;">
-              <img src="standees/mockups/kd mockup.jpg" alt="Knitmoda 2026 Standee"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/mockups/kd mockup.jpg" alt="Knitmoda 2026 Standee" loading="lazy"
                 style="width:100%; height:100%; object-fit:cover; display:block; mix-blend-mode:multiply;">
             </div>
-            <div class="photo-placeholder no-pattern"
-              style="flex: 0 0 calc(25% - 10px); min-height:580px; padding:0; overflow:hidden;">
-              <img src="standees/mockups/fd mockup.jpg" alt="Fashionova 2026 Standee"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/mockups/fd mockup.jpg" alt="Fashionova 2026 Standee" loading="lazy"
                 style="width:100%; height:100%; object-fit:cover; display:block; mix-blend-mode:multiply;">
             </div>
             <!-- Row 2: 3 centred -->
-            <div class="photo-placeholder no-pattern"
-              style="flex: 0 0 calc(25% - 10px); min-height:580px; padding:0; overflow:hidden;">
-              <img src="standees/mockups/fc mockup.jpg" alt="Communiqué 2026 Standee"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/mockups/fc mockup.jpg" alt="Communiqué 2026 Standee" loading="lazy"
                 style="width:100%; height:100%; object-fit:cover; display:block; mix-blend-mode:multiply;">
             </div>
-            <div class="photo-placeholder no-pattern"
-              style="flex: 0 0 calc(25% - 10px); min-height:580px; padding:0; overflow:hidden;">
-              <img src="standees/mockups/mfm mockup.jpg" alt="Bottom Line 2026 Standee"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/mockups/mfm mockup.jpg" alt="Bottom Line 2026 Standee" loading="lazy"
                 style="width:100%; height:100%; object-fit:cover; display:block; mix-blend-mode:multiply;">
             </div>
-            <div class="photo-placeholder no-pattern"
-              style="flex: 0 0 calc(25% - 10px); min-height:580px; padding:0; overflow:hidden;">
-              <img src="standees/mockups/mdes mockup.jpg" alt="Mishran 2026 Standee"
+            <div class="photo-placeholder no-pattern standee-col">
+              <img src="standees/mockups/mdes mockup.jpg" alt="Mishran 2026 Standee" loading="lazy"
                 style="width:100%; height:100%; object-fit:cover; display:block; mix-blend-mode:multiply;">
             </div>
           </div>
