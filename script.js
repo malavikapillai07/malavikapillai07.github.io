@@ -123,41 +123,186 @@ document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && dinelyModal && dinelyModal.classList.contains('show')) {
         closeDinelyModal();
     }
+    if (event.key === 'Escape' && ndaModal && ndaModal.classList.contains('show')) {
+        closeNdaModal();
+    }
 });
 
-/* === Flipbook Scroll Animation === */
-const flipbookScrollArea = document.getElementById('flipbook-scroll-area');
-const bookCover = document.getElementById('book-cover');
-const bookShift = document.getElementById('book-shift');
+// NDA Modal Handlers
+const ndaModal = document.getElementById('nda-modal');
+const ndaCloseBtn = document.getElementById('nda-modal-close');
+const ndaGotItBtn = document.getElementById('nda-modal-btn');
+const ndaTriggers = document.querySelectorAll('.open-nda-modal');
 
-if (flipbookScrollArea && bookCover && bookShift) {
-    const handleScroll = () => {
-        const rect = flipbookScrollArea.getBoundingClientRect();
-        const viewHeight = window.innerHeight;
-        
-        // Sticky offset (4.5rem). We convert to pixels for more accurate math
-        const stickyOffset = 4.5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
-        
-        // The animation should happen during the "sticky" window.
-        // It starts when rect.top hits stickyOffset, and ends when it hit -(rect.height - viewHeight)
-        const totalScrollable = (rect.height - viewHeight);
-        const currentScroll = stickyOffset - rect.top;
-        
-        let progress = currentScroll / totalScrollable;
-        progress = Math.max(0, Math.min(1, progress));
-        
-        // Smoothly rotate the cover
-        bookCover.style.transform = `rotateY(${progress * -180}deg)`;
-        
-        // Shift the book horizontally to keep it centered
-        const pageWidth = window.innerWidth <= 600 ? 105 : window.innerWidth <= 768 ? 120 : 160;
-        const shiftX = -pageWidth * (1 - progress);
-        bookShift.style.transform = `translateX(${shiftX}px)`;
-    };
+const openNdaModal = () => {
+    if (!ndaModal) return;
+    ndaModal.classList.add('show');
+    ndaModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+};
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
+const closeNdaModal = () => {
+    if (!ndaModal) return;
+    ndaModal.classList.remove('show');
+    ndaModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+};
+
+ndaTriggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        openNdaModal();
+    });
+});
+
+if (ndaCloseBtn) ndaCloseBtn.addEventListener('click', closeNdaModal);
+if (ndaGotItBtn) ndaGotItBtn.addEventListener('click', closeNdaModal);
+if (ndaModal) {
+    ndaModal.addEventListener('click', (e) => {
+        if (e.target === ndaModal) {
+            closeNdaModal();
+        }
+    });
 }
+
+// In Progress Modal Handlers
+const progressModal = document.getElementById('progress-modal');
+const progressCloseBtn = document.getElementById('progress-modal-close');
+const progressGotItBtn = document.getElementById('progress-modal-btn');
+const progressTriggers = document.querySelectorAll('.open-progress-modal');
+
+const openProgressModal = () => {
+    if (!progressModal) return;
+    progressModal.classList.add('show');
+    progressModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+};
+
+const closeProgressModal = () => {
+    if (!progressModal) return;
+    progressModal.classList.remove('show');
+    progressModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+};
+
+progressTriggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        openProgressModal();
+    });
+});
+
+if (progressCloseBtn) progressCloseBtn.addEventListener('click', closeProgressModal);
+if (progressGotItBtn) progressGotItBtn.addEventListener('click', closeProgressModal);
+if (progressModal) {
+    progressModal.addEventListener('click', (e) => {
+        if (e.target === progressModal) {
+            closeProgressModal();
+        }
+    });
+}
+
+// Global Escape Key Listener for Modals
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeNdaModal();
+        closeProgressModal();
+    }
+});
+
+// Whole-card click handling for showcase cards
+document.querySelectorAll('.showcase-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+        // If the user directly clicked a specific button or link, let native event handle it
+        if (e.target.closest('.btn-card-action') || e.target.closest('.open-nda-modal') || e.target.closest('.open-progress-modal')) return;
+        
+        // Find the action button or link inside the card and trigger it
+        const actionBtn = card.querySelector('.btn-card-action');
+        if (actionBtn) {
+            actionBtn.click();
+        }
+    });
+});
+
+/* === Custom Cursor Logic === */
+let cursorEl = document.getElementById('custom-cursor');
+if (!cursorEl) {
+    cursorEl = document.createElement('div');
+    cursorEl.id = 'custom-cursor';
+    document.body.appendChild(cursorEl);
+}
+
+let mouseX = -100;
+let mouseY = -100;
+let cursorX = -100;
+let cursorY = -100;
+let isCursorActive = false;
+
+window.addEventListener('pointermove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!isCursorActive) {
+        isCursorActive = true;
+        cursorX = mouseX;
+        cursorY = mouseY;
+        cursorEl.classList.add('visible');
+    }
+});
+
+// Smooth fluid trailing loop
+const renderCursor = () => {
+    if (isCursorActive) {
+        cursorX += (mouseX - cursorX) * 0.35;
+        cursorY += (mouseY - cursorY) * 0.35;
+        cursorEl.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+    }
+    requestAnimationFrame(renderCursor);
+};
+requestAnimationFrame(renderCursor);
+
+// Hover over polaroid -> yellow pill with "hi"
+if (polaroidWrapper) {
+    polaroidWrapper.addEventListener('mouseenter', () => {
+        cursorEl.classList.remove('cursor-hover', 'cursor-emerging');
+        cursorEl.classList.add('cursor-polaroid');
+        cursorEl.textContent = 'hi';
+    });
+    polaroidWrapper.addEventListener('mouseleave', () => {
+        cursorEl.classList.remove('cursor-polaroid');
+        cursorEl.textContent = '';
+    });
+}
+
+// Hover over "product designer" -> yellow pill with typography "emerging..."
+const emergingTarget = document.querySelector('.hover-target-emerging');
+if (emergingTarget) {
+    emergingTarget.addEventListener('mouseenter', () => {
+        cursorEl.classList.remove('cursor-hover', 'cursor-polaroid');
+        cursorEl.classList.add('cursor-emerging');
+        cursorEl.textContent = 'emerging...';
+    });
+    emergingTarget.addEventListener('mouseleave', () => {
+        cursorEl.classList.remove('cursor-emerging');
+        cursorEl.textContent = '';
+    });
+}
+
+// Hover over interactive links and buttons
+const setupCursorInteractions = () => {
+    const targets = document.querySelectorAll('a, button, .project-card, .showcase-card, .btn, .theme-toggle');
+    targets.forEach(el => {
+        if (el.closest('.polaroid-wrapper') || el.classList.contains('hover-target-emerging')) return;
+        el.addEventListener('mouseenter', () => {
+            if (!cursorEl.classList.contains('cursor-polaroid') && !cursorEl.classList.contains('cursor-emerging')) {
+                cursorEl.classList.add('cursor-hover');
+            }
+        });
+        el.addEventListener('mouseleave', () => {
+            cursorEl.classList.remove('cursor-hover');
+        });
+    });
+};
+setupCursorInteractions();
 
 /* === Mobile Polaroid Auto-Flip === */
 const isTouchMobile = () => (
@@ -199,5 +344,43 @@ if (polaroidWrapper) {
     window.addEventListener('orientationchange', syncPolaroidMode);
 }
 
+/* === Floating Cassette Spotify Player Toggle === */
+const cassetteToggleBtn = document.getElementById('cassette-toggle');
+const spotifyCard = document.getElementById('spotify-card');
+const spotifyCloseBtn = document.getElementById('spotify-close');
+const cassetteTooltip = document.getElementById('cassette-tooltip');
 
-/* Custom cursor logic has been removed as per user request */
+if (cassetteToggleBtn && spotifyCard) {
+    cassetteToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = spotifyCard.classList.toggle('is-open');
+        spotifyCard.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+        cassetteToggleBtn.classList.toggle('is-playing', isOpen);
+        if (cassetteTooltip) {
+            cassetteTooltip.textContent = isOpen ? 'Click to close player 🎵' : 'Click to play song 🎵';
+        }
+    });
+
+    if (spotifyCloseBtn) {
+        spotifyCloseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            spotifyCard.classList.remove('is-open');
+            spotifyCard.setAttribute('aria-hidden', 'true');
+            cassetteToggleBtn.classList.remove('is-playing');
+            if (cassetteTooltip) {
+                cassetteTooltip.textContent = 'Click to play song 🎵';
+            }
+        });
+    }
+
+    document.addEventListener('click', (e) => {
+        if (spotifyCard.classList.contains('is-open') && !spotifyCard.contains(e.target) && !cassetteToggleBtn.contains(e.target)) {
+            spotifyCard.classList.remove('is-open');
+            spotifyCard.setAttribute('aria-hidden', 'true');
+            cassetteToggleBtn.classList.remove('is-playing');
+            if (cassetteTooltip) {
+                cassetteTooltip.textContent = 'Click to play song 🎵';
+            }
+        }
+    });
+}

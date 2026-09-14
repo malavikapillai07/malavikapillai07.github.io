@@ -15,7 +15,10 @@
 
 <body class="dark-mode">
     <header>
-        <div class="logo">ABC OF FASHION</div>
+        <a href="../index.html" class="logo" aria-label="Go to home page">
+            <img src="../logo black.PNG" alt="Logo" class="logo-light">
+            <img src="../logo white.PNG" alt="Logo" class="logo-dark">
+        </a>
         <div class="header-right">
             <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme">
                 <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -44,9 +47,9 @@
 
             <nav id="main-nav">
                 <a href="../index.html">Home</a>
-                <a href="../index.html#work">Work</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
+                <a href="../works.html" class="active-link">Works</a>
+                <a href="../about.html">About</a>
+                <a href="../index.html#contact">Contact</a>
             </nav>
         </div>
     </header>
@@ -70,6 +73,6 @@
         </div>
     </main>
     <script src="script.js"></script>
-    <a href="../index.html#work" class="floating-back-btn" aria-label="Back to Works">[BACK]</a>
+    <a href="../works.html" class="floating-back-btn" aria-label="Back to Works">[BACK]</a>
 </body>
 </html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Malavika Pillai</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo white.PNG">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="about-page dark-mode">
+    <header>
+        <a href="index.html" class="logo" aria-label="Go to home page">
+            <img src="logo black.PNG" alt="Logo" class="logo-light">
+            <img src="logo white.PNG" alt="Logo" class="logo-dark">
+        </a>
+
+        <div class="header-right">
+            <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme">
+                <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav id="main-nav">
+                <a href="index.html">Home</a>
+                <a href="works.html">Works</a>
+                <a href="about.html" class="active-link">About</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="about-page-container">
+            <!-- Left Column: Static Zoomed Polaroid Frame -->
+            <div class="about-polaroid-frame">
+                <div class="polaroid">
+                    <div class="image-crop">
+                        <img src="about me picture.jpeg" alt="Malavika Pillai" class="profile-img about-profile-img">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: About Typography (Direct Intro) -->
+            <div class="about-text-content">
+                <p class="about-desc-p">
+                    I’m a Product Designer who’s curious about people, problems, and the little things we often overlook. I tend to notice the small difficulties I face while doing something and immediately start wondering, <em>“Why does it have to be this way?”</em> I ask a lot of questions, probably more than necessary, but it helps me look at problems from different perspectives. Being an empath also helps me understand how the same experience might feel completely different to someone else.
+                </p>
+                <p class="about-desc-p">
+                    When I’m not designing, I’m probably dancing, reading a good book, or getting distracted by a cat. I like noticing things, questioning them, and turning those little observations into ideas.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Interactive Cassette Widget -->
+    <div class="floating-cassette-widget">
+        <!-- Spotify Embed Popup -->
+        <div class="spotify-embed-card" id="spotify-card" aria-hidden="true">
+            <div class="spotify-card-header">
+                <span class="spotify-card-title">Favorite Track 🎵</span>
+                <button class="spotify-card-close" id="spotify-close" aria-label="Close Spotify Player">&times;</button>
+            </div>
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1hA3nNa0T0J49ZE4vYgLKV?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+
+        <div class="cassette-tooltip" id="cassette-tooltip">Click to play song 🎵</div>
+        
+        <button class="cassette-toggle-btn" id="cassette-toggle" aria-label="Toggle Spotify Player">
+            <img src="casette-transparent.png" alt="Cassette Tape" class="cassette-img">
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

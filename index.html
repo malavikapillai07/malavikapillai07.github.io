@@ -46,9 +46,9 @@
             </button>
 
             <nav id="main-nav">
-                <a href="index.html">Home</a>
-                <a href="#work">Work</a>
-                <a href="#about">About</a>
+                <a href="index.html" class="active-link">Home</a>
+                <a href="works.html">Works</a>
+                <a href="about.html">About</a>
                 <a href="#contact">Contact</a>
             </nav>
         </div>
@@ -82,11 +82,7 @@
                 <div class="info-block">
                     <h2 class="hero-heading">Hi, I'm Malavika</h2>
                     <p>
-                        Based in Kerala
-
-                        <br>Communication design student
-
-                        <br><span class="highlight-orange">Research-driven designer</span>
+                        I'm a <span class="hero-underline hover-target-emerging" data-cursor="emerging...">product designer</span> building <span class="hero-underline">digital experiences</span> through research and curiosity.
                     </p>
                 </div>
 
@@ -115,72 +111,175 @@
             </div>
         </div>
 
-
-
+        <!-- Featured Works Showcase Section (2 featured works) -->
         <section id="work" class="work-section">
-            <h2 class="section-title">Works </h2>
-            <div class="projects-grid">
-                <a href="ReflexLabsAI%20(1)/ReflexLabsAI/reflexlabs-casestudy-v3.html" class="project-card">
-                    <img src="Reflexlab cover.png" alt="ReflexLabsAI" class="project-img">
-                    <div class="project-info">
-                        <h3>ReflexLabsAI</h3>
-                        <p>AI Platform</p>
+            <h2 class="section-title">Works</h2>
+            <div class="works-grid-interactive">
+                <!-- Featured Card 1: Internship Experience (LoopLink AI) -->
+                <article class="showcase-card">
+                    <div class="card-visual visual-looplink open-nda-modal" style="cursor: pointer;">
+                        <span class="card-pill-badge pill-purple">Internship</span>
+                        <img src="internship/cover.png" alt="LoopLink AI Internship" class="card-visual-img">
                     </div>
-                </a>
-                <a href="#" class="project-card" id="dinely-card">
-                    <img src="Finance Tracking App.png" alt="Penny Pop" class="project-img">
-                    <div class="project-info">
-                        <h3>Penny Pop</h3>
-                        <p>Personal Finance Management & Expense Tracking</p>
+                    <div class="card-pull-panel">
+                        <div class="card-meta-bar">
+                            <span class="card-meta-title">LoopLink AI &nbsp;|&nbsp; 2026</span>
+                        </div>
+                        <div class="card-tagline">Product Design Internship</div>
+                        <h3 class="card-heading">Designing across products, systems and experiences</h3>
+                        <div class="card-expanded-content">
+                            <a href="javascript:void(0)" class="btn-card-action btn-card-nda open-nda-modal"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px; vertical-align:middle;"><rect x="4" y="11" width="16" height="11" rx="2.5" ry="2.5"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Under NDA</a>
+                            <p class="card-desc">
+                                Exploring UI foundations, Pocket’s visual language and complex operational workflows across LoopLink’s product ecosystem.
+                            </p>
+                            <div class="card-breakdown-grid">
+                                <div class="card-col-block">
+                                    <h4>My part</h4>
+                                    <ul>
+                                        <li>UI foundations &amp; reusable components</li>
+                                        <li>Pocket UI exploration</li>
+                                        <li>UX documentation &amp; information architecture</li>
+                                        <li>Prototyping &amp; interaction design</li>
+                                    </ul>
+                                </div>
+                                <div class="card-col-block">
+                                    <h4>The Outcome</h4>
+                                    <p>Building a stronger understanding of product design, from visual systems to user experiences.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </a>
-                <a href="branding%20final/graduation-portfolio.html" class="project-card project-card-branding">
-                    <img src="real graduation cover pg.png" alt="Graduation Project" class="project-img project-img-branding">
-                    <div class="project-info">
-                        <h3>Graduation Project</h3>
-                        <p>Graduation Showcase Identity.</p>
+                </article>
+
+                <!-- Featured Card 2: UX Research Case Study -->
+                <article class="showcase-card">
+                    <div class="card-visual visual-penny">
+                        <span class="card-pill-badge">Case Study</span>
+                        <img src="research cover pg.png" alt="Understanding Money Habits" class="card-visual-img">
                     </div>
-                </a>
-                <a href="escape room/void-escape-room.html" class="project-card">
-                    <img src="real escape room cover pg.png" alt="VOID Escape Room" class="project-img">
-                    <div class="project-info">
-                        <h3>VOID Escape Room</h3>
-                        <p>Sensory Visual Experience</p>
+                    <div class="card-pull-panel">
+                        <div class="card-meta-bar">
+                            <span class="card-meta-title">Understanding Money Habits &nbsp;|&nbsp; 2024</span>
+                        </div>
+                        <div class="card-tagline">UX Research &amp; Personal Finance</div>
+                        <h3 class="card-heading">Understanding the habits and barriers behind money management</h3>
+                        <div class="card-expanded-content">
+                            <a href="internship/research-case-study (2).html" class="btn-card-action">View case study</a>
+                            <p class="card-desc">
+                                Exploring why young adults struggle to build consistent money-tracking habits through surveys, interviews, secondary research, and market analysis.
+                            </p>
+                            <div class="card-breakdown-grid">
+                                <div class="card-col-block">
+                                    <h4>My part</h4>
+                                    <ul>
+                                        <li>User research &amp; interview synthesis</li>
+                                        <li>Research findings &amp; pattern mapping</li>
+                                        <li>Competitive analysis &amp; UX opportunities</li>
+                                    </ul>
+                                </div>
+                                <div class="card-col-block">
+                                    <h4>The Impact</h4>
+                                    <p>Identified recurring barriers including forgotten expense logging, confusing navigation, and time-consuming tracking — highlighting opportunities for simpler, more accessible money-management experiences.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </a>
-                <a href="abc%20of%20fashion/index.html" class="project-card">
-                    <img src="abc front pg.jpg" alt="ABC of Fashion" class="project-img">
-                    <div class="project-info">
-                        <h3>ABC of Fashion</h3>
-                        <p>Editorial Design and Illustration</p>
-                    </div>
+                </article>
+            </div>
+
+            <!-- View All Works Button redirects to works.html -->
+            <div class="view-all-works-wrapper">
+                <a href="works.html" class="btn-view-all-works" aria-label="View All Works Page">
+                    <span class="view-all-text">View All Works</span>
+                    <svg class="view-all-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
                 </a>
             </div>
         </section>
 
-        <section id="about" class="about-section">
-            <!-- This container creates the scroll height for the flipbook animation -->
-            <div id="flipbook-scroll-area">
-                <div id="flipbook-sticky-wrapper">
-                    <h2 class="section-title">About</h2>
+        <section id="experience" class="journey-section">
+            <h2 class="section-title">A Little About My Journey</h2>
+            <p class="journey-subtitle">A timeline of my design career, creative experiences, and product work.</p>
 
-                    <div id="book-viewport">
-                        <div id="book-shift">
-                            <div id="book">
-                                <!-- Base right page -->
-                                <div id="page-right" class="book-page">
-                                    <img src="3.png" alt="Toolkit and Journey">
+            <!-- Experience Subsection -->
+            <div class="timeline-block">
+                <h3 class="timeline-category-title">Experience</h3>
+                <div class="timeline-tree">
+                    <!-- Item 1: Al Ramz -->
+                    <div class="timeline-item">
+                        <div class="timeline-badge badge-alramz">
+                            <img src="al ramz logo.png" alt="Al Ramz logo" class="timeline-badge-img">
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <div class="timeline-title-group">
+                                    <span class="timeline-company">Al Ramz</span>
+                                    <span class="timeline-role">Product Designer &amp; Web Developer (Freelance)</span>
                                 </div>
-                                <!-- Rotating cover page -->
-                                <div id="book-cover" class="book-page">
-                                    <div class="page-side side-front">
-                                        <img src="1.PNG" alt="Book Cover">
-                                    </div>
-                                    <div class="page-side side-back">
-                                        <img src="2.png" alt="About Malavika">
-                                    </div>
-                                </div>
+                                <span class="timeline-date">Sep 2026</span>
                             </div>
+                            <p class="timeline-desc">
+                                Designed and developed a 0→1 responsive website based on client requirements. Created sitemaps, user flows, and Figma UI designs, implemented the front-end with HTML, CSS &amp; JavaScript, and managed SEO, hosting, and analytics.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: LoopLink -->
+                    <div class="timeline-item">
+                        <div class="timeline-badge badge-looplink">
+                            <img src="looplink logo.png" alt="LoopLink logo" class="timeline-badge-img">
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <div class="timeline-title-group">
+                                    <span class="timeline-company">LoopLink</span>
+                                    <span class="timeline-role">Product Designer (Internship)</span>
+                                </div>
+                                <span class="timeline-date">Jun 2026 - Aug 2026</span>
+                            </div>
+                            <p class="timeline-desc">
+                                Contributed to product design across LoopLink’s consumer-facing and internal operational platforms. Developed and maintained design system foundations with reusable components, and refined key user flows for the Pocket digital shopper wallet.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: ReflexLabs AI -->
+                    <div class="timeline-item">
+                        <div class="timeline-badge badge-reflex">
+                            <img src="ReflexLabsAI (1)/ReflexLabsAI/logo reflexlab.png" alt="ReflexLabs AI logo" class="timeline-badge-img">
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <div class="timeline-title-group">
+                                    <span class="timeline-company">ReflexLabs AI</span>
+                                    <span class="timeline-role">UI/UX Designer (Internship)</span>
+                                </div>
+                                <span class="timeline-date">Nov 2025</span>
+                            </div>
+                            <p class="timeline-desc">
+                                Redesigned the ReflexLabs AI website with a cleaner visual language and elevated brand identity. Created interactive components and streamlined user flows to improve navigation, clarity, and telemetry monitoring experience.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4: Unhooked India -->
+                    <div class="timeline-item">
+                        <div class="timeline-badge badge-unhooked">
+                            <img src="UNHOOKED LOGO.png" alt="Unhooked India logo" class="timeline-badge-img">
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-header">
+                                <div class="timeline-title-group">
+                                    <span class="timeline-company">Unhooked India</span>
+                                    <span class="timeline-role">Social Media Manager (Internship)</span>
+                                </div>
+                                <span class="timeline-date">Jun 2025 - Oct 2025</span>
+                            </div>
+                            <p class="timeline-desc">
+                                Managed end-to-end digital social media strategy, visual storytelling, and content creation for digital platforms. Directed brand consistency and monitored analytics and engagement metrics to drive organic growth.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -213,6 +312,40 @@
         <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">Gmail copied</div>
 
     </main>
+
+    <!-- NDA Modal Popup -->
+    <div id="nda-modal" class="nda-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="nda-title">
+        <div class="nda-modal-card">
+            <button class="nda-modal-close" id="nda-modal-close" aria-label="Close modal">&times;</button>
+            <div class="nda-lock-icon-wrap">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="11" width="16" height="11" rx="2.5" ry="2.5"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <h3 id="nda-title" class="nda-modal-title">Under NDA</h3>
+            <p class="nda-modal-text">Available for discussion in interviews.</p>
+            <p class="nda-modal-subtext">I can present the full project details, artifacts, and workflows during an interview.</p>
+            <button class="nda-modal-btn" id="nda-modal-btn">Got it</button>
+        </div>
+    </div>
+
+    <!-- In Progress Modal Popup -->
+    <div id="progress-modal" class="progress-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="progress-title">
+        <div class="progress-modal-card">
+            <button class="progress-modal-close" id="progress-modal-close" aria-label="Close modal">&times;</button>
+            <div class="progress-icon-wrap">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+            </div>
+            <h3 id="progress-title" class="progress-modal-title">In Progress</h3>
+            <p class="progress-modal-text">Case study documentation is in progress.</p>
+            <p class="progress-modal-subtext">This accessibility and competitive examinations research is currently being documented and will be published soon.</p>
+            <button class="progress-modal-btn" id="progress-modal-btn">Got it</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 

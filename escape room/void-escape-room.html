@@ -52,49 +52,7 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--sans);
-      cursor: none;
       overflow-x: hidden;
-    }
-
-    /* ─────────────────────────────────────────
-   CUSTOM CURSOR
-───────────────────────────────────────── */
-    #cursor {
-      width: 8px;
-      height: 8px;
-      background: #f7b731;
-      border-radius: 50%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 10002;
-      transform: translate(-50%, -50%);
-      transition: transform 0.08s, width 0.2s, height 0.2s, background 0.2s;
-      mix-blend-mode: normal;
-    }
-
-    #cursor-ring {
-      width: 40px;
-      height: 40px;
-      border: 1px solid #f7b731;
-      border-radius: 50%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 10001;
-      transform: translate(-50%, -50%);
-      transition: transform 0.18s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
-    }
-
-    body:hover #cursor {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    a:hover~#cursor,
-    button:hover~#cursor {
-      transform: translate(-50%, -50%) scale(2);
     }
 
     /* ─────────────────────────────────────────
@@ -108,54 +66,101 @@
       left: 5rem;
       right: 5rem;
       z-index: 10000;
-      background-color: rgba(15, 15, 15, 0.85);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background-color: rgba(18, 18, 18, 0.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 100px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 2.5rem;
+      padding: 0.75rem 2.5rem 0.75rem 1.75rem;
       font-weight: 700;
     }
 
     .logo {
-      font-family: 'Hagrid', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 1.5px;
-      color: var(--white);
-      text-decoration: none;
-      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      min-width: 120px;
       z-index: 20;
+    }
+
+    .logo img {
+      display: block;
+      height: 42px;
+      width: auto;
+    }
+
+    .logo-dark {
+      display: none !important;
+    }
+
+    body.dark-mode .logo-light {
+      display: none !important;
+    }
+
+    body.dark-mode .logo-dark {
+      display: block !important;
     }
 
     .header-right {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: 0.5rem;
     }
 
     nav {
       display: flex;
-      gap: 2.5rem;
+      gap: 2.2rem;
       align-items: center;
+      z-index: 20;
     }
 
     nav a {
-      font-family: 'Hagrid', sans-serif !important;
-      font-weight: 400;
-      font-size: 0.98rem;
+      font-family: 'Hagrid', 'Inter', sans-serif !important;
+      font-weight: 500;
+      font-size: 18px !important;
       text-transform: none;
       text-decoration: none;
       color: var(--white);
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
       transition: color 0.2s ease;
     }
 
-    nav a:hover {
-      color: #f7b731;
+    nav a:hover,
+    nav a.active-link {
+      color: #f7b731 !important;
+    }
+
+    /* ─── SCROLL TRACKER ─── */
+    .scroll-tracker {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 99999;
+    }
+    .scroll-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .scroll-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 0%;
+      background: linear-gradient(180deg, var(--red), var(--red-dim));
+      box-shadow: 0 0 12px rgba(200, 16, 46, 0.8);
+      transition: height 0.05s linear;
     }
 
     .theme-toggle {
@@ -166,7 +171,30 @@
       display: flex;
       align-items: center;
       padding: 0;
+      margin-right: 1rem;
       transition: color 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      color: #f7b731;
+    }
+
+    .theme-toggle svg {
+      pointer-events: none;
+    }
+
+    .moon-icon {
+      display: none;
+      fill: #fdf5d3;
+      color: #fdf5d3;
+    }
+
+    body.dark-mode .sun-icon {
+      display: none;
+    }
+
+    body.dark-mode .moon-icon {
+      display: block;
     }
 
     .mobile-menu-btn {
@@ -179,6 +207,28 @@
       border: none;
       cursor: pointer;
       padding: 0;
+      z-index: 110;
+      margin-left: 0.5rem;
+    }
+
+    .mobile-menu-btn .bar {
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .mobile-menu-btn.active .bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .mobile-menu-btn.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    .mobile-menu-btn.active .bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
     }
 
     .mobile-menu-btn .bar {
@@ -1111,15 +1161,6 @@
     }
 
     @media (max-width: 640px) {
-      body {
-        cursor: auto;
-      }
-
-      #cursor,
-      #cursor-ring {
-        display: none !important;
-      }
-
       nav {
         display: none;
       }
@@ -1301,63 +1342,93 @@
       height: 100vh;
       background: rgba(240, 237, 232, 0.03);
       z-index: 500;
+    /* === Custom Cursor Styles === */
+    #custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 14px;
+      height: 14px;
+      background-color: #707070;
+      border-radius: 50%;
       pointer-events: none;
+      z-index: 999999;
+      transform: translate(-50%, -50%);
+      transition: width 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  height 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  background-color 0.25s ease,
+                  box-shadow 0.25s ease,
+                  border-radius 0.28s ease,
+                  opacity 0.2s ease;
+      opacity: 0;
     }
-
-    .scroll-v-bar {
-      width: 100%;
-      height: 0%;
-      background: var(--red);
-      box-shadow: 0 0 25px var(--red-glow);
-      transition: height 0.1s ease-out;
+    #custom-cursor.visible { opacity: 1; }
+    #custom-cursor.cursor-hover { width: 22px; height: 22px; background-color: rgba(130, 130, 130, 0.7); }
+    @media (hover: hover) and (pointer: fine) {
+      *, *::before, *::after { cursor: none !important; }
     }
-
-    .scroll-v-number {
-      position: absolute;
-      top: 20px;
-      left: 14px;
-      font-size: 18px;
-      color: var(--red);
-      font-weight: 900;
-      font-family: var(--sans);
-      text-shadow: none;
+    @media (hover: none) or (pointer: coarse) {
+      #custom-cursor { display: none !important; }
     }
-
   </style>
 </head>
 
-<body>
+<body class="dark-mode">
 
-  <!-- Custom cursor removed -->
-
-  <!-- Vertical Scroll Progress -->
-  <div class="scroll-v-container">
-    <div class="scroll-v-bar" id="v-scroll-bar"></div>
-    <div class="scroll-v-number" id="v-scroll-num">00%</div>
+  <!-- Scroll Progress Indicator (No numbers) -->
+  <div class="scroll-tracker">
+    <div class="scroll-track"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
   </div>
 
   <!-- NAV -->
   <header>
-    <a href="../index.html" class="logo">VOID</a>
+    <a href="../index.html" class="logo" aria-label="Go to home page">
+      <img src="../logo black.PNG" alt="Logo" class="logo-light">
+      <img src="../logo white.PNG" alt="Logo" class="logo-dark">
+    </a>
     <div class="header-right">
-      <button class="theme-toggle" id="theme-btn" style="margin-right: 1.5rem;">
-        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme">
+        <svg class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
       </button>
+
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
       <nav id="main-nav">
         <a href="../index.html">Home</a>
-        <a href="../index.html#work">Work</a>
-        <a href="../index.html#about">About</a>
+        <a href="../works.html" class="active-link">Works</a>
+        <a href="../about.html">About</a>
         <a href="../index.html#contact">Contact</a>
       </nav>
-      <button class="mobile-menu-btn" id="mobile-menu-btn">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
     </div>
   </header>
 
-  <a href="../index.html#work" class="floating-back-btn">[BACK]</a>
+  <!-- Scroll Progress Indicator -->
+  <div class="scroll-tracker">
+    <div class="scroll-track"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+  </div>
+
+  <a href="../works.html" class="floating-back-btn" aria-label="Back to Works">[BACK]</a>
 
   <!-- ══ HERO ══ -->
   <div id="hero">
@@ -1872,37 +1943,88 @@
       if (desc) desc.style.transition = 'opacity 0.3s ease';
     });
 
-    /* ─── VERTICAL SCROLL PROGRESS ─── */
-    window.addEventListener('scroll', () => {
-      const bar = document.getElementById('v-scroll-bar');
-      const num = document.getElementById('v-scroll-num');
-      if (bar && num) {
-        const total = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = Math.max(0, Math.min(100, (window.scrollY / total) * 100));
-        bar.style.height = `${progress}%`;
-        num.textContent = Math.round(progress).toString().padStart(2, '0') + '%';
-      }
-    });
-
     /* ─── THEME TOGGLE ─── */
     const themeBtn = document.getElementById('theme-btn');
-    themeBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-    });
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.remove('dark-mode');
+    } else {
+      document.body.classList.add('dark-mode');
+    }
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        if (document.body.classList.contains('dark-mode')) {
+          localStorage.setItem('theme', 'dark');
+        } else {
+          localStorage.setItem('theme', 'light');
+        }
+      });
+    }
 
     /* ─── MOBILE MENU ─── */
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mainNav = document.getElementById('main-nav');
     if (mobileBtn && mainNav) {
-      mobileBtn.addEventListener('click', () => {
+      mobileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         mobileBtn.classList.toggle('active');
         mainNav.classList.toggle('active');
       });
+      mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileBtn.classList.remove('active');
+          mainNav.classList.remove('active');
+        });
+      });
+      document.addEventListener('click', (e) => {
+        if (!mainNav.contains(e.target) && !mobileBtn.contains(e.target)) {
+          mobileBtn.classList.remove('active');
+          mainNav.classList.remove('active');
+        }
+      });
     }
 
-    /* Cursor Tracking removed as per request */
+    /* === Scroll Progress Tracking === */
+    const updateScrollProgress = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = totalHeight > 0 ? (window.pageYOffset / totalHeight) * 100 : 0;
+      const bar = document.getElementById('scroll-progress');
+      if (bar) bar.style.height = `${progress}%`;
+    };
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
+    updateScrollProgress();
 
-
+    /* === Custom Cursor Logic === */
+    let cursorEl = document.getElementById('custom-cursor');
+    if (!cursorEl) {
+      cursorEl = document.createElement('div');
+      cursorEl.id = 'custom-cursor';
+      document.body.appendChild(cursorEl);
+    }
+    let mouseX = -100, mouseY = -100, cursorX = -100, cursorY = -100, isCursorActive = false;
+    window.addEventListener('pointermove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!isCursorActive) {
+        isCursorActive = true;
+        cursorX = mouseX;
+        cursorY = mouseY;
+        cursorEl.classList.add('visible');
+      }
+    });
+    const renderCursor = () => {
+      if (isCursorActive) {
+        cursorX += (mouseX - cursorX) * 0.35;
+        cursorY += (mouseY - cursorY) * 0.35;
+        cursorEl.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+      }
+      requestAnimationFrame(renderCursor);
+    };
+    requestAnimationFrame(renderCursor);
+    document.querySelectorAll('a, button, .fp-tab').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorEl.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => cursorEl.classList.remove('cursor-hover'));
+    });
   </script>
 </body>
 

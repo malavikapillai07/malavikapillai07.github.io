@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penny Pop — Personal Finance Management · Malavika Pillai</title>
+  <meta name="description" content="Penny Pop — A personal finance management and expense tracking app case study by Malavika Pillai.">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Hagrid';
+      src: url('../hagrid_font/Hagrid-Regular-trial.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    /* ─── ROOT & RESET ─── */
+    :root {
+      --bg: #0c0c0c;
+      --surface: #141414;
+      --surface2: #1c1c1c;
+      --border: #252525;
+      --border2: #333;
+      --accent: #7EB5A6;
+      --accent-dim: rgba(126, 181, 166, 0.12);
+      --accent-mid: rgba(126, 181, 166, 0.35);
+      --white: #f4f1ec;
+      --muted: #777;
+      --mid: #999;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    /* ─── HEADER / NAV ─── */
+    header {
+      position: fixed;
+      top: 1.25rem;
+      left: 4.5rem;
+      right: 4.5rem;
+      z-index: 10000;
+      background-color: rgba(20, 20, 20, 0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 100px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.18);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 2.5rem 0.75rem 1.75rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      min-width: 120px;
+      z-index: 20;
+    }
+
+    .logo img {
+      display: block;
+      height: 42px;
+      width: auto;
+    }
+
+    .logo-dark {
+      display: none !important;
+    }
+
+    body.dark-mode .logo-light {
+      display: none !important;
+    }
+
+    body.dark-mode .logo-dark {
+      display: block !important;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav#main-nav {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      z-index: 20;
+    }
+
+    nav#main-nav a {
+      font-family: 'Hagrid', sans-serif;
+      font-weight: 400;
+      font-size: 20px !important;
+      text-decoration: none;
+      color: var(--white);
+      letter-spacing: 0.5px;
+      transition: color 0.2s ease;
+    }
+
+    nav#main-nav a:hover {
+      color: var(--accent);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 110;
+    }
+
+    .mobile-menu-btn .bar {
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .mobile-menu-btn.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .mobile-menu-btn.active .bar:nth-child(2) { opacity: 0; }
+    .mobile-menu-btn.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* ─── SCROLL TRACKER ─── */
+    .scroll-tracker {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .scroll-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background-color: var(--bg);
+      border-right: 1px solid var(--border);
+    }
+
+    .scroll-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 0%;
+      background-color: var(--accent);
+      transition: height 0.05s linear;
+    }
+
+    .scroll-percent {
+      position: absolute;
+      left: 14px;
+      top: 0;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    /* ─── COVER / HERO ─── */
+    .cover {
+      min-height: 100vh;
+      padding: clamp(100px, 14vh, 160px) 64px 80px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cover-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.2;
+    }
+
+    .cover-glow {
+      position: absolute;
+      top: 40%;
+      left: 30%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(126, 181, 166, 0.14) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatGlow 28s ease-in-out infinite;
+    }
+
+    @keyframes floatGlow {
+      0%, 100% { transform: translate(-50%, -50%) translate(-20%, -15%); }
+      33% { transform: translate(-50%, -50%) translate(30%, 20%); }
+      66% { transform: translate(-50%, -50%) translate(-10%, 35%); }
+    }
+
+    .cover-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+    }
+
+    .cover-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cover-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .cover-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(60px, 9vw, 120px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .cover-title .highlight {
+      color: var(--accent);
+    }
+
+    .cover-subtitle {
+      font-size: clamp(16px, 2vw, 22px);
+      color: var(--muted);
+      margin-bottom: 48px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      max-width: 600px;
+    }
+
+    .cover-meta-row {
+      display: flex;
+      gap: 56px;
+      flex-wrap: wrap;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .cover-meta-item span {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .cover-meta-item p {
+      font-size: 16px;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 80px 64px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .s-dark { background: var(--surface); }
+    .s-darker { background: var(--bg); }
+
+    /* ─── PDF SECTION ─── */
+    .pdf-section {
+      padding: 64px 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pdf-header {
+      padding: 0 64px 40px 64px;
+    }
+
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(11px, 1vw, 14px);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .tag::after {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .section-title .o {
+      color: var(--accent);
+    }
+
+    .pdf-embed-wrapper {
+      width: 100%;
+      background: #111;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .pdf-embed-wrapper iframe {
+      display: block;
+      width: 100%;
+      height: 90vh;
+      min-height: 600px;
+      border: none;
+    }
+
+    .pdf-fallback {
+      padding: 40px 64px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .pdf-fallback-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .pdf-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.7rem 1.6rem;
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      color: var(--accent);
+      text-decoration: none;
+      font-family: 'Hagrid', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: all 0.25s ease;
+      background: transparent;
+    }
+
+    .pdf-download-btn:hover {
+      background: var(--accent-dim);
+      transform: translateY(-2px);
+    }
+
+    /* ─── IN-PROGRESS SECTION ─── */
+    .in-progress-section {
+      padding: 100px 64px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50vh;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .in-progress-inner {
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .progress-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .progress-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .in-progress-title {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .in-progress-message {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .in-progress-message strong {
+      color: var(--white);
+    }
+
+    .progress-divider {
+      width: 60px;
+      height: 1px;
+      background: var(--border2);
+    }
+
+    /* ─── FLOATING BACK BTN ─── */
+    .floating-back-btn {
+      position: fixed;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      z-index: 10000;
+      background: transparent;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--accent);
+      padding: 0.8rem 1.4rem;
+      border-radius: 100px;
+      text-decoration: none;
+      font-family: 'Hagrid', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .floating-back-btn:hover {
+      transform: translateY(-4px) scale(1.05);
+      background: var(--accent-dim);
+      border-color: var(--accent);
+      box-shadow: 0 15px 40px rgba(126, 181, 166, 0.2);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      header {
+        left: 1.5rem;
+        right: 1.5rem;
+        padding: 0.8rem 1.5rem;
+      }
+
+      nav#main-nav { display: none; }
+      .mobile-menu-btn { display: flex; }
+
+      #main-nav.active {
+        position: absolute;
+        top: calc(100% + 15px);
+        right: 0;
+        width: auto;
+        min-width: 160px;
+        background: var(--surface2);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.25rem;
+        gap: 1.25rem;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+      }
+
+      .cover { padding: 100px 24px 60px; }
+      .cover-meta-row { gap: 28px; }
+
+      section, .pdf-header, .pdf-fallback, .in-progress-section {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .scroll-tracker { width: 40px; }
+
+      .floating-back-btn {
+        bottom: 1.5rem;
+        right: 1.5rem;
+        padding: 0.6rem 1rem;
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .cover-title { font-size: clamp(40px, 12vw, 64px); }
+      .scroll-tracker { width: 28px; }
+      .scroll-track, .scroll-progress { width: 5px; }
+      .scroll-percent { left: 10px; font-size: 11px; }
+    }
+  </style>
+</head>
+<body class="dark-mode">
+
+  <!-- NAV BAR -->
+  <header>
+    <a href="../index.html" class="logo" aria-label="Go to home page">
+      <img src="../logo black.PNG" alt="Logo" class="logo-light">
+      <img src="../logo white.PNG" alt="Logo" class="logo-dark">
+    </a>
+    <div class="header-right">
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <nav id="main-nav">
+        <a href="../index.html">Home</a>
+        <a href="../works.html">Works</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- SCROLL PROGRESS TRACKER -->
+  <div class="scroll-tracker" aria-hidden="true">
+    <div class="scroll-track"></div>
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <div class="scroll-percent" id="scroll-percent">0%</div>
+  </div>
+
+  <!-- COVER HERO -->
+  <div class="cover">
+    <div class="cover-grid"></div>
+    <div class="cover-glow"></div>
+    <div class="cover-content">
+      <div class="cover-eyebrow">Case Study</div>
+      <h1 class="cover-title">Penny <span class="highlight">Pop</span></h1>
+      <p class="cover-subtitle">Personal Finance Management &amp; Expense Tracking — Designing a smarter, friendlier way to manage money.</p>
+      <div class="cover-meta-row">
+        <div class="cover-meta-item">
+          <span>Project Type</span>
+          <p>UX Research + UI Design</p>
+        </div>
+        <div class="cover-meta-item">
+          <span>Category</span>
+          <p>Personal Finance App</p>
+        </div>
+        <div class="cover-meta-item">
+          <span>Deliverable</span>
+          <p>App Design + Case Study</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PDF EMBED SECTION -->
+  <div class="pdf-section">
+    <div class="pdf-header">
+      <div class="tag">Full Case Study</div>
+      <h2 class="section-title">The <span class="o">complete</span> document.</h2>
+    </div>
+
+    <div class="pdf-embed-wrapper">
+      <iframe
+        id="penny-pop-pdf"
+        src="../penny pop.pdf"
+        title="Penny Pop Case Study PDF"
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    <div class="pdf-fallback">
+      <span class="pdf-fallback-text">Can't view the PDF inline?</span>
+      <a href="../penny pop.pdf" class="pdf-download-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Open / Download PDF
+      </a>
+    </div>
+  </div>
+
+  <!-- IN-PROGRESS MESSAGE -->
+  <div class="in-progress-section">
+    <div class="in-progress-inner">
+      <div class="progress-badge">
+        <span class="progress-dot"></span>
+        Work in Progress
+      </div>
+      <div class="progress-divider"></div>
+      <h2 class="in-progress-title">The rest of the project is currently in progress.</h2>
+      <p class="in-progress-message">
+        More design decisions, research insights, and interactive prototypes are being documented and will be updated here <strong>very soon.</strong> Stay tuned!
+      </p>
+    </div>
+  </div>
+
+  <!-- FLOATING BACK BUTTON -->
+  <a href="../index.html#work" class="floating-back-btn" aria-label="Back to Works">[BACK]</a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // --- Scroll Progress Bar ---
+      const progressEl = document.getElementById('scroll-progress');
+      const percentEl  = document.getElementById('scroll-percent');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop    = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const pct          = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+
+        if (progressEl) progressEl.style.height = `${pct}%`;
+        if (percentEl) {
+          percentEl.textContent = `${Math.round(pct)}%`;
+          percentEl.style.top   = `${pct}%`;
+        }
+      });
+
+      // --- Mobile Menu ---
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mainNav       = document.getElementById('main-nav');
+
+      if (mobileMenuBtn && mainNav) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileMenuBtn.classList.toggle('active');
+          mainNav.classList.toggle('active');
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

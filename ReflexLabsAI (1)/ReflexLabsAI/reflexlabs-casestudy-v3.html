@@ -7,9 +7,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dark-mode">
   <header>
-      <div class="logo">REFLEXLABS AI</div>
+      <a href="../../index.html" class="logo" aria-label="Go to home page">
+          <img src="../../logo black.PNG" alt="Logo" class="logo-light">
+          <img src="../../logo white.PNG" alt="Logo" class="logo-dark">
+      </a>
       <div class="header-right">
           <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Navigation">
               <span class="bar"></span>
@@ -18,8 +21,8 @@
           </button>
           <nav id="main-nav">
               <a href="../../index.html">Home</a>
-              <a href="../../index.html#work">Work</a>
-              <a href="../../index.html#about">About</a>
+              <a href="../../works.html" class="active-link">Works</a>
+              <a href="../../about.html">About</a>
               <a href="../../index.html#contact">Contact</a>
           </nav>
       </div>
@@ -874,7 +877,7 @@
   </div>
 </section>
 
-<a href="../../index.html#work" class="floating-back-btn" aria-label="Back to Works">[BACK]</a>
+<a href="../../works.html" class="floating-back-btn" aria-label="Back to Works">[BACK]</a>
 <script src="script.js" defer></script>
 </body>
 </html>
